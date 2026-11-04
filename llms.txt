@@ -1,0 +1,22 @@
+# Kai Park
+
+> Kai (Hyeyeon) Park is a computational linguist working on language, cognition and LLM alignment. She quantifies pragmatic, emotional and cultural nuance to evaluate where model language departs from how people actually use it. Based in Germany, open to relocation.
+
+## Profile
+- [Home and About](https://bakeyeon.github.io/): research summary, interests, recent work, news
+- [Research](https://bakeyeon.github.io/research.html): MA thesis, The Grue Divide, Light Verbs, modal particle studies, alignment work at DeepL
+- [Experience](https://bakeyeon.github.io/experience.html): DeepL (RLHF data for Korean LLM alignment), localization QA, earlier strategy and marketing
+- [Education](https://bakeyeon.github.io/education.html): MA Linguistics (Computational Linguistics), Göttingen / HHU Düsseldorf; computer science coursework, TU Darmstadt; BA, Pusan National University
+- [Certificates and honors](https://bakeyeon.github.io/certificates.html): C1 in English and German, Google Cloud TPU Research Cloud, competition awards
+- [News](https://bakeyeon.github.io/news.html)
+
+## Publications
+- Park, K. (2026). The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment. PANDORA Workshop @ EMNLP 2026. https://aclanthology.org/2026.pandora-1.2/
+- Park, H. (2026). Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum. MA thesis, University of Göttingen.
+- Park, K. (2026). Light Verbs, Heavy Meaning? Working paper. https://github.com/bakeyeon/light-verbs-heavy-meaning
+
+## Elsewhere
+- Google Scholar: https://scholar.google.com/citations?user=CzCE0C0AAAAJ
+- ORCID: https://orcid.org/0000-0002-2854-0127
+- LinkedIn: https://www.linkedin.com/in/bakeyeon/
+- GitHub: https://github.com/bakeyeon
