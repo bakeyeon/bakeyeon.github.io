@@ -112,6 +112,25 @@
     }
   }
 
+  // Email links copy the address instead of opening a mail app; if copying is blocked, mailto still works
+  const toast = document.createElement('div');
+  toast.className = 'toast'; toast.setAttribute('role', 'status'); toast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(toast);
+  let toastTimer;
+  document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+    a.addEventListener('click', async e => {
+      const addr = a.getAttribute('href').slice(7);
+      if (!navigator.clipboard) return;
+      e.preventDefault();
+      try { await navigator.clipboard.writeText(addr); }
+      catch (err) { location.href = a.getAttribute('href'); return; }
+      toast.textContent = 'Email copied: ' + addr;
+      toast.classList.add('show');
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    });
+    a.setAttribute('title', 'Click to copy email address');
+  });
+
   // Back-to-top: a small floating button that appears after the first screen
   const top = document.createElement('button');
   top.type = 'button'; top.className = 'to-top'; top.setAttribute('aria-label', 'Back to top');
