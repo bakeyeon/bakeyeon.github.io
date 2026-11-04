@@ -96,6 +96,22 @@
     draw();
   }
 
+  // News: one list in assets/news.js feeds the home strip (latest few) and the full archive
+  if (Array.isArray(window.NEWS)) {
+    const row = n => '<li><span class="gloss">' + n.label + '</span><span>' + n.text + '</span></li>';
+    document.querySelectorAll('ul.news[data-limit]').forEach(ul => {
+      ul.innerHTML = window.NEWS.slice(0, Number(ul.dataset.limit) || 4).map(row).join('');
+    });
+    const archive = document.querySelector('.news-archive');
+    if (archive) {
+      const years = [...new Set(window.NEWS.map(n => n.date.slice(0, 4)))];
+      archive.innerHTML = years.map(y =>
+        '<section class="section" aria-label="' + y + '"><header><span class="label">News</span><h2>' + y + '</h2></header>' +
+        '<div class="body"><ul class="news">' + window.NEWS.filter(n => n.date.startsWith(y)).map(row).join('') + '</ul></div></section>'
+      ).join('');
+    }
+  }
+
   // Back-to-top: a small floating button that appears after the first screen
   const top = document.createElement('button');
   top.type = 'button'; top.className = 'to-top'; top.setAttribute('aria-label', 'Back to top');
