@@ -137,16 +137,30 @@
   top.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   document.body.appendChild(top);
   top.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
-  // Home: a twin floating button on every page except the home page itself
-  const onHome = !!document.querySelector('.hero');
-  let homeBtn = null;
-  if (!onHome) {
-    homeBtn = document.createElement('a');
-    homeBtn.href = 'index.html'; homeBtn.className = 'to-top to-home'; homeBtn.setAttribute('aria-label', 'Home');
-    homeBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    document.body.appendChild(homeBtn);
-  }
-  const showTop = () => { const on = scrollY > innerHeight * 0.8; top.classList.toggle('show', on); if (homeBtn) homeBtn.classList.toggle('show', on); };
+  // Menu: a floating button beside back-to-top that opens a short list of every page
+  const here = (location.pathname.split('/').pop() || 'index.html');
+  const LINKS = [['index.html', 'Home'], ...PAGES.map(p => [p.href, p.label]), ['news.html', 'News']];
+  const menuBtn = document.createElement('button');
+  menuBtn.type = 'button'; menuBtn.className = 'to-top to-menu';
+  menuBtn.setAttribute('aria-label', 'Menu'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-controls', 'fab-menu');
+  menuBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  const panel = document.createElement('nav');
+  panel.id = 'fab-menu'; panel.className = 'menu-panel'; panel.setAttribute('aria-label', 'Pages'); panel.hidden = true;
+  panel.innerHTML = '<ul>' + LINKS.map(([href, label]) =>
+    '<li><a href="' + href + '"' + (href === here ? ' aria-current="page"' : '') + '>' + label + '</a></li>').join('') + '</ul>';
+  document.body.appendChild(panel); document.body.appendChild(menuBtn);
+  const setMenu = open => {
+    panel.hidden = !open; menuBtn.setAttribute('aria-expanded', String(open));
+    if (open) { const first = panel.querySelector('a'); if (first) first.focus(); }
+  };
+  menuBtn.addEventListener('click', e => { e.stopPropagation(); setMenu(panel.hidden); });
+  document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target)) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { setMenu(false); menuBtn.focus(); } });
+  const showTop = () => {
+    const on = scrollY > innerHeight * 0.8;
+    top.classList.toggle('show', on); menuBtn.classList.toggle('show', on);
+    if (!on && !panel.hidden) setMenu(false);
+  };
   addEventListener('scroll', showTop, { passive: true }); showTop();
 
   // Research map: hover a zone (or its legend) to bring it forward; click jumps to the section
