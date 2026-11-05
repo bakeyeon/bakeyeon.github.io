@@ -156,6 +156,27 @@
   menuBtn.addEventListener('click', e => { e.stopPropagation(); setMenu(panel.hidden); });
   document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target)) setMenu(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { setMenu(false); menuBtn.focus(); } });
+  // Top menu: a familiar hamburger next to the home icon, opening the same list as a dropdown
+  const mark = document.querySelector('.bar .mark');
+  if (mark) {
+    const wrap = document.createElement('span'); wrap.className = 'bar-left';
+    mark.parentNode.insertBefore(wrap, mark); wrap.appendChild(mark);
+    const tBtn = document.createElement('button');
+    tBtn.type = 'button'; tBtn.className = 'top-menu-btn';
+    tBtn.setAttribute('aria-label', 'Menu'); tBtn.setAttribute('aria-expanded', 'false'); tBtn.setAttribute('aria-controls', 'top-menu');
+    tBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 7h15M4.5 12h15M4.5 17h15"/></svg>';
+    const tPanel = document.createElement('nav');
+    tPanel.id = 'top-menu'; tPanel.className = 'menu-panel top-menu'; tPanel.setAttribute('aria-label', 'Pages'); tPanel.hidden = true;
+    tPanel.innerHTML = panel.innerHTML;
+    wrap.appendChild(tBtn); wrap.appendChild(tPanel);
+    const setTop = open => {
+      tPanel.hidden = !open; tBtn.setAttribute('aria-expanded', String(open));
+      if (open) { setMenu(false); const first = tPanel.querySelector('a'); if (first) first.focus(); }
+    };
+    tBtn.addEventListener('click', e => { e.stopPropagation(); setTop(tPanel.hidden); });
+    document.addEventListener('click', e => { if (!tPanel.hidden && !tPanel.contains(e.target)) setTop(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !tPanel.hidden) { setTop(false); tBtn.focus(); } });
+  }
   const showTop = () => {
     const on = scrollY > innerHeight * 0.8;
     const onHome = !!document.querySelector('.hero');

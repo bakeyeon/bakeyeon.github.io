@@ -56,6 +56,11 @@ img, svg { display: block; max-width: 100%; }
 .bar { position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 26px var(--gutter); }
 .mark { display: inline-flex; color: var(--ink); }
 .mark svg line { stroke: currentColor; stroke-width: 1.5; }
+.bar-left { position: relative; display: inline-flex; align-items: center; gap: 14px; }
+.top-menu-btn { appearance: none; border: 0; background: transparent; padding: 0; width: 28px; height: 28px; display: grid; place-items: center; color: var(--ink); cursor: pointer; }
+.top-menu-btn svg { width: 26px; height: 26px; }
+.top-menu-btn svg path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.menu-panel.top-menu { position: absolute; top: 40px; left: 0; right: auto; bottom: auto; z-index: 30; }
 .mark svg path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .mark svg circle { fill: currentColor; }
 .theme-btn { appearance: none; border: 1px solid color-mix(in oklab, var(--ink) 30%, transparent); background: transparent; color: var(--ink); width: 34px; height: 34px; border-radius: var(--radius-full); display: grid; place-items: center; cursor: pointer; }
