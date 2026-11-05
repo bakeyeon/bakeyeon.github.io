@@ -74,7 +74,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ---------- home hero ---------- */
 .hero-track { height: 190vh; position: relative; }
-.hero { position: sticky; top: 0; height: 100vh; min-height: 520px; overflow: hidden; }
+.hero { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 520px; overflow: hidden; }
 .bands { position: absolute; inset: 0; display: flex; pointer-events: none; }
 .bands i { flex: none; height: 100%; }
 .bands i.light { background: var(--surface); }
@@ -249,7 +249,8 @@ footer.site .links { display: flex; flex-wrap: wrap; gap: var(--space-24); }
   .scroll-hint { display: none; }
   .hero-links { flex-direction: column; gap: 10px; padding-bottom: .3em; }
   .hero-links a { width: 22px; height: 22px; }
-  .role { font-size: 9.5px; line-height: 14px; letter-spacing: .05em; right: var(--gutter); bottom: calc(clamp(76px, 16vw, 200px) * 1.02); }
+  .nameplate { bottom: 14svh; }
+  .role { font-size: 9.5px; line-height: 14px; letter-spacing: .05em; right: var(--gutter); bottom: calc(14svh + clamp(76px, 16vw, 200px) * 1.02); }
   .section { grid-template-columns: 1fr; gap: var(--space-16); }
   .notes { grid-template-columns: 1fr; }
   .csw { grid-template-columns: 1fr; }
