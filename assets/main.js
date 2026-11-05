@@ -137,7 +137,16 @@
   top.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   document.body.appendChild(top);
   top.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
-  const showTop = () => top.classList.toggle('show', scrollY > innerHeight * 0.8);
+  // Home: a twin floating button on every page except the home page itself
+  const onHome = !!document.querySelector('.hero');
+  let homeBtn = null;
+  if (!onHome) {
+    homeBtn = document.createElement('a');
+    homeBtn.href = 'index.html'; homeBtn.className = 'to-top to-home'; homeBtn.setAttribute('aria-label', 'Home');
+    homeBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    document.body.appendChild(homeBtn);
+  }
+  const showTop = () => { const on = scrollY > innerHeight * 0.8; top.classList.toggle('show', on); if (homeBtn) homeBtn.classList.toggle('show', on); };
   addEventListener('scroll', showTop, { passive: true }); showTop();
 
   // Research map: hover a zone (or its legend) to bring it forward; click jumps to the section
