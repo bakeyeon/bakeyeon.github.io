@@ -7,7 +7,7 @@
 - [Research](https://bakeyeon.github.io/research.html): MA thesis, The Grue Divide, Light Verbs, modal particle studies, alignment work at DeepL
 - [Experience](https://bakeyeon.github.io/experience.html): DeepL (RLHF data for Korean LLM alignment), localization QA, earlier strategy and marketing
 - [Education](https://bakeyeon.github.io/education.html): MA Linguistics (Computational Linguistics), Göttingen / HHU Düsseldorf; computer science coursework, TU Darmstadt; BA, Pusan National University
-- [Certificates and honors](https://bakeyeon.github.io/certificates.html): C1 in English and German, Google Cloud TPU Research Cloud, competition awards
+- [Awards and certificates](https://bakeyeon.github.io/certificates.html): Google Cloud TPU Research Cloud grant, national scholarship, competition awards, C1 in English and German
 - [News](https://bakeyeon.github.io/news.html)
 
 ## Publications

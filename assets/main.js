@@ -13,7 +13,7 @@
     { id: 'research', label: 'Research', href: 'research.html' },
     { id: 'experience', label: 'Experience', href: 'experience.html' },
     { id: 'education', label: 'Education', href: 'education.html' },
-    { id: 'certificates', label: 'Certificates', href: 'certificates.html' }
+    { id: 'certificates', label: 'Awards', href: 'certificates.html' }
   ];
 
   const SKY = '<div class="pool p1"></div><div class="pool p2"></div><div class="pool p3"></div><div class="pool p4"></div><div class="pool p5"></div><div class="pool p6"></div>' +
