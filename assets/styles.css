@@ -79,13 +79,13 @@ img, svg { display: block; max-width: 100%; }
 .bands i { flex: none; height: 100%; }
 .bands i.light { background: var(--surface); }
 .wash { position: absolute; inset: 0; background: var(--surface); opacity: 0; pointer-events: none; }
-.nameplate { position: absolute; z-index: 3; left: calc(var(--gutter) - 4px); bottom: -0.12em; display: flex; align-items: flex-end; gap: .1em; font-size: clamp(76px, 16vw, 200px); }
+.nameplate { position: absolute; z-index: 3; left: max(calc(var(--gutter) - 4px), calc((100% - 1080px) / 2 + var(--gutter) - 4px)); bottom: -0.12em; display: flex; align-items: flex-end; gap: .1em; font-size: clamp(76px, 16vw, 200px); }
 .name { margin: 0; white-space: nowrap; font-size: 1em; line-height: .9; font-weight: 600; letter-spacing: -0.035em;
   background: linear-gradient(90deg, var(--ink) 0%, var(--ink) 10%, color-mix(in oklab, var(--ink) 55%, var(--field-aqua)) 24%, color-mix(in oklab, var(--ink) 22%, var(--field-aqua)) 38%, color-mix(in oklab, var(--ink) 10%, var(--field-blue)) 50%, color-mix(in oklab, var(--ink) 6%, var(--field-blue)) 100%);
   background-size: 200% 100%; background-position: 0% 0; -webkit-background-clip: text; background-clip: text; color: transparent; mix-blend-mode: multiply; }
 :root[data-theme="dark"] .name { mix-blend-mode: screen; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .name { mix-blend-mode: screen; } }
-.role { position: absolute; z-index: 3; left: var(--gutter); bottom: calc(clamp(76px, 16vw, 200px) * .82); margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .75; }
+.role { position: absolute; z-index: 3; left: max(var(--gutter), calc((100% - 1080px) / 2 + var(--gutter))); bottom: calc(clamp(76px, 16vw, 200px) * .82); margin: 0; font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .75; }
 .profiles { display: flex; flex-wrap: wrap; gap: var(--space-8); margin: var(--space-16) 0 var(--space-24); padding: 0; list-style: none; }
 .profiles a { display: inline-block; padding: 6px 12px; border: 1px solid var(--line); border-radius: var(--radius-full); font-size: 13px; line-height: 18px; font-weight: 500; color: var(--ink); text-decoration: none; }
 .profiles a:hover { border-color: var(--ink); }
