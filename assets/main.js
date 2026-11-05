@@ -158,8 +158,13 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { setMenu(false); menuBtn.focus(); } });
   const showTop = () => {
     const on = scrollY > innerHeight * 0.8;
-    top.classList.toggle('show', on); menuBtn.classList.toggle('show', on);
-    if (!on && !panel.hidden) setMenu(false);
+    const onHome = !!document.querySelector('.hero');
+    top.classList.toggle('show', on);
+    // subpages keep the menu visible from the start; it slides into the corner while back-to-top is hidden
+    menuBtn.classList.toggle('show', on || !onHome);
+    menuBtn.classList.toggle('solo', !on && !onHome);
+    panel.classList.toggle('solo', !on && !onHome);
+    if (!on && onHome && !panel.hidden) setMenu(false);
   };
   addEventListener('scroll', showTop, { passive: true }); showTop();
 
