@@ -126,8 +126,7 @@ img, svg { display: block; max-width: 100%; }
 .star:hover .bloom, .star:focus-visible .bloom { opacity: 1; transform: scale(1.4); }
 .star:hover .spike, .star:focus-visible .spike { opacity: 1; transform: scale(1); }
 .star:hover .core, .star:focus-visible .core { r: 4.5; }
-.star .globe { fill: var(--star); }
-.star .ring { fill: none; stroke: var(--star); }
+.star .globe, .star .ring { fill: none; stroke: var(--star); stroke-linecap: round; }
 .star .saturn { transition: transform .4s ease; }
 .star.planet:hover .saturn, .star.planet:focus-visible .saturn { transform: rotate(-14deg) scale(1.12); }
 .star:hover text, .star:focus-visible text { fill-opacity: 1; }

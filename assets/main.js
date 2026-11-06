@@ -38,14 +38,18 @@
     return s;
   }
 
-  // Saturn in the sky: the CV download (home and every subpage header)
-  function planetSVG(cx, cy, r) {
-    const k = r / 13;
-    return '<a class="star planet" href="cv/Kai_Park_CV_public.pdf" download="Kai_Park_CV.pdf" aria-label="Download CV (PDF)">' +
+  // Saturn in the sky, drawn as an outline: the CV download (home and every subpage header)
+  function planetSVG(cx, cy, r, id) {
+    const k = r / 13, rx = 2.05 * r, ry = 0.62 * r, w = 1.6 * k;
+    const back = 'M' + (cx - rx) + ' ' + cy + ' A' + rx + ' ' + ry + ' 0 0 1 ' + (cx + rx) + ' ' + cy;
+    const front = 'M' + (cx + rx) + ' ' + cy + ' A' + rx + ' ' + ry + ' 0 0 1 ' + (cx - rx) + ' ' + cy;
+    return '<defs><mask id="' + id + '" maskUnits="userSpaceOnUse"><rect x="' + (cx - 3 * r) + '" y="' + (cy - 3 * r) + '" width="' + 6 * r + '" height="' + 6 * r + '" fill="#fff"/>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r + w) + '" fill="#000"/></mask></defs>' +
+      '<a class="star planet" href="cv/Kai_Park_CV_public.pdf" download="Kai_Park_CV.pdf" aria-label="Download CV (PDF)">' +
       '<circle class="bloom" cx="' + cx + '" cy="' + cy + '" r="' + 34 * k + '"/>' +
-      '<g class="saturn" style="transform-origin:' + cx + 'px ' + cy + 'px">' +
-      '<ellipse class="ring" cx="' + cx + '" cy="' + cy + '" rx="' + 2.05 * r + '" ry="' + 0.62 * r + '" transform="rotate(-18 ' + cx + ' ' + cy + ')" style="stroke-width:' + 1.7 * k + '"/>' +
-      '<circle class="globe" cx="' + cx + '" cy="' + cy + '" r="' + r + '"/></g>' +
+      '<g class="saturn" style="transform-origin:' + cx + 'px ' + cy + 'px;stroke-width:' + w + 'px">' +
+      '<circle class="globe" cx="' + cx + '" cy="' + cy + '" r="' + r + '"/>' +
+      '<g transform="rotate(-24 ' + cx + ' ' + cy + ')"><path class="ring" d="' + back + '" mask="url(#' + id + ')"/><path class="ring" d="' + front + '"/></g></g>' +
       '<text x="' + cx + '" y="' + (cy + 36 * k) + '" text-anchor="middle">CV ↓</text></a>';
   }
 
@@ -55,7 +59,7 @@
     const dust = [[420,110,1.2,.7],[610,80,1,.6],[760,140,1.4,.8],[905,215,1,.6],[715,365,1.2,.7],[945,430,1.4,.7],[495,300,1,.6],[350,220,1.2,.5],[580,420,1,.5],[840,470,1,.6],[980,120,1.2,.6],[300,420,1,.5]]
       .map(d => '<circle class="dust" cx="' + d[0] + '" cy="' + d[1] + '" r="' + d[2] + '" opacity="' + d[3] + '"/>').join('');
     const tw = [[452,239,7],[920,80,8],[640,446,6]].map(t => '<g class="twinkle"><line x1="' + t[0] + '" y1="' + (t[1]-t[2]) + '" x2="' + t[0] + '" y2="' + (t[1]+t[2]) + '"/><line x1="' + (t[0]-t[2]) + '" y1="' + t[1] + '" x2="' + (t[0]+t[2]) + '" y2="' + t[1] + '"/></g>').join('');
-    home.innerHTML = BLOOM + dust + tw + starsSVG([[520,160],[668,196],[792,250],[872,340]]) + planetSVG(900, 100, 11);
+    home.innerHTML = BLOOM + dust + tw + starsSVG([[520,160],[668,196],[792,250],[872,340]]) + planetSVG(900, 100, 11, 'saturn-cut');
     // On narrow screens crop the view to the constellation so the stars and labels stay legible
     const fit = () => home.setAttribute('viewBox', innerWidth < 760 ? '440 40 520 420' : '0 0 1000 560');
     fit(); addEventListener('resize', fit);
@@ -63,7 +67,7 @@
 
   // Mini nav on section pages
   const mini = document.querySelector('.mini-nav svg');
-  if (mini) mini.innerHTML = BLOOM + starsSVG([[30,40],[150,62],[260,96],[340,150]], { current: mini.dataset.current, size: .62 }) + planetSVG(368, 52, 7);
+  if (mini) mini.innerHTML = BLOOM + starsSVG([[30,40],[150,62],[260,96],[340,150]], { current: mini.dataset.current, size: .62 }) + planetSVG(368, 52, 7, 'saturn-cut-mini');
 
   // Theme toggle
   const btn = document.querySelector('.theme-btn');
