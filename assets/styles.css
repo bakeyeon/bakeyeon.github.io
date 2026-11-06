@@ -121,6 +121,8 @@ img, svg { display: block; max-width: 100%; }
 .star:hover .bloom, .star:focus-visible .bloom { opacity: 1; transform: scale(1.4); }
 .star:hover .spike, .star:focus-visible .spike { opacity: 1; transform: scale(1); }
 .star:hover .core, .star:focus-visible .core { r: 4.5; }
+.star .moon-face { fill: var(--star); transform-box: fill-box; transform-origin: center; transition: transform .35s ease; }
+.star.moon:hover .moon-face, .star.moon:focus-visible .moon-face { transform: scale(1.15) rotate(-8deg); }
 .star:hover text, .star:focus-visible text { fill-opacity: 1; }
 .star:focus-visible .core { stroke: var(--focus); stroke-width: 2; }
 
