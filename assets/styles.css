@@ -64,7 +64,12 @@ img, svg { display: block; max-width: 100%; }
 .mark svg path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .mark svg circle { fill: currentColor; }
 .theme-btn { appearance: none; border: 1px solid color-mix(in oklab, var(--ink) 30%, transparent); background: transparent; color: var(--ink); width: 34px; height: 34px; border-radius: var(--radius-full); display: grid; place-items: center; cursor: pointer; }
-.theme-btn svg { width: 16px; height: 16px; }
+.theme-btn svg { width: 17px; height: 17px; }
+.theme-btn svg circle, .theme-btn svg path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.theme-btn .i-moon { display: none; }
+:root[data-theme="dark"] .theme-btn .i-sun { display: none; }
+:root[data-theme="dark"] .theme-btn .i-moon { display: block; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme-btn .i-sun { display: none; } :root:not([data-theme="light"]) .theme-btn .i-moon { display: block; } }
 
 /* ---------- watercolor Grue sky ---------- */
 .sky { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(160deg, var(--field-mint) 0%, var(--field-aqua) 45%, var(--field-blue) 100%); }
@@ -121,8 +126,10 @@ img, svg { display: block; max-width: 100%; }
 .star:hover .bloom, .star:focus-visible .bloom { opacity: 1; transform: scale(1.4); }
 .star:hover .spike, .star:focus-visible .spike { opacity: 1; transform: scale(1); }
 .star:hover .core, .star:focus-visible .core { r: 4.5; }
-.star .moon-face { fill: var(--star); transform-box: fill-box; transform-origin: center; transition: transform .35s ease; }
-.star.moon:hover .moon-face, .star.moon:focus-visible .moon-face { transform: scale(1.15) rotate(-8deg); }
+.star .globe { fill: var(--star); }
+.star .ring { fill: none; stroke: var(--star); }
+.star .saturn { transition: transform .4s ease; }
+.star.planet:hover .saturn, .star.planet:focus-visible .saturn { transform: rotate(-14deg) scale(1.12); }
 .star:hover text, .star:focus-visible text { fill-opacity: 1; }
 .star:focus-visible .core { stroke: var(--focus); stroke-width: 2; }
 
