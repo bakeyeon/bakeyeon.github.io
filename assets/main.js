@@ -147,7 +147,8 @@
   const panel = document.createElement('nav');
   panel.id = 'fab-menu'; panel.className = 'menu-panel'; panel.setAttribute('aria-label', 'Pages'); panel.hidden = true;
   panel.innerHTML = '<ul>' + LINKS.map(([href, label]) =>
-    '<li><a href="' + href + '"' + (href === here ? ' aria-current="page"' : '') + '>' + label + '</a></li>').join('') + '</ul>';
+    '<li><a href="' + href + '"' + (href === here ? ' aria-current="page"' : '') + '>' + label + '</a></li>').join('') +
+    '<li class="menu-cv"><a href="cv/Kai_Park_CV_public.pdf" download="Kai_Park_CV.pdf">Download CV ↓</a></li></ul>';
   document.body.appendChild(panel); document.body.appendChild(menuBtn);
   const setMenu = open => {
     panel.hidden = !open; menuBtn.setAttribute('aria-expanded', String(open));

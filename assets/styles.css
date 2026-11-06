@@ -257,6 +257,12 @@ details.more summary:hover .label { color: var(--ink); }
 .menu-panel a:hover, .menu-panel a:focus-visible { background: var(--surface-raised); }
 .menu-panel a[aria-current="page"]::before { background: var(--signal); }
 .menu-panel a[aria-current="page"] { font-weight: 600; }
+.menu-panel .menu-cv { margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--line); }
+.menu-panel .menu-cv a::before { display: none; }
+.menu-panel .menu-cv a { font-weight: 600; }
+footer.site .cv-foot { font-weight: 600; }
+/* leave room so the floating buttons never sit on the footer links */
+footer.site { padding-bottom: 96px; }
 .to-top:hover { border-color: var(--ink); }
 .to-top svg { width: 18px; height: 18px; }
 @media (prefers-reduced-motion: reduce) { .to-top { transition: none; } }
