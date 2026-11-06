@@ -38,19 +38,24 @@
     return s;
   }
 
+  // A crescent moon in the sky: the CV download (used on home and in every subpage header)
+  function moonSVG(cx, cy, r, id) {
+    const k = r / 13;
+    return '<defs><mask id="' + id + '"><rect x="' + (cx - 2 * r) + '" y="' + (cy - 2 * r) + '" width="' + 4 * r + '" height="' + 4 * r + '" fill="#fff"/>' +
+      '<circle cx="' + (cx + 7 * k) + '" cy="' + (cy - 6 * k) + '" r="' + 12.5 * k + '" fill="#000"/></mask></defs>' +
+      '<a class="star moon" href="cv/Kai_Park_CV_public.pdf" download="Kai_Park_CV.pdf" aria-label="Download CV (PDF)">' +
+      '<circle class="bloom" cx="' + cx + '" cy="' + cy + '" r="' + 34 * k + '"/>' +
+      '<circle class="moon-face" cx="' + cx + '" cy="' + cy + '" r="' + r + '" mask="url(#' + id + ')"/>' +
+      '<text x="' + cx + '" y="' + (cy + 36 * k) + '" text-anchor="middle">CV ↓</text></a>';
+  }
+
   // Home constellation
   const home = document.querySelector('.constellation svg');
   if (home) {
     const dust = [[420,110,1.2,.7],[610,80,1,.6],[760,140,1.4,.8],[905,215,1,.6],[715,365,1.2,.7],[945,430,1.4,.7],[495,300,1,.6],[350,220,1.2,.5],[580,420,1,.5],[840,470,1,.6],[980,120,1.2,.6],[300,420,1,.5]]
       .map(d => '<circle class="dust" cx="' + d[0] + '" cy="' + d[1] + '" r="' + d[2] + '" opacity="' + d[3] + '"/>').join('');
     const tw = [[452,239,7],[920,80,8],[640,446,6]].map(t => '<g class="twinkle"><line x1="' + t[0] + '" y1="' + (t[1]-t[2]) + '" x2="' + t[0] + '" y2="' + (t[1]+t[2]) + '"/><line x1="' + (t[0]-t[2]) + '" y1="' + t[1] + '" x2="' + (t[0]+t[2]) + '" y2="' + t[1] + '"/></g>').join('');
-    // A small crescent moon in the same sky: the CV download
-    const MOON = '<defs><mask id="moon-cut"><rect x="870" y="70" width="60" height="60" fill="#fff"/><circle cx="907" cy="94" r="12.5" fill="#000"/></mask></defs>' +
-      '<a class="star moon" href="cv/Kai_Park_CV_public.pdf" download="Kai_Park_CV.pdf" aria-label="Download CV (PDF)">' +
-      '<circle class="bloom" cx="900" cy="100" r="34"/>' +
-      '<circle class="moon-face" cx="900" cy="100" r="13" mask="url(#moon-cut)"/>' +
-      '<text x="900" y="136" text-anchor="middle">CV ↓</text></a>';
-    home.innerHTML = BLOOM + dust + tw + starsSVG([[520,160],[668,196],[792,250],[872,340]]) + MOON;
+    home.innerHTML = BLOOM + dust + tw + starsSVG([[520,160],[668,196],[792,250],[872,340]]) + moonSVG(900, 100, 13, 'moon-cut');
     // On narrow screens crop the view to the constellation so the stars and labels stay legible
     const fit = () => home.setAttribute('viewBox', innerWidth < 760 ? '440 40 520 420' : '0 0 1000 560');
     fit(); addEventListener('resize', fit);
@@ -58,7 +63,7 @@
 
   // Mini nav on section pages
   const mini = document.querySelector('.mini-nav svg');
-  if (mini) mini.innerHTML = BLOOM + starsSVG([[30,40],[150,62],[260,96],[340,150]], { current: mini.dataset.current, size: .62 });
+  if (mini) mini.innerHTML = BLOOM + starsSVG([[30,40],[150,62],[260,96],[340,150]], { current: mini.dataset.current, size: .62 }) + moonSVG(372, 52, 8, 'moon-cut-mini');
 
   // Theme toggle
   const btn = document.querySelector('.theme-btn');
