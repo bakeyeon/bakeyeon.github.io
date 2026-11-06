@@ -1,3 +1,7 @@
 # Private source material: never publish
 *.pdf
 .claude/
+
+# The one PDF meant for the public
+!cv/
+!cv/Kai_Park_CV_public.pdf
