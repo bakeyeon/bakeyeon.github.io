@@ -15,6 +15,9 @@
 - Park, H. (2026). Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum. MA thesis, University of Göttingen.
 - Park, K. (2026). Light Verbs, Heavy Meaning? Working paper. https://github.com/bakeyeon/light-verbs-heavy-meaning
 
+## Talks
+- Invited speaker, APAC AI for Science DevFest 2026 (Google Researcher Groups, GDG AI for Science), Nov 27–28, 2026
+
 ## Elsewhere
 - Google Scholar: https://scholar.google.com/citations?user=CzCE0C0AAAAJ
 - ORCID: https://orcid.org/0000-0002-2854-0127
