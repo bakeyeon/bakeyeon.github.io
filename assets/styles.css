@@ -411,7 +411,7 @@ article.item.flash { animation: item-flash 2.2s ease-out; }
 /* ---------- peeking robot: fun projects, from the bottom of the page ---------- */
 .peek { position: absolute; z-index: 2; left: var(--gutter); bottom: 0; width: 92px; height: 58px; pointer-events: none; }
 .peek-bot { position: absolute; left: 0; bottom: 0; width: 92px; height: 58px; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; overflow: hidden; -webkit-tap-highlight-color: transparent; }
-.peek-bot svg { position: absolute; left: 0; top: 0; width: 92px; height: 74px; overflow: visible; transform: translateY(26px) rotate(0); transform-origin: 46px 74px;
+.peek-bot svg { position: absolute; left: 0; top: 0; width: 92px; height: 74px; overflow: visible; transform: translateY(42px) rotate(0); transform-origin: 46px 74px;
   transition: transform .55s cubic-bezier(.34,1.5,.5,1); }
 .peek-bot:hover svg, .peek-bot:focus-visible svg, .peek.open .peek-bot svg { transform: translateY(1px) rotate(-6deg); }
 .peek-bot:focus-visible { outline: 2px solid var(--link); outline-offset: -2px; border-radius: 12px 12px 0 0; }
