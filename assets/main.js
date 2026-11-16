@@ -219,4 +219,15 @@
     });
     legend.forEach(a => { a.addEventListener('mouseenter', () => on(a.dataset.z)); a.addEventListener('mouseleave', off); });
   }
+  // Writing & tools: rows open into a card, one at a time
+  document.querySelectorAll('[data-xlist]').forEach(list => {
+    list.classList.add('js');
+    const items = [...list.querySelectorAll('.x')];
+    const set = (li, on) => { li.classList.toggle('open', on); li.querySelector('.x-row').setAttribute('aria-expanded', on); };
+    items.forEach(li => li.querySelector('.x-row').addEventListener('click', () => {
+      const on = !li.classList.contains('open');
+      items.forEach(o => set(o, o === li && on));
+      list.classList.toggle('has-open', on);
+    }));
+  });
 })();
