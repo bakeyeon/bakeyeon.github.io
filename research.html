@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=34">
+  <link rel="stylesheet" href="assets/styles.css?v=37">
 </head>
 <body>
   <header class="bar">
@@ -71,20 +71,19 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="h-pubs">
+    <section class="section" aria-labelledby="h-pubs" data-pubs>
       <header><span class="label">Index</span><h2 id="h-pubs">Publications &amp; papers</h2></header>
       <div class="body">
-        <details class="more pubs">
-          <summary><span class="label">5 papers · show list</span></summary>
+        <div class="pub-list">
         <ol class="tl">
-          <li class="major"><span class="gloss">2026 · Conference paper (poster)</span><br><a href="https://aclanthology.org/2026.pandora-1.2/">The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment</a>. PANDORA @ EMNLP 2026, Budapest.</li>
-          <li class="major"><span class="gloss">2026 · MA thesis</span><br>Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum. Göttingen.</li>
-          <li><span class="gloss">2026 · Working paper</span><br><a href="https://github.com/bakeyeon/light-verbs-heavy-meaning">Light Verbs, Heavy Meaning?</a></li>
-          <li><span class="gloss">2025 · Supervised student publication</span><br><a href="https://github.com/bakeyeon/modalparticles_sentiment_analysis/">How Much Sentiment Can Be Carried by Modal Particles?</a></li>
-          <li><span class="gloss">2024 · Supervised student publication</span><br><a href="https://github.com/bakeyeon/Modalparticles_Emojis/blob/main/Modalpartikeln_Can_Sentiments_Survive_Translation_with_Emojis.pdf">Modalpartikeln: Can Sentiments Survive Translation with Emojis?</a></li>
+          <li data-kw="Grue Divide" data-target="p-grue-divide" class="major"><span class="gloss">2026 · Conference paper (poster)</span><br><a href="https://aclanthology.org/2026.pandora-1.2/">The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment</a>. PANDORA @ EMNLP 2026, Budapest.</li>
+          <li data-kw="Blue-green" data-target="p-ma-thesis" class="major"><span class="gloss">2026 · MA thesis</span><br>Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum. Göttingen.</li>
+          <li data-kw="Light verbs" data-target="p-light-verbs"><span class="gloss">2026 · Working paper</span><br><a href="https://github.com/bakeyeon/light-verbs-heavy-meaning">Light Verbs, Heavy Meaning?</a></li>
+          <li data-kw="Modal particles" data-target="p-modal-particles"><span class="gloss">2025 · Supervised student publication</span><br><a href="https://github.com/bakeyeon/modalparticles_sentiment_analysis/">How Much Sentiment Can Be Carried by Modal Particles?</a></li>
+          <li data-kw="Emoji" data-target="p-emoji"><span class="gloss">2024 · Supervised student publication</span><br><a href="https://github.com/bakeyeon/Modalparticles_Emojis/blob/main/Modalpartikeln_Can_Sentiments_Survive_Translation_with_Emojis.pdf">Modalpartikeln: Can Sentiments Survive Translation with Emojis?</a></li>
         </ol>
+        </div>
         <p class="gloss">ORCID <a href="https://orcid.org/0000-0002-2854-0127">0000-0002-2854-0127</a></p>
-        </details>
       </div>
     </section>
 
@@ -92,14 +91,14 @@
     <section class="section" id="nuance" aria-labelledby="h-nuance">
       <header><span class="sw" style="background:var(--field-yellow)"></span><span class="label">01 · Nuance</span><h2 id="h-nuance">How languages carve meaning</h2></header>
       <div class="body">
-        <article class="item">
+        <article class="item" id="p-ma-thesis">
           <div class="row"><h3>Can the Use of Derivatives Affect Cognition?</h3><span class="gloss">MA thesis · 2026</span></div>
           <p class="gloss meta">A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum · Georg-August-Universität Göttingen · Supervisors: Prof. Dr. Stavros Skopeteas, Prof. Dr. Jacopo Romoli</p>
           <p>Does language structure shape perception? Study 1 analyzes a curated corpus of 419 Korean color-term variants; Study 2 is a behavioral experiment across Korea, the US, the UK and Australia. Korean derivation is far more productive than English, and jamo-level similarity predicts semantic similarity better than morpheme-level similarity, partly via consonant strengthening independent of vowel-harmony shift.</p>
           <ul class="facts"><li>419 color-term variants</li><li>≈ 21 : 1 KO vs EN unique forms</li><li>jamo &gt; morpheme</li><li>N = 9,534 trials</li></ul>
           <p>Results fit a usage-salience account: frequent, morphologically economical categories are lexically compact and perceptually sharp. The design is correlational; the account is a plausible interpretation, not a demonstrated cause.</p>
         </article>
-        <article class="item">
+        <article class="item" id="p-light-verbs">
           <div class="row"><h3>Light Verbs, Heavy Meaning?</h3><span class="gloss">Working paper · 2026</span></div>
           <p class="gloss meta">Exploring Informativity, Frequency and Morpho-Syntactic Interface of Simplex Verbs and 'root+hata' Light Verb Constructions in Korean · MA seminar, Göttingen</p>
           <p>Tests Polinsky and Magyar's (2020) informativity account of head-final lexicons on Korean simplex verbs vs. root+hata constructions, using dictionary sense counts, embedding self-similarity (KLUE-BERT, KcBERT, Vertex AI) and corpus frequency.</p>
@@ -114,7 +113,7 @@
     <section class="section" id="quantify" aria-labelledby="h-quantify">
       <header><span class="sw" style="background:var(--field-peach)"></span><span class="label">02 · Quantify</span><h2 id="h-quantify">Measuring what people see and feel</h2></header>
       <div class="body">
-        <article class="item">
+        <article class="item" id="p-grue-divide">
           <div class="row"><h3>The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment</h3><span class="gloss">Poster · PANDORA @ EMNLP 2026</span></div>
           <p class="gloss meta">Sole author · Proceedings of the First Workshop on Pluralistic AI NLP (PANDORA 2026), pp. 35–68 · ACL · DOI 10.18653/2026.pandora-1.2</p>
           <dl class="csw">
@@ -139,13 +138,13 @@
     <section class="section" id="align" aria-labelledby="h-align">
       <header><span class="sw" style="background:var(--field-lilac)"></span><span class="label">03 · Align</span><h2 id="h-align">Making models carry nuance</h2></header>
       <div class="body">
-        <article class="item">
+        <article class="item" id="p-modal-particles">
           <div class="row"><h3>How Much Sentiment Can Be Carried by Modal Particles?</h3><span class="gloss">Term paper · 2025</span></div>
           <p class="gloss meta">A Comparative Analysis Using BERT, Hugging Face, and FastText Models · Deep Learning in NLP, HHU Düsseldorf · featured on the DeepL Blog</p>
           <p>Benchmarks sentiment models on German modal particles (<i>ja, doch, halt, mal</i>), which shift tone without changing propositional content.</p>
           <p><a href="https://github.com/bakeyeon/modalparticles_sentiment_analysis/">GitHub →</a></p>
         </article>
-        <article class="item">
+        <article class="item" id="p-emoji">
           <div class="row"><h3>Modalpartikeln: Can Sentiments Survive Translation with Emojis?</h3><span class="gloss">Term paper · 2024</span></div>
           <p class="gloss meta">Decoding Sentiments from German Modal Particles to Korean Using Emojis · The Meaning of Gestures (and more), Prof. Dr. Jacopo Romoli · featured on the DeepL Blog</p>
           <p><i>Sehen wir</i> and <i>Sehen wir mal</i> both come out as "Let's see", but the particle <i>mal</i> turns a businesslike decision into a relaxed suggestion. Two surveys measured this: German speakers rated the sentiment of modal particles, and Korean speakers rated expressive emojis. The two sets of scores matched at about 80%, with positive sentiment aligning almost exactly, suggesting emojis can carry tone that translation flattens.</p>
@@ -221,6 +220,6 @@
       <a href="https://github.com/bakeyeon">GitHub</a>
     </span>
   </footer>
-  <script src="assets/main.js?v=16"></script>
+  <script src="assets/main.js?v=20"></script>
 </body>
 </html>

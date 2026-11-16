@@ -230,4 +230,242 @@
       list.classList.toggle('has-open', on);
     }));
   });
+  // Publications: a night sky of planets (oldest on the left) and a rocket that flies the route; or the plain list
+  const pubs = document.querySelector('[data-pubs]');
+  if (pubs) {
+    const listWrap = pubs.querySelector('.pub-list');
+    const lis = [...listWrap.querySelectorAll('ol > li')].reverse();
+    const PL = [
+      { x: 150, y: 214, r: 25, tone: 'pink',   shine: '#f7a8c2', kind: 'face' },
+      { x: 330, y: 128, r: 33, tone: 'peach',  shine: '#ffc39b', kind: 'craters' },
+      { x: 505, y: 228, r: 29, tone: 'lilac',  shine: '#cfa9f2', kind: 'moon' },
+      { x: 690, y: 126, r: 46, tone: 'aqua',   shine: '#8fe0d0', kind: 'bands' },
+      { x: 878, y: 214, r: 40, tone: 'blue',   shine: '#9cc0ff', kind: 'ring' },
+    ];
+    if (lis.length && lis.length <= PL.length) {
+      const P = PL.slice(PL.length - lis.length);
+      const f = n => n.toFixed(1);
+      let sd = 11; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+      const wob = (cx, cy, r, s, a0 = 0, sweep = 360, close = false) => {
+        const pts = [];
+        for (let a = 0; a <= sweep; a += 5) {
+          const t = (a0 + a) * Math.PI / 180, rr = r * (1 + .014 * Math.sin(3 * t + s) + .009 * Math.sin(5 * t + 2 * s));
+          pts.push(f(cx + rr * Math.cos(t)) + ' ' + f(cy + rr * Math.sin(t)));
+        }
+        return 'M' + pts.join(' L') + (close ? 'Z' : '');
+      };
+      const arc = (cx, cy, r, a0, a1) => { const p = a => [cx + r * Math.cos(a * Math.PI / 180), cy + r * Math.sin(a * Math.PI / 180)].map(f).join(' ');
+        return `M${p(a0)} A${f(r)} ${f(r)} 0 0 1 ${p(a1)}`; };
+
+      // stars
+      let stars = '';
+      for (let i = 0; i < 70; i++) {
+        const x = rnd() * 1000, y = rnd() * 300, rr = .5 + rnd() * 1.1, tw = rnd() < .35;
+        stars += `<circle cx="${f(x)}" cy="${f(y)}" r="${f(rr)}"${tw ? ` class="tw" style="animation-delay:-${f(rnd() * 3.6)}s"` : ` opacity="${f(.25 + rnd() * .5)}"`}/>`;
+      }
+      for (let i = 0; i < 7; i++) {
+        const x = 40 + rnd() * 920, y = 20 + rnd() * 120, k = 3 + rnd() * 3;
+        stars += `<path class="tw" style="animation-delay:-${f(rnd() * 3.6)}s" d="M${f(x)} ${f(y - k)} Q${f(x)} ${f(y)} ${f(x + k)} ${f(y)} Q${f(x)} ${f(y)} ${f(x)} ${f(y + k)} Q${f(x)} ${f(y)} ${f(x - k)} ${f(y)} Q${f(x)} ${f(y)} ${f(x)} ${f(y - k)}Z"/>`;
+      }
+
+      // planets
+      const planetsSVG = P.map((p, i) => {
+        const { x, y, r } = p, s = i * 1.7 + .4, id = 'pc' + i;
+        let back = '', deco = '', front = '';
+        const ring = (sign) => { const rx = r * 1.85, ry = r * .4;
+          return [1, .8].map(k => `<path class="pen${k < 1 ? ' thin' : ''}" d="M${f(x - rx * k)} ${f(y)} A${f(rx * k)} ${f(ry * k)} 0 0 ${sign} ${f(x + rx * k)} ${f(y)}"/>`).join(''); };
+        if (p.kind === 'ring') { back = `<g transform="rotate(-12 ${x} ${y})">${ring(1)}</g>`; front = `<g transform="rotate(-12 ${x} ${y})"><path class="pen" d="M${f(x + r * 1.85)} ${f(y)} A${f(r * 1.85)} ${f(r * .4)} 0 0 1 ${f(x - r * 1.85)} ${f(y)}"/><path class="pen thin" d="M${f(x + r * 1.48)} ${f(y)} A${f(r * 1.48)} ${f(r * .32)} 0 0 1 ${f(x - r * 1.48)} ${f(y)}"/></g>`; }
+        if (p.kind === 'bands') {
+          const ys = [-.62, -.3, .02, .34, .64];
+          deco = ys.slice(0, -1).map((a, k) => k % 2 ? '' : `<path class="band" style="--band:var(--field-${k === 2 ? 'blue' : 'mint'})" d="M${f(x - r)} ${f(y + a * r)} Q${f(x)} ${f(y + a * r + 7)} ${f(x + r)} ${f(y + a * r)} L${f(x + r)} ${f(y + ys[k + 1] * r)} Q${f(x)} ${f(y + ys[k + 1] * r + 7)} ${f(x - r)} ${f(y + ys[k + 1] * r)}Z"/>`).join('')
+            + ys.map(a => `<path class="pen thin" d="M${f(x - r)} ${f(y + a * r)} Q${f(x)} ${f(y + a * r + 7)} ${f(x + r)} ${f(y + a * r)}"/>`).join('');
+        }
+        if (p.kind === 'craters') deco = [[-.35, -.25, .2], [.3, .2, .14], [-.1, .45, .11]].map(([a, b, k], n) =>
+          `<path class="pen thin crater" d="${wob(x + a * r, y + b * r, k * r, n + 2, 0, 360, true)}"/>`).join('');
+        if (p.kind === 'face') deco = `<circle cx="${f(x - r * .3)}" cy="${f(y - r * .18)}" r="1.8" fill="currentColor"/><circle cx="${f(x + r * .26)}" cy="${f(y - r * .2)}" r="1.8" fill="currentColor"/><path class="pen thin" d="M${f(x - r * .32)} ${f(y + r * .16)} Q${f(x)} ${f(y + r * .46)} ${f(x + r * .3)} ${f(y + r * .14)}"/>`;
+        if (p.kind === 'moon') front = `<ellipse class="pen thin" cx="${x}" cy="${y}" rx="${r + 22}" ry="9" stroke-dasharray="1 5" transform="rotate(-8 ${x} ${y})" opacity=".7"/><circle class="pen moon" r="5.5" cx="${x + r + 22}" cy="${y}" style="fill:var(--sky-bg)"/>`;
+        const hatch = [0, 1, 2].map(k => `<path class="pen hatch" d="${arc(x, y, r * (.6 + .12 * k), 25 + k * 4, 75 - k * 6)}"/>`).join('');
+        const li = lis[i], title = (li.querySelector('a') || li).textContent.trim().replace(/\s+/g, ' ');
+        const yr = (li.querySelector('.gloss') || li).textContent.trim().slice(0, 4);
+        const yl = y + r + (p.kind === 'moon' ? 18 : p.kind === 'ring' ? 20 : 14); p.ly = yl;
+        return `<g class="planet" data-i="${i}" tabindex="0" role="button" aria-label="${title.replace(/"/g, '&quot;')} (${yr}). Fly the rocket here" style="--tone:var(--field-${p.tone});--shine:${p.shine}">
+          <clipPath id="${id}"><path d="${wob(x, y, r, s, 0, 360, true)}"/></clipPath>
+          <circle class="hit" cx="${x}" cy="${y}" r="${r + 26}"/>
+          <circle class="halo" cx="${x}" cy="${y}" r="${r + 9}"/>
+          <g class="pl">${back}<path class="fill" d="${wob(x, y, r, s, 0, 360, true)}"/><g clip-path="url(#${id})">${deco}${hatch}</g>
+          <path class="pen" d="${wob(x, y, r, s, -110, 342)}"/><path class="pen thin" d="${wob(x, y, r + 1.2, s + .5, 210, 48)}"/>${front}</g>
+</g>`;
+      }).join('');
+
+      // route through the landing spots, starting at the launch rock
+      const PAD = [62, 300];
+      const nodes = [PAD, ...P.map(p => [p.x, p.y - p.r - 1])];
+      let route = `M${nodes[0].join(' ')}`;
+      for (let i = 0; i < nodes.length - 1; i++) {
+        const p0 = nodes[Math.max(0, i - 1)], p1 = nodes[i], p2 = nodes[i + 1], p3 = nodes[Math.min(nodes.length - 1, i + 2)];
+        const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6 - 26], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6 - 26];
+        route += ` C${c1.map(f).join(' ')} ${c2.map(f).join(' ')} ${p2.join(' ')}`;
+      }
+
+      const tagsHTML = P.map((p, i) => {
+        const li = lis[i], a = li.querySelector('a'), g = li.querySelector('.gloss');
+        const kw = li.dataset.kw || (g ? g.textContent.slice(0, 4) : '');
+        const name = a ? a.textContent : (li.lastChild.textContent || '').trim(), tt = li.dataset.target ? `<a href="#${li.dataset.target}">${name}</a>` : (a ? a.outerHTML : name);
+        const al = p.x < 200 ? ' al' : p.x > 800 ? ' ar' : '';
+        return `<div class="tag${al}" data-i="${i}" style="left:${p.x / 10}%;top:${f(p.ly / 3.4)}%;--shine:${p.shine}"><span class="kw">${kw}</span><div class="full"><div class="fin"><span class="gloss">${g ? g.textContent : ''}</span><span class="tt">${tt}</span></div></div></div>`;
+      }).join('');
+
+      const sky = document.createElement('div');
+      sky.className = 'pub-sky';
+      sky.innerHTML = `<div class="sky-scroll"><div class="sky-stage"><svg viewBox="0 0 1000 340" role="group" aria-label="Publications as planets, oldest on the left">
+        <g class="stars" aria-hidden="true">${stars}</g>
+        <path class="route" d="${route}" aria-hidden="true"/>
+        <g aria-hidden="true"><path class="pen rock" d="M18 318 Q26 300 48 299 Q70 297 84 304 Q102 312 104 322"/><path class="pen thin" d="M40 309 q6 -3 12 0 M70 312 q5 -2 9 1"/></g>
+        ${planetsSVG}
+        <g class="rocket" aria-hidden="true"><g class="rk"><path class="pen flame" d=""/>
+          <path class="pen body" d="M-7 0 C-8.5 -12 -6.5 -24 0 -35 C6.5 -24 8.5 -12 7 0 Z"/><path class="pen thin" d="M-7.6 -9 Q0 -7 7.6 -9"/>
+          <circle class="pen win" cx="0" cy="-20" r="3.3"/><path class="pen" d="M-7 -8 Q-12 -4 -12.5 2 Q-9 0 -7 0 M7 -8 Q12 -4 12.5 2 Q9 0 7 0"/></g></g>
+        <text class="hint" x="985" y="332" text-anchor="end" aria-hidden="true">hover a planet · click to fly there</text>
+      </svg><div class="sky-tags">${tagsHTML}</div></div></div>`;
+      const info = document.createElement('div');
+      info.className = 'sky-info idle'; info.setAttribute('aria-live', 'polite');
+      const IDLE = '<span class="gloss">Five papers, oldest on the left. Pick a planet to visit one.</span>';
+      info.innerHTML = IDLE;
+
+      const tog = document.createElement('div');
+      tog.className = 'view-toggle'; tog.setAttribute('role', 'group'); tog.setAttribute('aria-label', 'Publications view');
+      tog.innerHTML = '<button type="button" data-v="sky">✦ Sky</button><button type="button" data-v="list">≡ List</button>';
+      const nav = document.createElement('div');
+      nav.className = 'sky-nav'; nav.setAttribute('role', 'group'); nav.setAttribute('aria-label', 'Fly between planets');
+      nav.innerHTML = '<button type="button" data-d="-1" aria-label="Previous planet">←</button><button type="button" data-d="1" aria-label="Next planet">→</button>';
+      const bar = document.createElement('div');
+      bar.className = 'sky-bar'; bar.append(tog, nav);
+      listWrap.before(bar, sky, info);
+
+      const svg = sky.querySelector('svg'), routeEl = sky.querySelector('.route');
+      const rocket = sky.querySelector('.rocket'), flame = sky.querySelector('.flame');
+      const starsG = sky.querySelector('.stars'), moon = sky.querySelector('.moon');
+      const planets = [...sky.querySelectorAll('.planet')];
+      const pls = planets.map(g => g.querySelector('.pl'));
+      const tags = [...sky.querySelectorAll('.tag')];
+      const measure = () => tags.forEach(t => { const w = t.querySelector('.kw').offsetWidth; if (w) t.style.setProperty('--kw', w + 'px'); });
+      const fit = () => { sky.classList.toggle('narrow', sky.clientWidth < 580); measure(); };
+      addEventListener('resize', fit);
+      if (document.fonts) document.fonts.ready.then(measure);
+
+      // where along the route each node sits
+      const L = routeEl.getTotalLength(), at = [0];
+      for (let n = 1, l = 0; n < nodes.length; n++) {
+        let best = 1e9, bl = l;
+        for (; l <= L; l += 2) { const q = routeEl.getPointAtLength(l), d = Math.hypot(q.x - nodes[n][0], q.y - nodes[n][1]); if (d < best) { best = d; bl = l; } else if (d > best + 30) break; }
+        at.push(bl); l = bl + 2;
+      }
+
+      let hov = -1, closeT = 0;
+      const openTag = () => { tags.forEach((t, n) => { t.classList.toggle('open', n === hov); t.classList.toggle('sel', n === sel); const l = t.querySelector('a'); if (l) l.tabIndex = n === hov ? 0 : -1; }); planets.forEach((g, n) => g.classList.toggle('hot', n === hov)); };
+      let cur = 0, fly = null, here = -1, sel = -1, ang = 0, raf = 0, last = 0, tm = 0;
+      const sq = P.map(() => ({ x: 1, v: 0 }));
+      let px = 0, py = 0, tx = 0, ty = 0;
+      const show = i => { if (i < 0) { info.innerHTML = IDLE; info.classList.add('idle'); } else { info.innerHTML = lis[i].innerHTML; info.classList.remove('idle'); } };
+      const place = (l, a, flameLen) => {
+        const q = routeEl.getPointAtLength(Math.max(0, Math.min(L, l)));
+        rocket.setAttribute('transform', `translate(${f(q.x)} ${f(q.y)}) rotate(${f(a)}) scale(1.05)`);
+        flame.setAttribute('d', flameLen > .5 ? `M-4.5 1 Q-3 ${f(1 + flameLen * .7)} 0 ${f(1 + flameLen)} Q3 ${f(1 + flameLen * .7)} 4.5 1Z` : '');
+      };
+      const goTo = i => {
+        const el = document.getElementById(lis[i].dataset.target || '');
+        if (!el) return;
+        el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+      };
+      const visit = (i, go) => {
+        sel = i; show(i); openTag();
+        const sc = sky.querySelector('.sky-scroll');
+        if (sc.scrollWidth > sc.clientWidth) sc.scrollTo({ left: P[i].x / 1000 * sc.scrollWidth - sc.clientWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
+        planets.forEach((g, k) => g.classList.toggle('here', k === i && here === i));
+        if (here === i && !fly) { if (go) goTo(i); return; }
+        if (reduce) { cur = at[i + 1]; here = i; ang = 0; place(cur, 0, 0); planets.forEach((g, k) => g.classList.toggle('here', k === i)); if (go) setTimeout(() => goTo(i), 250); return; }
+        const dist = Math.abs(at[i + 1] - cur);
+        fly = { from: cur, to: at[i + 1], t0: tm, dur: Math.min(2.4, .7 + dist / 520), i, go };
+        here = -1; planets.forEach(g => g.classList.remove('here'));
+        kick();
+      };
+      planets.forEach((g, i) => {
+        g.addEventListener('click', () => visit(i, true));
+        g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); visit(i, true); } });
+        const enter = () => { clearTimeout(closeT); hov = i; openTag(); show(i); };
+        const leave = () => { clearTimeout(closeT); closeT = setTimeout(() => { hov = -1; openTag(); show(sel); }, 180); };
+        [g, tags[i]].forEach(el => { el.addEventListener('mouseenter', enter); el.addEventListener('mouseleave', leave); });
+        g.addEventListener('focus', enter); g.addEventListener('blur', leave);
+        tags[i].addEventListener('click', e => { const l = e.target.closest('a'); if (l && !l.getAttribute('href').startsWith('#')) return; if (l) e.preventDefault(); visit(i, true); });
+      });
+      svg.addEventListener('pointermove', e => { const b = svg.getBoundingClientRect(); tx = ((e.clientX - b.left) / b.width - .5) * -10; ty = ((e.clientY - b.top) / b.height - .5) * -6; kick(); });
+      svg.addEventListener('pointerleave', () => { tx = ty = 0; kick(); });
+
+      const ease = u => u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+      const norm = a => ((a + 540) % 360) - 180;
+      const frame = now => {
+        raf = 0;
+        const dt = Math.min(.05, (now - (last || now)) / 1000); last = now; tm += dt;
+        let busy = false;
+        // stars drift with the pointer
+        px += (tx - px) * Math.min(1, dt * 4); py += (ty - py) * Math.min(1, dt * 4);
+        starsG.setAttribute('transform', `translate(${f(px)} ${f(py)})`);
+        if (Math.abs(tx - px) + Math.abs(ty - py) > .05) busy = true;
+        // rocket
+        if (fly) {
+          const u = Math.min(1, (tm - fly.t0) / fly.dur), e = ease(u), dir = Math.sign(fly.to - fly.from) || 1;
+          cur = fly.from + (fly.to - fly.from) * e;
+          const a1 = routeEl.getPointAtLength(Math.max(0, cur - 2 * dir)), a2 = routeEl.getPointAtLength(Math.min(L, cur + 2 * dir));
+          const heading = norm(Math.atan2(a2.y - a1.y, a2.x - a1.x) * 180 / Math.PI + 90 - (dir < 0 ? 180 : 0));
+          const w = Math.min(1, Math.min(u, 1 - u) * 6);
+          const target = heading * w;
+          ang += norm(target - ang) * Math.min(1, dt * 14);
+          place(cur, ang, 9 + Math.sin(tm * 40) * 2.5 + rnd() * 2);
+          if (u >= 1) { const done = fly; if (done.go) setTimeout(() => goTo(done.i), 450); here = fly.i; sq[here].v = -2.4; planets[here].classList.add('here'); fly = null; place(cur, 0, 0); ang = 0; }
+          busy = true;
+        }
+        // planets squash a little when the rocket lands
+        sq.forEach((s, k) => {
+          if (Math.abs(s.x - 1) < .0005 && Math.abs(s.v) < .001) return;
+          s.v += (-260 * (s.x - 1) - 12 * s.v) * dt; s.x += s.v * dt; busy = true;
+          const p = P[k]; pls[k].setAttribute('transform', `translate(${p.x} ${p.y + p.r}) scale(${f(2 - s.x)} ${s.x.toFixed(4)}) translate(${-p.x} ${-p.y - p.r})`);
+        });
+        // the moon keeps orbiting
+        if (moon && !reduce) {
+          const p = P.find(q => q.kind === 'moon'), a = tm * .7, rx = p.r + 22;
+          const mx = p.x + rx * Math.cos(a), my = p.y + 9 * Math.sin(a) - Math.cos(a) * rx * Math.tan(8 * Math.PI / 180) * .9;
+          moon.setAttribute('cx', f(mx)); moon.setAttribute('cy', f(my));
+          moon.style.opacity = Math.sin(a) < -.15 && Math.abs(mx - p.x) < p.r ? '0' : '1';
+          busy = true;
+        }
+        if (busy && !sky.hidden && !document.hidden) kick();
+      };
+      const kick = () => { if (!raf) { raf = requestAnimationFrame(frame); } };
+      document.addEventListener('visibilitychange', () => { last = 0; kick(); });
+      place(0, 0, 0);
+
+      // view toggle, remembered per visitor
+      const btns = [...tog.querySelectorAll('button')];
+      const setView = v => {
+        btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v));
+        sky.hidden = info.hidden = nav.hidden = v !== 'sky'; listWrap.hidden = v === 'sky';
+        try { localStorage.setItem('pubView', v); } catch (e) {}
+        if (v === 'sky') { last = 0; kick(); fit(); }
+      };
+      btns.forEach(b => b.addEventListener('click', () => setView(b.dataset.v)));
+      // previous / next planet
+      const navBtns = [...nav.querySelectorAll('button')];
+      const syncNav = () => { const k = fly ? fly.i : sel; navBtns[0].disabled = k <= 0; navBtns[1].disabled = k >= P.length - 1; };
+      navBtns.forEach(b => b.addEventListener('click', () => {
+        const k = fly ? fly.i : sel, d = +b.dataset.d;
+        visit(k < 0 ? (d > 0 ? 0 : P.length - 1) : Math.max(0, Math.min(P.length - 1, k + d))); syncNav();
+      }));
+      planets.forEach(g => g.addEventListener('click', syncNav));
+      tags.forEach(t => t.addEventListener('click', syncNav));
+      syncNav(); openTag();
+      let v0 = 'sky'; try { v0 = localStorage.getItem('pubView') || 'sky'; } catch (e) {}
+      setView(v0 === 'list' ? 'list' : 'sky');
+    }
+  }
 })();
