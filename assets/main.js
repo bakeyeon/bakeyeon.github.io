@@ -468,4 +468,43 @@
       setView(v0 === 'list' ? 'list' : 'sky');
     }
   }
+  // a robot peeking up from the bottom of the page; hover or tap and it shares a fun project
+  const FUN = [
+    { title: 'Turned my Claude Code into a Christmas market 🎄', text: 'Bring the festive market stroll straight to your cozy room.', href: 'https://github.com/bakeyeon/christmas-market-backdrop', go: 'Take a look' },
+  ];
+  if (FUN.length && !document.querySelector('.peek')) {
+    const pk = document.createElement('div');
+    pk.className = 'peek';
+    const f0 = FUN[0];
+    pk.innerHTML = `<div class="peek-say" id="peek-say" role="dialog" aria-label="Fun project">
+        <button class="peek-x" type="button" aria-label="Close">×</button>
+        <span class="label">Psst · fun project</span>
+        ${FUN.map(f => `<b>${f.title}</b><p>${f.text}</p><a class="peek-go" href="${f.href}">${f.go} <span aria-hidden="true">↗</span></a>`).join('')}
+      </div>
+      <button class="peek-bot" type="button" aria-expanded="false" aria-controls="peek-say" aria-label="A little robot has a fun project to show you">
+        <svg viewBox="0 0 92 74" aria-hidden="true">
+          <g class="ant"><path class="pen" d="M35 20 Q33.6 14.5 32.2 11.2 M57 20 Q58.6 14.4 59.9 11.2"/>
+          <path class="pen tip" d="M31.9 5.4 Q35.6 5.5 35.4 8.6 Q35.2 11.9 31.7 11.8 Q28.5 11.6 28.6 8.5 Q28.8 5.4 31.9 5.4Z M60.2 5.3 Q63.4 5.4 63.4 8.6 Q63.3 11.8 60 11.8 Q56.7 11.7 56.9 8.4 Q57.1 5.3 60.2 5.3Z"/></g>
+          <path class="pen ear" d="M22 29.6 L18.2 29.3 Q14.6 29.4 14.8 33 L14.9 40.2 Q14.8 43.7 18.1 43.8 L22.4 43.5 M70 29.6 L73.8 29.2 Q77.4 29.5 77.2 33.2 L77.1 40 Q77.3 43.6 73.9 43.8 L69.6 43.5"/>
+          <path class="pen head" d="M34 19.5 C46 18.6 58 19.2 63 19.4 C71 19.8 75.3 24 75 32 C74.8 40 75.4 52 74.8 60 C74.5 68 74 74 74 74 L17.2 74 C17.2 74 17 66 17.1 58 C17.2 48 17.2 41 17.2 35 C17.4 26 18.5 20.2 34 19.5Z"/>
+          <path class="pen thin" d="M19.6 26 Q22.2 18.4 34 17.9"/>
+          <g class="eyes"><circle class="dot" cx="37" cy="33" r="2.6"/><circle class="dot" cx="55" cy="33" r="2.6"/></g>
+          <circle class="cheek" cx="31" cy="40.5" r="3"/><circle class="cheek" cx="61" cy="40.5" r="3"/>
+          <path class="pen mouth" d="M40 40.5 Q46 45.6 52 40.4"/>
+        </svg>
+      </button>`;
+    (document.querySelector('footer.site') || document.body).append(pk);
+    const bot = pk.querySelector('.peek-bot');
+    let hoverT = 0, pinned = false;
+    const set = on => { pk.classList.toggle('open', on); bot.setAttribute('aria-expanded', on); };
+    const fine = matchMedia('(hover: hover)').matches;
+    if (fine) {
+      pk.addEventListener('mouseenter', () => { clearTimeout(hoverT); set(true); });
+      pk.addEventListener('mouseleave', () => { if (!pinned) hoverT = setTimeout(() => set(false), 350); });
+    }
+    bot.addEventListener('click', () => { pinned = !(pinned && pk.classList.contains('open')); set(pinned); });
+    pk.querySelector('.peek-x').addEventListener('click', () => { pinned = false; set(false); bot.focus(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && pk.classList.contains('open')) { pinned = false; set(false); bot.focus(); } });
+    document.addEventListener('click', e => { if (!pk.contains(e.target) && pk.classList.contains('open')) { pinned = false; set(false); } });
+  }
 })();
