@@ -199,6 +199,8 @@ main.content { max-width: 1080px; margin: 0 auto; padding: var(--space-64) var(-
 .x-thumb[data-tone="yellow"] { --c0: var(--field-yellow); --c1: var(--field-peach);  --c2: var(--field-mint); --p1: 80% 80%; --p2: 10% 10%; }
 .x-thumb[data-tone="lilac"]  { --c0: var(--field-lilac);  --c1: var(--field-sky);    --c2: var(--field-pink); --p1: 20% 85%; --p2: 90% 15%; }
 .x-thumb[data-tone="aqua"]   { --c0: var(--field-mint);   --c1: var(--field-yellow); --c2: var(--field-aqua); --p1: 90% 20%; }
+.x-thumb[data-tone="dusk"]   { background-image: radial-gradient(circle, rgba(255, 196, 110, .6) 0 .9px, transparent 1.5px), radial-gradient(90% 75% at 50% 118%, #ff8a4a 0, transparent 72%), linear-gradient(#1b2150, #3a2f6b 58%, #b8577a);
+  background-size: 6px 6px, auto, auto; background-blend-mode: normal; }
 .x-head { display: flex; flex-direction: column-reverse; gap: 2px; min-width: 0; }
 .x-t { font-weight: 600; line-height: 22px; transition: color .2s; }
 .x-chev { position: absolute; right: 12px; top: 34px; width: 8px; height: 8px; border-right: 1.5px solid var(--ink-muted); border-bottom: 1.5px solid var(--ink-muted); transform: rotate(45deg); transition: transform .4s var(--spring); }
