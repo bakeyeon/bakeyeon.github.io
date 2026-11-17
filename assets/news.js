@@ -1,7 +1,7 @@
 /* News, newest first. Add a new item at the TOP of this list; the home page shows the first four,
    news.html shows everything grouped by year. `text` may contain links. */
 window.NEWS = [
-  { date: '2026-11', label: 'Nov 2026', text: 'Completed the MA in Linguistics at Göttingen: thesis graded 1.0, final grade 1.4 (German scale, sehr gut).' },
+  { date: '2026-11', label: 'Nov 2026', text: 'Completed the MA in Linguistics at Göttingen: thesis graded 1.0, final grade 1.4 (German scale, sehr gut). The thesis, <a href="https://publications.goettingen-research-online.de/handle/2/182236">Can the Use of Derivatives Affect Cognition?</a>, is now published in the Göttingen university library repository.' },
   { date: '2026-11', label: 'Nov 27–28, 2026', text: 'Speaking at the <a href="https://gdg.community.dev/events/details/google-gdg-ai-for-science-australia-presents-apac-ai-for-science-devfest/cohost-gdg-ai-for-science-india/">APAC AI for Science DevFest 2026</a>, hosted by Google Researcher Groups (GDG AI for Science): notes from my thesis and ARR submission on why empirical linguistics matters for evaluating AI, and how AI tools and cloud resources helped me through technical bottlenecks.' },
   { date: '2026-11', label: 'Nov – Dec 2026', text: 'Attending the <a href="https://frontierresearchclub.de/">Frontier Research Club</a> series "Beyond the Bench: Engineering Autonomous AI Research Loops" in Munich (9 Nov) and Zurich (3 Dec), hosted by Digital Schooling and Google Cloud.' },
   { date: '2026-10', label: 'Oct 2026', text: '<a href="https://aclanthology.org/2026.pandora-1.2/">The Grue Divide</a> presented as a poster at PANDORA @ EMNLP 2026.' },
