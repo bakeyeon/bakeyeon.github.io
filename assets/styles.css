@@ -199,6 +199,7 @@ main.content { max-width: 1080px; margin: 0 auto; padding: var(--space-64) var(-
 .x-thumb[data-tone="yellow"] { --c0: var(--field-yellow); --c1: var(--field-peach);  --c2: var(--field-mint); --p1: 80% 80%; --p2: 10% 10%; }
 .x-thumb[data-tone="lilac"]  { --c0: var(--field-lilac);  --c1: var(--field-sky);    --c2: var(--field-pink); --p1: 20% 85%; --p2: 90% 15%; }
 .x-thumb[data-tone="aqua"]   { --c0: var(--field-mint);   --c1: var(--field-yellow); --c2: var(--field-aqua); --p1: 90% 20%; }
+.x-thumb[data-tone="xmas"]   { --c0: var(--field-mint);   --c1: var(--field-yellow); --c2: var(--field-pink); --p1: 50% 8%; --p2: 85% 90%; }
 .x-thumb[data-tone="dusk"]   { background-image: radial-gradient(circle, rgba(255, 196, 110, .6) 0 .9px, transparent 1.5px), radial-gradient(90% 75% at 50% 118%, #ff8a4a 0, transparent 72%), linear-gradient(#1b2150, #3a2f6b 58%, #b8577a);
   background-size: 6px 6px, auto, auto; background-blend-mode: normal; }
 .x-head { display: flex; flex-direction: column-reverse; gap: 2px; min-width: 0; }
@@ -408,41 +409,52 @@ article.item.flash { animation: item-flash 2.2s ease-out; }
 @keyframes item-flash { 0%, 25% { box-shadow: -14px 0 0 -10px var(--field-aqua); background: color-mix(in srgb, var(--highlight-a) 45%, transparent); } 100% { box-shadow: -14px 0 0 -10px transparent; background: transparent; } }
 @media (prefers-reduced-motion: reduce) { article.item.flash { animation: none; } }
 
-/* ---------- peeking robot: fun projects, from the bottom of the page ---------- */
-.peek { position: absolute; z-index: 2; left: var(--gutter); bottom: 0; width: 92px; height: 58px; pointer-events: none; }
-.peek-bot { position: absolute; left: 0; bottom: 0; width: 92px; height: 58px; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; overflow: hidden; -webkit-tap-highlight-color: transparent; }
-.peek-bot svg { position: absolute; left: 0; top: 0; width: 92px; height: 74px; overflow: visible; transform: translateY(42px) rotate(0); transform-origin: 46px 74px;
+/* ---------- peeking friends: fun projects, from the bottom of the page ---------- */
+.peek { position: absolute; z-index: 2; left: var(--gutter); bottom: 0; display: flex; align-items: flex-end; gap: 6px; pointer-events: none; }
+.pk { position: static; }
+.pk-bot { --w: 92px; --h: 58px; --sh: 74px; --hide: 42px; --show: 1px; --tilt: -6deg; }
+.pk-tree { --w: 64px; --h: 84px; --sh: 83.2px; --hide: 66px; --show: 1px; --tilt: 5deg; }
+.pk-btn { position: relative; display: block; width: var(--w); height: var(--h); padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.pk-btn svg { position: absolute; left: 0; top: 0; width: var(--w); height: var(--sh); overflow: visible; transform: translateY(var(--hide)); transform-origin: 50% 100%;
   transition: transform .55s cubic-bezier(.34,1.5,.5,1); }
-.peek-bot:hover svg, .peek-bot:focus-visible svg, .peek.open .peek-bot svg { transform: translateY(1px) rotate(-6deg); }
-.peek-bot:focus-visible { outline: 2px solid var(--link); outline-offset: -2px; border-radius: 12px 12px 0 0; }
+.pk-btn:hover svg, .pk-btn:focus-visible svg, .pk.open .pk-btn svg { transform: translateY(var(--show)) rotate(var(--tilt)); }
+.pk-btn:focus-visible { outline: 2px solid var(--link); outline-offset: -2px; border-radius: 12px 12px 0 0; }
 .peek .pen { fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .peek .thin { stroke-width: 1; opacity: .6; }
-.peek .head { fill: var(--field-mint); }
+.peek .head, .peek .tier { fill: var(--field-mint); }
 .peek .ear { fill: var(--field-blue); }
-.peek .tip { fill: var(--field-yellow); }
+.peek .tip, .peek .star, .peek .chick { fill: var(--field-yellow); }
+.peek .bead { fill: var(--b); stroke-width: 1; }
+.peek .gl { opacity: .8; }
+.peek .heart { fill: var(--field-pink); stroke-width: 1.1; }
+.peek .ceye { fill: var(--surface); stroke-width: 1.3; }
+.peek .beak { fill: var(--field-peach); stroke-width: 1.1; }
 .peek .cheek { fill: var(--field-pink); opacity: 0; transition: opacity .3s; }
-.peek-bot:hover .cheek, .peek.open .cheek { opacity: 1; }
+.pk-btn:hover .cheek, .pk.open .cheek { opacity: 1; }
 .peek .dot { fill: var(--ink); }
-.peek .eyes { animation: peek-blink 5s infinite; transform-origin: 46px 31px; }
+.peek .eyes { animation: peek-blink 5s infinite; transform-box: fill-box; transform-origin: center; }
+.pk-tree .eyes { animation-delay: -2.2s; }
 .peek .mouth { opacity: 0; transition: opacity .25s; }
-.peek-bot:hover .mouth, .peek.open .mouth { opacity: 1; }
+.pk-btn:hover .mouth, .pk.open .mouth { opacity: 1; }
 .peek .ant { transform-origin: 46px 20px; animation: peek-wiggle 3.2s ease-in-out infinite; }
+.peek .star { transform-box: fill-box; transform-origin: center; animation: peek-twinkle 2.8s ease-in-out infinite; }
 @keyframes peek-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
 @keyframes peek-wiggle { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(4deg); } }
-.peek-say { position: absolute; left: 70px; bottom: 50px; width: min(300px, calc(100vw - 100px)); padding: 14px 16px 16px; pointer-events: auto;
+@keyframes peek-twinkle { 0%, 100% { transform: rotate(-8deg) scale(1); } 50% { transform: rotate(8deg) scale(1.08); } }
+.pk-say { position: absolute; z-index: 3; left: var(--sx, calc(var(--w) - 22px)); bottom: calc(var(--h) - 6px); width: min(300px, var(--sw, 300px)); padding: 14px 16px 16px; pointer-events: auto;
   background: var(--surface); color: var(--ink); border: 1.6px solid var(--ink); border-radius: 18px 225px 16px 255px / 255px 18px 225px 16px;
   box-shadow: 4px 4px 0 -1px var(--field-yellow); transform-origin: 0 100%; transform: scale(.6) rotate(-4deg); opacity: 0; visibility: hidden;
   transition: transform .45s cubic-bezier(.34,1.5,.5,1), opacity .2s, visibility 0s .45s; }
-.peek-say::after { content: ""; position: absolute; left: 10px; bottom: -12px; width: 18px; height: 14px; background: var(--surface);
+.pk-say::after { content: ""; position: absolute; left: 10px; bottom: -12px; width: 18px; height: 14px; background: var(--surface);
   border-left: 1.6px solid var(--ink); border-bottom: 1.6px solid var(--ink); border-bottom-left-radius: 14px 12px; transform: skewX(-28deg); }
-.peek.open .peek-say { transform: none; opacity: 1; visibility: visible; transition: transform .45s cubic-bezier(.34,1.5,.5,1), opacity .2s, visibility 0s; }
-.peek-say .label { display: block; margin-bottom: 6px; }
-.peek-say b { display: block; font-size: 15px; line-height: 21px; }
-.peek-say p { margin: 4px 0 12px; font-size: 13px; line-height: 19px; color: var(--ink-muted); }
-.peek-go { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border: 1.4px solid var(--ink); background: var(--field-mint); color: var(--ink); text-decoration: none;
+.pk.open .pk-say { transform: none; opacity: 1; visibility: visible; transition: transform .45s cubic-bezier(.34,1.5,.5,1), opacity .2s, visibility 0s; }
+.pk-say .label { display: block; margin-bottom: 6px; }
+.pk-say b { display: block; font-size: 15px; line-height: 21px; padding-right: 18px; }
+.pk-say p { margin: 4px 0 12px; font-size: 13px; line-height: 19px; color: var(--ink-muted); }
+.pk-go { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border: 1.4px solid var(--ink); background: var(--field-mint); color: var(--ink); text-decoration: none;
   font-size: 13px; line-height: 18px; font-weight: 600; border-radius: 14px 225px 16px 255px / 255px 16px 225px 14px; transform: rotate(-1.5deg); transition: transform .3s cubic-bezier(.34,1.5,.5,1), box-shadow .3s; }
-.peek-go:hover { transform: rotate(0) translate(-1px, -1px); box-shadow: 3px 3px 0 -1px var(--ink); }
-.peek-x { position: absolute; right: 8px; top: 6px; width: 26px; height: 26px; border: 0; background: none; color: var(--ink-muted); cursor: pointer; font-size: 18px; line-height: 1; border-radius: 50%; }
-.peek-x:hover { color: var(--ink); }
-@media (prefers-reduced-motion: reduce) { .peek-bot svg, .peek-say, .peek-go { transition: none; } .peek .eyes, .peek .ant { animation: none; } }
+.pk-go:hover { transform: rotate(0) translate(-1px, -1px); box-shadow: 3px 3px 0 -1px var(--ink); }
+.pk-x { position: absolute; right: 8px; top: 6px; width: 26px; height: 26px; border: 0; background: none; color: var(--ink-muted); cursor: pointer; font-size: 18px; line-height: 1; border-radius: 50%; }
+.pk-x:hover { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .pk-btn svg, .pk-say, .pk-go { transition: none; } .peek .eyes, .peek .ant, .peek .star { animation: none; } }
 @media print { .peek { display: none; } }

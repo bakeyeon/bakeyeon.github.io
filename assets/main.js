@@ -468,21 +468,8 @@
       setView(v0 === 'list' ? 'list' : 'sky');
     }
   }
-  // a robot peeking up from the bottom of the page; hover or tap and it shares a fun project
-  const FUN = [
-    { title: 'Turned my Claude Code into a Christmas market 🎄', text: 'Bring the festive market stroll straight to your cozy room.', href: 'https://github.com/bakeyeon/christmas-market-backdrop', go: 'Take a look' },
-  ];
-  if (FUN.length && !document.querySelector('.peek')) {
-    const pk = document.createElement('div');
-    pk.className = 'peek';
-    const f0 = FUN[0];
-    pk.innerHTML = `<div class="peek-say" id="peek-say" role="dialog" aria-label="Fun project">
-        <button class="peek-x" type="button" aria-label="Close">×</button>
-        <span class="label">Psst · fun project</span>
-        ${FUN.map(f => `<b>${f.title}</b><p>${f.text}</p><a class="peek-go" href="${f.href}">${f.go} <span aria-hidden="true">↗</span></a>`).join('')}
-      </div>
-      <button class="peek-bot" type="button" aria-expanded="false" aria-controls="peek-say" aria-label="A little robot has a fun project to show you">
-        <svg viewBox="0 0 92 74" aria-hidden="true">
+  // little friends peeking up from the bottom of the page; hover or tap one and it shares a fun project
+  const BOT_SVG = `<svg viewBox="0 0 92 74" aria-hidden="true">
           <g class="ant"><path class="pen" d="M35 20 Q33.6 14.5 32.2 11.2 M57 20 Q58.6 14.4 59.9 11.2"/>
           <path class="pen tip" d="M31.9 5.4 Q35.6 5.5 35.4 8.6 Q35.2 11.9 31.7 11.8 Q28.5 11.6 28.6 8.5 Q28.8 5.4 31.9 5.4Z M60.2 5.3 Q63.4 5.4 63.4 8.6 Q63.3 11.8 60 11.8 Q56.7 11.7 56.9 8.4 Q57.1 5.3 60.2 5.3Z"/></g>
           <path class="pen ear" d="M22 29.6 L18.2 29.3 Q14.6 29.4 14.8 33 L14.9 40.2 Q14.8 43.7 18.1 43.8 L22.4 43.5 M70 29.6 L73.8 29.2 Q77.4 29.5 77.2 33.2 L77.1 40 Q77.3 43.6 73.9 43.8 L69.6 43.5"/>
@@ -491,20 +478,75 @@
           <g class="eyes"><circle class="dot" cx="37" cy="33" r="2.6"/><circle class="dot" cx="55" cy="33" r="2.6"/></g>
           <circle class="cheek" cx="31" cy="40.5" r="3"/><circle class="cheek" cx="61" cy="40.5" r="3"/>
           <path class="pen mouth" d="M40 40.5 Q46 45.6 52 40.4"/>
-        </svg>
-      </button>`;
-    (document.querySelector('footer.site') || document.body).append(pk);
-    const bot = pk.querySelector('.peek-bot');
-    let hoverT = 0, pinned = false;
-    const set = on => { pk.classList.toggle('open', on); bot.setAttribute('aria-expanded', on); };
+        </svg>`;
+  const TREE_SVG = (() => {
+    const n = v => v.toFixed(1);
+    // a plush tier: round shoulders on top, a scalloped hem below
+    const tier = (cx, top, bot, hw, bumps) => {
+      let d = `M${n(cx - hw)} ${n(bot - 3)} C${n(cx - hw - 3)} ${n(top + (bot - top) * .35)} ${n(cx - hw * .55)} ${n(top)} ${n(cx)} ${n(top)} C${n(cx + hw * .55)} ${n(top)} ${n(cx + hw + 3)} ${n(top + (bot - top) * .35)} ${n(cx + hw)} ${n(bot - 3)}`;
+      const w = 2 * hw / bumps;
+      for (let k = 0; k < bumps; k++) { const x1 = cx + hw - w * (k + 1); d += ` Q${n(x1 + w / 2)} ${n(bot + 3 + (k % 2) * 1.2)} ${n(x1)} ${n(bot - 2 + (k % 2 ? 0 : 1.2))}`; }
+      return d + 'Z';
+    };
+    const beads = ['pink', 'peach', 'yellow', 'pink', 'peach', 'yellow'];
+    const garland = (x0, x1, y, sag, cnt, off) => {
+      let s = `<path class="pen thin gl" d="M${n(x0)} ${n(y)} Q${n((x0 + x1) / 2)} ${n(y + sag * 2)} ${n(x1)} ${n(y)}"/>`;
+      for (let k = 0; k < cnt; k++) { const t = (k + .5) / cnt, x = x0 + (x1 - x0) * t, yy = y + sag * 4 * t * (1 - t);
+        s += `<circle class="pen bead" style="--b:var(--field-${beads[(k + off) % beads.length]})" cx="${n(x)}" cy="${n(yy)}" r="${k % 2 ? 1.9 : 2.4}"/>`; }
+      return s;
+    };
+    const T = [[40, 66, 104, 37, 6], [40, 49, 74, 31, 5], [40, 34, 58, 25, 4], [40, 20, 43, 18, 3]];
+    let g = '';
+    T.forEach(([cx, top, bot, hw, bumps], i) => {
+      g += `<path class="pen tier" d="${tier(cx, top, bot, hw, bumps)}"/>`;
+      if (i === 0) g += garland(5, 75, 80, 1.5, 5, 0);
+      if (i === 1) g += garland(11, 69, 64, 2.2, 6, 1);
+      if (i === 2) g += garland(17, 63, 48, 2.2, 5, 2);
+      if (i === 3) g += garland(24, 56, 33, 2, 4, 3) + `<path class="pen heart" d="M47.5 27.3 q-1.8 -2.2 -3.4 -.4 q-1.2 1.6 3.4 4.4 q4.6 -2.8 3.4 -4.4 q-1.6 -1.8 -3.4 .4Z"/>`;
+    });
+    const face = `<path class="pen chick" d="M40 77 C49 76.6 53.6 82 53.4 89 C53.2 96 48 100.4 40 100.2 C32 100.4 26.8 96 26.6 89 C26.4 82 31 76.6 40 77Z"/>
+          <g class="eyes"><ellipse class="pen ceye" cx="34.4" cy="87" rx="2.7" ry="1.8"/><ellipse class="pen ceye" cx="45.6" cy="87" rx="2.7" ry="1.8"/></g>
+          <ellipse class="cheek" cx="31.6" cy="91.4" rx="2.8" ry="1.8"/><ellipse class="cheek" cx="48.4" cy="91.4" rx="2.8" ry="1.8"/>
+          <path class="pen beak" d="M37.6 90 L42.4 90 L40 92.6Z"/>`;
+    const star = `<path class="pen star" d="M40 2.2 L42.6 8.2 L49 8.8 L44.2 13 L45.7 19.4 L40 16.1 L34.3 19.4 L35.8 13 L31 8.8 L37.4 8.2Z"/>`;
+    return `<svg viewBox="0 0 80 104" aria-hidden="true"><g class="sway">${g}${face}${star}</g></svg>`;
+  })();
+  const FUN = [
+    { who: 'bot', svg: BOT_SVG, label: 'A little robot has a fun project to show you',
+      title: 'Turned my Claude Code into a Christmas market 🎄', text: 'Bring the festive market stroll straight to your cozy room.', href: 'https://github.com/bakeyeon/christmas-market-backdrop', go: 'Take a look' },
+    { who: 'tree', svg: TREE_SVG, label: 'A Christmas tree has a fun project to show you',
+      title: 'A plush Christmas tree made of 7,000 letters 🐥', text: 'It turns slowly in 3D, and the chick on the bottom tier blinks and chirps.', href: 'https://github.com/bakeyeon/ascii-tree', go: 'Take a look' },
+  ];
+  if (FUN.length && !document.querySelector('.peek')) {
+    const peek = document.createElement('div');
+    peek.className = 'peek';
+    peek.innerHTML = FUN.map((f, i) => `<div class="pk pk-${f.who}">
+        <div class="pk-say" id="pk-say-${i}" role="dialog" aria-label="Fun project">
+          <button class="pk-x" type="button" aria-label="Close">×</button>
+          <span class="label">Psst · fun project</span>
+          <b>${f.title}</b><p>${f.text}</p><a class="pk-go" href="${f.href}">${f.go} <span aria-hidden="true">↗</span></a>
+        </div>
+        <button class="pk-btn" type="button" aria-expanded="false" aria-controls="pk-say-${i}" aria-label="${f.label}">${f.svg}</button>
+      </div>`).join('');
+    (document.querySelector('footer.site') || document.body).append(peek);
+    const items = [...peek.querySelectorAll('.pk')];
+    const place = () => { const pl = peek.getBoundingClientRect().left, vw = document.documentElement.clientWidth;
+      items.forEach(it => { const x = it.offsetLeft + it.offsetWidth - 22, sy = it.querySelector('.pk-say').style;
+        sy.setProperty('--sx', x + 'px'); sy.setProperty('--sw', Math.max(200, vw - pl - x - 12) + 'px'); }); };
+    place(); addEventListener('resize', place);
+    let pinned = null, hoverT = 0;
+    const set = it => items.forEach(x => { const on = x === it; x.classList.toggle('open', on); x.querySelector('.pk-btn').setAttribute('aria-expanded', on); });
     const fine = matchMedia('(hover: hover)').matches;
-    if (fine) {
-      pk.addEventListener('mouseenter', () => { clearTimeout(hoverT); set(true); });
-      pk.addEventListener('mouseleave', () => { if (!pinned) hoverT = setTimeout(() => set(false), 350); });
-    }
-    bot.addEventListener('click', () => { pinned = !(pinned && pk.classList.contains('open')); set(pinned); });
-    pk.querySelector('.peek-x').addEventListener('click', () => { pinned = false; set(false); bot.focus(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && pk.classList.contains('open')) { pinned = false; set(false); bot.focus(); } });
-    document.addEventListener('click', e => { if (!pk.contains(e.target) && pk.classList.contains('open')) { pinned = false; set(false); } });
+    items.forEach(it => {
+      const btn = it.querySelector('.pk-btn');
+      if (fine) {
+        it.addEventListener('mouseenter', () => { clearTimeout(hoverT); if (!pinned || pinned === it) set(it); });
+        it.addEventListener('mouseleave', () => { if (!pinned) hoverT = setTimeout(() => set(null), 350); });
+      }
+      btn.addEventListener('click', () => { pinned = (pinned === it && it.classList.contains('open')) ? null : it; set(pinned); });
+      it.querySelector('.pk-x').addEventListener('click', () => { pinned = null; set(null); btn.focus(); });
+    });
+    document.addEventListener('keydown', e => { const o = items.find(x => x.classList.contains('open')); if (e.key === 'Escape' && o) { pinned = null; set(null); o.querySelector('.pk-btn').focus(); } });
+    document.addEventListener('click', e => { if (!peek.contains(e.target) && items.some(x => x.classList.contains('open'))) { pinned = null; set(null); } });
   }
 })();
