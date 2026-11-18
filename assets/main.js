@@ -549,4 +549,17 @@
     document.addEventListener('keydown', e => { const o = items.find(x => x.classList.contains('open')); if (e.key === 'Escape' && o) { pinned = null; set(null); o.querySelector('.pk-btn').focus(); } });
     document.addEventListener('click', e => { if (!peek.contains(e.target) && items.some(x => x.classList.contains('open'))) { pinned = null; set(null); } });
   }
+  // silent demo loops: play only while on screen; with reduced motion, show controls instead of autoplay
+  const loops = document.querySelectorAll('video[data-loop]');
+  if (loops.length) {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    loops.forEach(v => { v.muted = true; if (still) { v.autoplay = false; v.pause(); v.controls = true; } });
+    if (!still && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { const p = e.target.play(); if (p) p.catch(() => { e.target.controls = true; }); }
+        else e.target.pause();
+      }), { threshold: 0.35 });
+      loops.forEach(v => io.observe(v));
+    }
+  }
 })();
