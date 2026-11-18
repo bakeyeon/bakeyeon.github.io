@@ -244,7 +244,7 @@ main.content { max-width: 1080px; margin: 0 auto; padding: var(--space-64) var(-
 .fig .crop { overflow: hidden; border: 1px solid var(--line); background: #fff; }
 .fig .crop img { border: 0; width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
 .fig-pair .fig { margin-bottom: var(--space-16); }
-.fig .video { position: relative; aspect-ratio: 16 / 10; border: 1px solid var(--line); background: #0f172a; }
+.fig .video { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); background: #f6f8fb; }
 .fig .video video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
 
 /* line-art robot doodle: context in (?), cue noticed (!) */
