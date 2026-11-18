@@ -562,4 +562,13 @@
       loops.forEach(v => io.observe(v));
     }
   }
+  // sibling-project panels: their demo video plays only while the panel is open
+  document.querySelectorAll('details.sib').forEach((d) => {
+    d.addEventListener('toggle', () => {
+      const v = d.querySelector('video');
+      if (!v) return;
+      if (d.open && !matchMedia('(prefers-reduced-motion: reduce)').matches) { const p = v.play(); if (p) p.catch(() => { v.controls = true; }); }
+      else v.pause();
+    });
+  });
 })();

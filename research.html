@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=49">
+  <link rel="stylesheet" href="assets/styles.css?v=51">
 </head>
 <body>
   <header class="bar">
@@ -150,6 +150,17 @@
             <div class="video"><video data-loop autoplay muted loop playsinline preload="metadata" poster="assets/video/sentiment-translator-demo.jpg?v=2" aria-label="Silent looping demo of the Sentiment Translator prototype"><source src="assets/video/sentiment-translator-demo.mp4?v=2" type="video/mp4"></video></div>
             <figcaption class="gloss">Sentiment Translator v2, a concept demo on a phone: modal particles in Thai, German and Japanese. Its map is an early form of the SFF (Sentiment-Formality-Friendliness) framework, plotting positive–negative sentiment, friendliness and formality against a shared scoring rubric. <a href="https://youtu.be/pZkeuCs8pf8">Watch with sound on YouTube →</a></figcaption>
           </figure>
+          <details class="sib">
+            <summary><span class="sib-arrow" aria-hidden="true"></span><span>Sibling project: <b>Sentiment Interpreter</b>, live interpreting that keeps the feeling</span></summary>
+            <div class="sib-body">
+              <p>The same SFF rubric, used to guide a live interpreter instead of a scorer. Speak or type in one language, and hear or read it in another: the interpreter judges the original's sentiment, formality and friendliness and matches them in its words and its voice. A meeting mode puts live subtitles in a floating window over slides or a video call. Built on the Gemini Live API.</p>
+              <figure class="fig">
+                <div class="video"><video data-loop muted loop playsinline preload="none" poster="assets/video/sentiment-interpreter-demo.jpg" aria-label="Silent looping demo of Sentiment Interpreter"><source src="assets/video/sentiment-interpreter-demo.mp4" type="video/mp4"></video></div>
+                <figcaption class="gloss">Sentiment Interpreter, a demo on a phone: typed English spoken back in warm Korean, German <i>doch mal</i> kept casual, and live meeting subtitles. <a href="https://youtu.be/HIIB_evJC6Y">Watch with sound on YouTube →</a></figcaption>
+              </figure>
+              <p><a href="https://github.com/bakeyeon/Live-Voice-to-Voice-Translation-App">GitHub →</a></p>
+            </div>
+          </details>
         </article>
         <article class="item">
           <div class="row"><h3>Alignment work at DeepL</h3><span class="gloss">Language Data Team · 2024–</span></div>
@@ -240,6 +251,6 @@
       <a href="https://github.com/bakeyeon">GitHub</a>
     </span>
   </footer>
-  <script src="assets/main.js?v=25"></script>
+  <script src="assets/main.js?v=26"></script>
 </body>
 </html>

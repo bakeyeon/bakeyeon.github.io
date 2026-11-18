@@ -245,6 +245,16 @@ main.content { max-width: 1080px; margin: 0 auto; padding: var(--space-64) var(-
 .fig .crop img { border: 0; width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
 .fig-pair .fig { margin-bottom: var(--space-16); }
 .fig .video { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); background: #f6f8fb; }
+.sib { margin: 4px 0 var(--space-16); max-width: 680px; }
+.sib summary { display: flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); }
+.sib summary::-webkit-details-marker { display: none; }
+.sib summary:hover { border-color: var(--link); }
+.sib summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sib-arrow { flex: none; width: 8px; height: 8px; border-right: 2px solid var(--link); border-bottom: 2px solid var(--link); transform: rotate(-45deg); transition: transform .25s ease; }
+.sib[open] .sib-arrow { transform: rotate(45deg); }
+.sib-body { padding: var(--space-8) 2px 0; }
+.sib-body .fig { margin-top: var(--space-8); }
+@media (prefers-reduced-motion: reduce) { .sib-arrow { transition: none; } }
 .fig .video video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
 
 /* line-art robot doodle: context in (?), cue noticed (!) */
