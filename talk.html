@@ -18,6 +18,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css?v=51">
+  <style>
+    .prompt-box { position: relative; margin: var(--space-8) 0; border: 1px solid var(--line); border-radius: var(--radius-2); background: var(--surface-raised); }
+    .prompt-box pre { margin: 0; padding: var(--space-16); padding-top: 44px; font: 13px/20px var(--font-mono); color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+    .copy-btn { position: absolute; top: var(--space-8); right: var(--space-8); padding: 4px 12px; font: 500 13px/20px var(--font-sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-full); cursor: pointer; }
+    .copy-btn:hover { border-color: var(--ink); }
+    .copy-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  </style>
 </head>
 <body>
   <header class="bar">
@@ -101,6 +108,16 @@
           <li class="major"><div class="row"><h3>Using AI in ACL-venue research</h3><span class="gloss">Policy</span></div>
             <p>Use it, disclose it, and remember the authors stay responsible.</p>
             <p class="links-row"><a href="https://aclrollingreview.org/responsibleNLPresearch/">ARR Responsible NLP Checklist →</a> &nbsp; <a href="https://2023.aclweb.org/blog/ACL-2023-policy/">ACL 2023 policy on AI writing assistance →</a></p></li>
+          <li class="major"><div class="row"><h3>My system instructions for Gemini</h3><span class="gloss">Prompt</span></div>
+            <p>They don't stop hallucinations, but they make them easy to spot: if the answer says no search was done and still gives exact names or numbers, check it. Open the links it lists, too.</p>
+            <div class="prompt-box">
+              <button class="copy-btn" type="button" data-copy="sys-prompt">Copy</button>
+<pre id="sys-prompt">At the very beginning of each answer, state whether you searched the web (Y/N). If Y, list the URLs you used.
+1. Never fabricate or extrapolate. If you cannot verify a fact, name or number, say you do not know. Do not guess.
+2. Never misstate whether you searched. If you found nothing, say so.
+3. Mark unverified claims as unverified; never present them as established facts.
+4. Keep a formal, objective tone. No emojis, and no follow-up questions at the end.</pre>
+            </div></li>
           <li><div class="row"><h3>Reading and note-taking tools</h3><span class="gloss">Tools</span></div>
             <p class="links-row"><a href="https://obsidian.md/">Obsidian →</a> &nbsp; <a href="https://www.researchrabbit.ai/">ResearchRabbit →</a> &nbsp; <a href="https://www.alphaxiv.org/">alphaXiv →</a> &nbsp; <a href="https://notebooklm.google/">Gemini Notebook (NotebookLM) →</a> &nbsp; <a href="https://support.google.com/notebooklm/answer/16164461">Its data and privacy help →</a></p>
             <p class="gloss meta">Data policies change; check them before you upload unpublished work.</p></li>
@@ -126,5 +143,19 @@
     </span>
   </footer>
   <script src="assets/main.js?v=26"></script>
+  <script>
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const text = document.getElementById(btn.dataset.copy).textContent;
+        try { await navigator.clipboard.writeText(text); }
+        catch {
+          const ta = document.createElement('textarea'); ta.value = text; document.body.append(ta);
+          ta.select(); try { document.execCommand('copy'); } catch {} ta.remove();
+        }
+        btn.textContent = 'Copied ✓';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+      });
+    });
+  </script>
 </body>
 </html>
