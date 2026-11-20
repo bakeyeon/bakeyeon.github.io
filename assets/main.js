@@ -589,6 +589,81 @@
       snowBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.6 4.6 12 7l2.4-2.4M9.6 19.4 12 17l2.4 2.4M4.6 10.9l3.3-.9-.9-3.3M19.4 13.1l-3.3.9.9 3.3M4.6 13.1l3.3.9-.9 3.3M19.4 10.9l-3.3-.9.9-3.3"/></svg>';
       wrap.appendChild(snowBtn); wrap.appendChild(themeBtn);
     }
+    let musicBtn = null;
+    if (snowBtn) {
+      musicBtn = document.createElement('button');
+      musicBtn.type = 'button'; musicBtn.className = 'theme-btn snow-btn music-btn';
+      musicBtn.setAttribute('aria-label', 'Play Jingle Bells on a xylophone');
+      musicBtn.title = 'Play Jingle Bells (xylophone)';
+      musicBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 17.5V5.5l10-2v12"/><circle cx="7" cy="17.5" r="2.5"/><circle cx="17" cy="15.5" r="2.5"/></svg>';
+      snowBtn.parentNode.insertBefore(musicBtn, snowBtn);
+    }
+
+    // Jingle Bells (J. L. Pierpont, 1857, public domain) on a synthesized xylophone: Web Audio only,
+    // nothing to download, and it plays only after a click.
+    const carol = (function () {
+      const HI = { C: 523.25, D: 587.33, E: 659.25, F: 698.46, G: 783.99 };
+      const LO = { C: 130.81, D: 146.83, F: 174.61, G: 196.0, A: 220.0, C4: 261.63, D4: 293.66 };
+      const hook = [['E', 1], ['E', 1], ['E', 2], ['E', 1], ['E', 1], ['E', 2], ['E', 1], ['G', 1], ['C', 1.5], ['D', .5], ['E', 4]];
+      const mid = [['F', 1], ['F', 1], ['F', 1.5], ['F', .5], ['F', 1], ['E', 1], ['E', 1], ['E', .5], ['E', .5]];
+      const tune = [...hook, ...mid, ['E', 1], ['D', 1], ['D', 1], ['E', 1], ['D', 2], ['G', 2],
+                    ...hook, ...mid, ['G', 1], ['G', 1], ['F', 1], ['D', 1], ['C', 4]];
+      // one chord per bar: root on beat 1, fifth on beat 3
+      const bass = 'C C C C F C D G C C C C F C G C'.split(' ');
+      const FIFTH = { C: 'G', F: 'C4', D: 'A', G: 'D4' };
+      const BEAT = 60 / 138, LOOP = 64;
+      let ctx = null, master = null, timer = 0, playing = false;
+
+      function strike(out, f, t, vel, len) {
+        // a wooden bar: the fundamental plus the bright, quickly fading partials of a xylophone
+        [[1, 1, 1], [3, .32, .35], [6.3, .1, .18], [9.8, .04, .1]].forEach(([m, amp, d]) => {
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = 'sine'; o.frequency.value = f * m;
+          g.gain.setValueAtTime(.0001, t);
+          g.gain.exponentialRampToValueAtTime(vel * amp, t + .003);
+          g.gain.exponentialRampToValueAtTime(.0001, t + len * d);
+          o.connect(g); g.connect(out); o.start(t); o.stop(t + len * d + .05);
+        });
+      }
+      function schedule(t0) {
+        let t = t0;
+        tune.forEach(([n, b], i) => { strike(master, HI[n], t, i % 2 ? .5 : .6, .9); t += b * BEAT; });
+        bass.forEach((c, k) => {
+          const bt = t0 + k * 4 * BEAT;
+          strike(master, LO[c], bt, .38, 1.4);
+          if (k < bass.length - 1) strike(master, LO[FIFTH[c]], bt + 2 * BEAT, .26, 1.1);
+        });
+        return t0 + (LOOP + 2) * BEAT;
+      }
+      function play() {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return false;
+        ctx = ctx || new AC();
+        ctx.resume();
+        master = ctx.createGain(); master.gain.value = .2;
+        const echo = ctx.createDelay(), fb = ctx.createGain(), tone = ctx.createBiquadFilter();
+        echo.delayTime.value = .23; fb.gain.value = .22; tone.type = 'lowpass'; tone.frequency.value = 2600;
+        master.connect(ctx.destination); master.connect(echo); echo.connect(tone); tone.connect(fb); fb.connect(echo); tone.connect(ctx.destination);
+        let t = ctx.currentTime + .08;
+        const loop = () => { t = schedule(t); timer = setTimeout(loop, Math.max(0, (t - ctx.currentTime - 1) * 1000)); };
+        loop(); playing = true;
+        return true;
+      }
+      function stop() {
+        clearTimeout(timer); playing = false;
+        if (!master) return;
+        const m = master; master = null;
+        m.gain.setTargetAtTime(0, ctx.currentTime, .08);
+        setTimeout(() => { m.disconnect(); if (!master && ctx) ctx.suspend(); }, 500);
+      }
+      return { play, stop, get playing() { return playing; } };
+    })();
+    const syncMusic = () => { if (musicBtn) musicBtn.setAttribute('aria-pressed', String(carol.playing)); };
+    if (musicBtn) musicBtn.addEventListener('click', () => {
+      if (carol.playing) carol.stop(); else carol.play();
+      syncMusic();
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && carol.playing) { carol.stop(); syncMusic(); } });
     const mq = matchMedia('(prefers-color-scheme: dark)');
     const isDark = () => root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && mq.matches);
 
@@ -640,17 +715,27 @@
     }
 
     let stops = [], town = null;
-    const townSrc = () => 'assets/img/xmas-town-' + (isDark() ? 'night' : 'day') + '.webp';
+    // The town is a base render with the tree lights dimmed, plus three small layers over the tree,
+    // each with one group of bulbs lit; CSS fades them in turn so the lights twinkle.
+    const setTownSrc = () => {
+      if (!town) return;
+      const m = isDark() ? 'night' : 'day';
+      town.querySelectorAll('img').forEach(img => {
+        img.src = img.dataset.g === undefined ? 'assets/img/xmas-town-' + m + '.webp' : 'assets/img/xmas-lights-' + m + '-' + img.dataset.g + '.webp';
+      });
+    };
     function on() {
       root.classList.add('xmas');
+      if (musicBtn) musicBtn.hidden = false;
       stops = [...document.querySelectorAll('.hero, .page-head')].map(snowfall);
       const hero = document.querySelector('.hero');
       if (hero) {
-        town = document.createElement('img');
-        town.className = 'xmas-town'; town.alt = ''; town.setAttribute('aria-hidden', 'true');
-        town.width = 720; town.height = 504; town.decoding = 'async';
-        town.addEventListener('load', () => { if (town) town.classList.add('in'); });
-        town.src = townSrc();
+        town = document.createElement('div');
+        town.className = 'xmas-town'; town.setAttribute('aria-hidden', 'true');
+        town.innerHTML = '<img class="town-base" alt="" width="720" height="504" decoding="async">' +
+          [0, 1, 2].map(g => '<img class="town-lights" data-g="' + g + '" alt="" width="189" height="198" decoding="async">').join('');
+        town.firstChild.addEventListener('load', () => { if (town) town.classList.add('in'); });
+        setTownSrc();
         hero.insertBefore(town, hero.querySelector('.wash'));
       }
     }
@@ -658,8 +743,11 @@
       root.classList.remove('xmas');
       stops.forEach(s => s()); stops = [];
       if (town) { town.remove(); town = null; }
+      if (carol.playing) carol.stop();
+      syncMusic();
+      if (musicBtn) musicBtn.hidden = true;
     }
-    const swap = () => { if (town) town.src = townSrc(); };
+    const swap = setTownSrc;
     new MutationObserver(swap).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
     if (mq.addEventListener) mq.addEventListener('change', swap);
 
@@ -669,8 +757,8 @@
       snowBtn.setAttribute('aria-pressed', String(enabled));
       snowBtn.title = enabled ? 'Turn off the December theme' : 'Turn on the December theme';
     };
-    if (enabled) on();
-    sync();
+    if (enabled) on(); else if (musicBtn) musicBtn.hidden = true;
+    sync(); syncMusic();
     if (snowBtn) snowBtn.addEventListener('click', () => {
       enabled = !enabled; store.set('xmas', enabled ? 'on' : 'off');
       if (enabled) on(); else off();

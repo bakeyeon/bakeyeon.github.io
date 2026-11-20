@@ -490,8 +490,14 @@ article.item.flash { animation: item-flash 2.2s ease-out; }
 .xmas-town { position: absolute; right: max(var(--gutter), calc((100% - 1360px) / 2)); bottom: 4vh; width: clamp(220px, 26vw, 390px); height: auto;
   pointer-events: none; opacity: 0; transition: opacity .8s ease; filter: drop-shadow(0 16px 22px rgba(20, 30, 70, .22)); animation: town-float 7s ease-in-out infinite; }
 .xmas-town.in { opacity: 1; }
+.xmas-town img { display: block; width: 100%; height: auto; }
+.xmas-town .town-lights { position: absolute; left: 37.5%; top: 17.262%; width: 26.25%; opacity: 0; animation: tree-twinkle 3.3s ease-in-out infinite; }
+.xmas-town .town-lights[data-g="1"] { animation-delay: -1.1s; }
+.xmas-town .town-lights[data-g="2"] { animation-delay: -2.2s; }
+@keyframes tree-twinkle { 0%, 100% { opacity: 0; } 30% { opacity: 1; } 62% { opacity: 0; } }
+.music-btn[hidden] { display: none; }
 @keyframes town-float { 50% { transform: translateY(-7px); } }
 @media (max-width: 760px) {
   .xmas-town { width: min(46vw, 300px); right: auto; left: var(--gutter); bottom: calc(20px + clamp(76px, 16vw, 200px) * 1.02 + 60px); }
 }
-@media (prefers-reduced-motion: reduce) { .xmas-town { animation: none; transition: none; } }
+@media (prefers-reduced-motion: reduce) { .xmas-town { animation: none; transition: none; } .xmas-town .town-lights { animation: none; opacity: .55; } }
