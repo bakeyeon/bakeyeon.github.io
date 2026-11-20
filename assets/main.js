@@ -571,4 +571,110 @@
       else v.pause();
     });
   });
+  // December theme (Dec 1 – Jan 6, visitor's local date): a winter sky, falling snow and, on the
+  // home hero, a small isometric town rendered in Blender. The snowflake button turns it off and
+  // remembers; ?xmas=1 previews it on any date, ?xmas=0 hides it.
+  (function () {
+    const q = new URLSearchParams(location.search).get('xmas');
+    const now = new Date(), mo = now.getMonth(), dd = now.getDate();
+    if (!(q === '1' || (q !== '0' && (mo === 11 || (mo === 0 && dd <= 6))))) return;
+    const themeBtn = document.querySelector('.theme-btn');
+    let snowBtn = null;
+    if (themeBtn) {
+      const wrap = document.createElement('span'); wrap.className = 'bar-right';
+      themeBtn.parentNode.insertBefore(wrap, themeBtn);
+      snowBtn = document.createElement('button');
+      snowBtn.type = 'button'; snowBtn.className = 'theme-btn snow-btn';
+      snowBtn.setAttribute('aria-label', 'December theme');
+      snowBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.6 4.6 12 7l2.4-2.4M9.6 19.4 12 17l2.4 2.4M4.6 10.9l3.3-.9-.9-3.3M19.4 13.1l-3.3.9.9 3.3M4.6 13.1l3.3.9-.9 3.3M19.4 10.9l-3.3-.9.9-3.3"/></svg>';
+      wrap.appendChild(snowBtn); wrap.appendChild(themeBtn);
+    }
+    const mq = matchMedia('(prefers-color-scheme: dark)');
+    const isDark = () => root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && mq.matches);
+
+    function snowfall(host) {
+      const cv = document.createElement('canvas');
+      cv.className = 'xmas-snow'; cv.setAttribute('aria-hidden', 'true');
+      const sky = host.querySelector('.sky');
+      host.insertBefore(cv, host.querySelector('.wash') || (sky ? sky.nextSibling : null));
+      const ctx = cv.getContext('2d');
+      let w = 0, h = 0, flakes = [], raf = 0, last = 0, seen = true;
+      const make = top => ({ x: Math.random() * w, y: top ? -4 : Math.random() * h, r: .7 + Math.random() * 2.1,
+        v: .35 + Math.random() * .55, ph: Math.random() * 6.3, a: .5 + Math.random() * .45 });
+      function size() {
+        const dpr = Math.min(2, devicePixelRatio || 1);
+        w = cv.clientWidth; h = cv.clientHeight;
+        cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const n = Math.round(Math.min(150, w * h / 9500));
+        while (flakes.length < n) flakes.push(make(false));
+        flakes.length = n;
+      }
+      function paint() {
+        ctx.clearRect(0, 0, w, h);
+        const dark = isDark();
+        for (const f of flakes) {
+          const x = f.x + Math.sin(f.ph) * 7;
+          if (!dark) { ctx.fillStyle = 'rgba(70,95,150,' + (.16 * f.a) + ')'; ctx.beginPath(); ctx.arc(x, f.y, f.r + .7, 0, 6.3); ctx.fill(); }
+          ctx.fillStyle = 'rgba(255,255,255,' + f.a + ')'; ctx.beginPath(); ctx.arc(x, f.y, f.r, 0, 6.3); ctx.fill();
+        }
+      }
+      function tick(t) {
+        const k = last ? Math.min(3, (t - last) / 16.7) : 1; last = t;
+        for (const f of flakes) {
+          f.y += f.v * (.6 + f.r * .45) * k; f.ph += .012 * k;
+          if (f.y > h + 4) Object.assign(f, make(true));
+        }
+        paint();
+        raf = requestAnimationFrame(tick);
+      }
+      const run = () => { if (!raf && !reduce && seen && !document.hidden) { last = 0; raf = requestAnimationFrame(tick); } };
+      const halt = () => { cancelAnimationFrame(raf); raf = 0; };
+      size(); paint(); run();
+      const onResize = () => { size(); paint(); };
+      addEventListener('resize', onResize);
+      const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => { seen = es[0].isIntersecting; if (seen) run(); else halt(); }) : null;
+      if (io) io.observe(host);
+      const onVis = () => { if (document.hidden) halt(); else run(); };
+      document.addEventListener('visibilitychange', onVis);
+      return () => { halt(); if (io) io.disconnect(); removeEventListener('resize', onResize); document.removeEventListener('visibilitychange', onVis); cv.remove(); };
+    }
+
+    let stops = [], town = null;
+    const townSrc = () => 'assets/img/xmas-town-' + (isDark() ? 'night' : 'day') + '.webp';
+    function on() {
+      root.classList.add('xmas');
+      stops = [...document.querySelectorAll('.hero, .page-head')].map(snowfall);
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        town = document.createElement('img');
+        town.className = 'xmas-town'; town.alt = ''; town.setAttribute('aria-hidden', 'true');
+        town.width = 720; town.height = 504; town.decoding = 'async';
+        town.addEventListener('load', () => { if (town) town.classList.add('in'); });
+        town.src = townSrc();
+        hero.insertBefore(town, hero.querySelector('.wash'));
+      }
+    }
+    function off() {
+      root.classList.remove('xmas');
+      stops.forEach(s => s()); stops = [];
+      if (town) { town.remove(); town = null; }
+    }
+    const swap = () => { if (town) town.src = townSrc(); };
+    new MutationObserver(swap).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    if (mq.addEventListener) mq.addEventListener('change', swap);
+
+    let enabled = q === '1' || store.get('xmas') !== 'off';
+    const sync = () => {
+      if (!snowBtn) return;
+      snowBtn.setAttribute('aria-pressed', String(enabled));
+      snowBtn.title = enabled ? 'Turn off the December theme' : 'Turn on the December theme';
+    };
+    if (enabled) on();
+    sync();
+    if (snowBtn) snowBtn.addEventListener('click', () => {
+      enabled = !enabled; store.set('xmas', enabled ? 'on' : 'off');
+      if (enabled) on(); else off();
+      sync();
+    });
+  })();
 })();

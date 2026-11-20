@@ -470,3 +470,28 @@ article.item.flash { animation: item-flash 2.2s ease-out; }
 .pk-x:hover { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { .pk-btn svg, .pk-say, .pk-go { transition: none; } .peek .eyes, .peek .ant, .peek .star { animation: none; } }
 @media print { .peek { display: none; } }
+
+/* ---------- December theme: html.xmas, switched on by main.js from Dec 1 to Jan 6 ---------- */
+:root.xmas .hero, :root.xmas .page-head {
+  --field-mint: #d4e5f4; --field-aqua: #bad1ee; --field-blue: #a6b6ea; --field-lilac: #f1cbd5;
+}
+:root.xmas[data-theme="dark"] .hero, :root.xmas[data-theme="dark"] .page-head {
+  --field-mint: #17345c; --field-aqua: #1b2b60; --field-blue: #201f58; --field-lilac: #4d2247; --star: #ffe3a8;
+}
+@media (prefers-color-scheme: dark) {
+  :root.xmas:not([data-theme="light"]) .hero, :root.xmas:not([data-theme="light"]) .page-head {
+    --field-mint: #17345c; --field-aqua: #1b2b60; --field-blue: #201f58; --field-lilac: #4d2247; --star: #ffe3a8;
+  }
+}
+.bar-right { display: inline-flex; align-items: center; gap: 10px; }
+.snow-btn svg path { stroke-width: 1.5; }
+.snow-btn[aria-pressed="false"] { opacity: .5; }
+.xmas-snow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.xmas-town { position: absolute; right: max(var(--gutter), calc((100% - 1360px) / 2)); bottom: 4vh; width: clamp(220px, 26vw, 390px); height: auto;
+  pointer-events: none; opacity: 0; transition: opacity .8s ease; filter: drop-shadow(0 16px 22px rgba(20, 30, 70, .22)); animation: town-float 7s ease-in-out infinite; }
+.xmas-town.in { opacity: 1; }
+@keyframes town-float { 50% { transform: translateY(-7px); } }
+@media (max-width: 760px) {
+  .xmas-town { width: min(46vw, 300px); right: auto; left: var(--gutter); bottom: calc(20px + clamp(76px, 16vw, 200px) * 1.02 + 60px); }
+}
+@media (prefers-reduced-motion: reduce) { .xmas-town { animation: none; transition: none; } }
