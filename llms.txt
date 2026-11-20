@@ -16,7 +16,7 @@
 - Park, K. (2026). Light Verbs, Heavy Meaning? Working paper. https://github.com/bakeyeon/light-verbs-heavy-meaning
 
 ## Talks
-- Invited speaker, APAC AI for Science DevFest 2026 (Google Researcher Groups, GDG AI for Science), Nov 27–28, 2026
+- Invited speaker, APAC AI for Science DevFest 2026 (Google Researcher Groups, GDG AI for Science), Nov 27–28, 2026 (session: Fri, Nov 27, 9:20–9:50 AM GMT+1)
 
 ## Elsewhere
 - Google Scholar: https://scholar.google.com/citations?user=CzCE0C0AAAAJ
