@@ -571,13 +571,20 @@
       else v.pause();
     });
   });
-  // December theme (Dec 1 – Jan 6, visitor's local date): a winter sky, falling snow and, on the
-  // home hero, a small isometric town rendered in Blender. The snowflake button turns it off and
-  // remembers; ?xmas=1 previews it on any date, ?xmas=0 hides it.
+  // Seasonal themes, by the visitor's local date, both rendered in Blender:
+  //   Christmas (Dec 1 – Dec 31): a winter sky, falling snow and an isometric town with twinkling lights.
+  //   New Year (Jan 1 – Feb 9, through Seollal): a dawn sky, light snow and a snow globe with a sheep in hanbok.
+  // The snowflake button turns the current theme off and remembers. ?theme=xmas / ?theme=newyear
+  // preview a theme on any date, ?theme=off hides it (?xmas=1 / ?xmas=0 still work).
   (function () {
-    const q = new URLSearchParams(location.search).get('xmas');
+    const qs = new URLSearchParams(location.search);
+    const forced = qs.get('theme') || ({ '1': 'xmas', '0': 'off' })[qs.get('xmas')] || null;
     const now = new Date(), mo = now.getMonth(), dd = now.getDate();
-    if (!(q === '1' || (q !== '0' && (mo === 11 || (mo === 0 && dd <= 6))))) return;
+    let season = mo === 11 ? 'xmas' : (mo === 0 || (mo === 1 && dd <= 9)) ? 'newyear' : null;
+    if (forced) season = forced;
+    if (season !== 'xmas' && season !== 'newyear') return;
+    const XMAS = season === 'xmas';
+    const NAME = XMAS ? 'December theme' : 'New Year theme';
     const themeBtn = document.querySelector('.theme-btn');
     let snowBtn = null;
     if (themeBtn) {
@@ -585,12 +592,12 @@
       themeBtn.parentNode.insertBefore(wrap, themeBtn);
       snowBtn = document.createElement('button');
       snowBtn.type = 'button'; snowBtn.className = 'theme-btn snow-btn';
-      snowBtn.setAttribute('aria-label', 'December theme');
+      snowBtn.setAttribute('aria-label', NAME);
       snowBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.6 4.6 12 7l2.4-2.4M9.6 19.4 12 17l2.4 2.4M4.6 10.9l3.3-.9-.9-3.3M19.4 13.1l-3.3.9.9 3.3M4.6 13.1l3.3.9-.9 3.3M19.4 10.9l-3.3-.9.9-3.3"/></svg>';
       wrap.appendChild(snowBtn); wrap.appendChild(themeBtn);
     }
     let musicBtn = null;
-    if (snowBtn && document.querySelector('.hero')) {
+    if (XMAS && snowBtn && document.querySelector('.hero')) {
       musicBtn = document.createElement('button');
       musicBtn.type = 'button'; musicBtn.className = 'theme-btn snow-btn music-btn';
       musicBtn.setAttribute('aria-label', 'Play Jingle Bells on chimes');
@@ -737,7 +744,7 @@
     // The town is a base render with the tree lights dimmed, plus three small layers over the tree,
     // each with one group of bulbs lit; CSS fades them in turn so the lights twinkle.
     const setTownSrc = () => {
-      if (!town) return;
+      if (!town || !XMAS) return;
       const m = isDark() ? 'night' : 'day';
       town.querySelectorAll('img').forEach(img => {
         img.src = img.dataset.g === undefined ? 'assets/img/xmas-town-' + m + '.webp' : 'assets/img/xmas-lights-' + m + '-' + img.dataset.g + '.webp';
@@ -745,10 +752,17 @@
     };
     function on() {
       root.classList.add('xmas');
+      if (!XMAS) root.classList.add('newyear');
       if (musicBtn) musicBtn.hidden = false;
       stops = [...document.querySelectorAll('.hero, .page-head')].map(snowfall);
       const hero = document.querySelector('.hero');
-      if (hero) {
+      if (hero && !XMAS) {
+        town = document.createElement('div');
+        town.className = 'xmas-town globe'; town.setAttribute('aria-hidden', 'true');
+        town.innerHTML = '<img class="town-base" alt="" width="560" height="645" decoding="async" src="assets/img/newyear-globe.webp">';
+        town.firstChild.addEventListener('load', () => { if (town) town.classList.add('in'); });
+        hero.insertBefore(town, hero.querySelector('.wash'));
+      } else if (hero) {
         town = document.createElement('div');
         town.className = 'xmas-town'; town.setAttribute('aria-hidden', 'true');
         town.innerHTML = '<img class="town-base" alt="" width="720" height="504" decoding="async">' +
@@ -759,7 +773,7 @@
       }
     }
     function off() {
-      root.classList.remove('xmas');
+      root.classList.remove('xmas', 'newyear');
       stops.forEach(s => s()); stops = [];
       if (town) { town.remove(); town = null; }
       if (carol.playing) carol.stop();
@@ -770,16 +784,17 @@
     new MutationObserver(swap).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
     if (mq.addEventListener) mq.addEventListener('change', swap);
 
-    let enabled = q === '1' || store.get('xmas') !== 'off';
+    const KEY = 'theme-' + season;
+    let enabled = !!forced || store.get(KEY) !== 'off';
     const sync = () => {
       if (!snowBtn) return;
       snowBtn.setAttribute('aria-pressed', String(enabled));
-      snowBtn.title = enabled ? 'Turn off the December theme' : 'Turn on the December theme';
+      snowBtn.title = (enabled ? 'Turn off the ' : 'Turn on the ') + NAME;
     };
     if (enabled) on(); else if (musicBtn) musicBtn.hidden = true;
     sync(); syncMusic();
     if (snowBtn) snowBtn.addEventListener('click', () => {
-      enabled = !enabled; store.set('xmas', enabled ? 'on' : 'off');
+      enabled = !enabled; store.set(KEY, enabled ? 'on' : 'off');
       if (enabled) on(); else off();
       sync();
     });

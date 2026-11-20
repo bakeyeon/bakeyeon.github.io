@@ -483,6 +483,20 @@ article.item.flash { animation: item-flash 2.2s ease-out; }
     --field-mint: #17345c; --field-aqua: #1b2b60; --field-blue: #201f58; --field-lilac: #4d2247; --star: #ffe3a8;
   }
 }
+/* New Year (html.xmas.newyear): a dawn sky instead of the winter one */
+:root.newyear .hero, :root.newyear .page-head {
+  --field-mint: #fcdcc8; --field-aqua: #f7cad6; --field-blue: #d3c9f0; --field-lilac: #fde4a6;
+}
+:root.newyear[data-theme="dark"] .hero, :root.newyear[data-theme="dark"] .page-head {
+  --field-mint: #2b2c66; --field-aqua: #43306a; --field-blue: #22235a; --field-lilac: #74404f; --star: #ffd9a8;
+}
+@media (prefers-color-scheme: dark) {
+  :root.newyear:not([data-theme="light"]) .hero, :root.newyear:not([data-theme="light"]) .page-head {
+    --field-mint: #2b2c66; --field-aqua: #43306a; --field-blue: #22235a; --field-lilac: #74404f; --star: #ffd9a8;
+  }
+}
+.xmas-town.globe { width: clamp(190px, 19vw, 290px); filter: drop-shadow(0 14px 20px rgba(60, 30, 50, .2)); }
+@media (max-width: 760px) { .xmas-town.globe { width: min(38vw, 210px); } }
 .bar-right { display: inline-flex; align-items: center; gap: 10px; }
 .snow-btn svg path { stroke-width: 1.5; }
 .snow-btn[aria-pressed="false"] { opacity: .5; }
