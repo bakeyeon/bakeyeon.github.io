@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Curiosity to Proposal · Kai Park</title>
+  <meta name="description" content="An essay by Kai Park on how academic research actually works: from a first question to a research gap, hypothesis, methodology and a reproducible proposal.">
+  <link rel="canonical" href="https://bakeyeon.github.io/from-curiosity-to-proposal.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="From Curiosity to Proposal: How Academic Research Actually Works">
+  <meta property="og:description" content="How a research question becomes a proposal, step by step, for anyone writing their first one.">
+  <meta property="og:url" content="https://bakeyeon.github.io/from-curiosity-to-proposal.html">
+  <meta property="og:site_name" content="Kai Park">
+  <meta name="twitter:card" content="summary">
+  <meta name="author" content="Kai Park">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css?v=51">
+  <style>
+    .essay h3 { margin-top: var(--space-24); }
+    .essay ul { margin: 0 0 var(--space-16); padding-left: 1.25em; max-width: 68ch; }
+    .essay li { margin-bottom: var(--space-8); }
+    .essay h4 { margin: var(--space-16) 0 var(--space-4); font-size: 15px; line-height: 22px; font-weight: 600; }
+    .essay .art { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: var(--sky-bg); }
+    .art .t { font: 500 13px var(--font-mono); fill: var(--ink-muted); letter-spacing: .02em; }
+    .art .h { font: 600 15px var(--font-sans); fill: var(--ink); }
+    .art .s { font: 500 12px var(--font-sans); fill: var(--ink); }
+    .art .ln { stroke: var(--ink-muted); stroke-width: 1.25; fill: none; }
+    .art .ln-d { stroke: var(--ink-muted); stroke-width: 1.25; fill: none; stroke-dasharray: 4 5; }
+    .art .card { fill: var(--surface); stroke: var(--line); }
+    .art .ink { fill: var(--ink); }
+    .art .star { fill: var(--ink); }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a class="mark" href="index.html" aria-label="Kai Park, home">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v11h4.5v-6h4v6h4.5V9"/></svg>
+    </a>
+    <button class="theme-btn" type="button" aria-label="Toggle light and dark theme"><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 1 1 9.4 4a6.6 6.6 0 0 0 10.6 10.6z"/></svg>
+    </button>
+  </header>
+
+  <section class="page-head">
+    <div class="sky"></div>
+    <nav class="mini-nav" aria-label="Sections"><svg viewBox="0 0 380 200" data-current="none"></svg></nav>
+    <h1 class="title">Essay</h1>
+  </section>
+
+  <main class="content">
+    <section class="section essay" aria-labelledby="h-essay">
+      <header><span class="sw" style="background:var(--field-mint)"></span><span class="label">Essay · May 13, 2026 · 11 min read</span><h2 id="h-essay">From Curiosity to Proposal: How Academic Research Actually Works</h2></header>
+      <div class="body">
+        <p class="links-row gloss">Originally published on <a href="https://medium.com/@kaiwritesornot/from-curiosity-to-proposal-how-academic-research-actually-works-c314f835b751">Medium ↗</a></p>
+
+        <p>Recently, an undergraduate student asked me how to write a research proposal. This question led me to reflect on my own journey. In my view, expectations at the undergraduate level tend to be more flexible, whereas graduate school demands a much higher level of analytical rigor and formal structure. Having navigated that transition myself, I would like to outline the essential characteristics of a compelling research proposal.</p>
+
+        <h3>How Does Research Begin?</h3>
+        <p>Before diving into the specifics, I’d like to briefly share my own research trajectory. I completed my degree in English Language and Literature, and after relocating to Germany, I also took courses in Computer Science. From my very first semester in graduate school, my goal was to build toward a final thesis that integrated traditional linguistic frameworks with computational methods: an experience that fundamentally shaped how I think about research design and, by extension, how I approach writing a research proposal.</p>
+        <p>My initial interest lay in Machine Translation. Having spent considerable time in the translation industry, I found myself constantly thinking about how to address the inevitable “loss of meaning” that occurs during the translation process. This led me to my first research topic: meaning loss in German translation, with a particular focus on German modal particles.</p>
+        <p>To investigate this, I took a pragmatics-based approach, examining the interplay between semantics and pragmatics to better understand where and why meaning slips through the cracks. From there, I became interested in whether transformer-based AI translation models which had emerged as the dominant paradigm in the field could help mitigate this loss. My early work unfolded across a pragmatics seminar and subsequent computational linguistics research, each paper building toward what would eventually become my thesis. While some assignments leaned closer to literature reviews or essays, I approached nearly every piece of writing with my final thesis in mind. As a result, the papers I produced throughout my Master’s program share a cohesive narrative arc. Actually, I gave serious thought to compiling my existing term papers and submitting them as my graduation thesis.</p>
+        <p>In my experience, a Master’s thesis is ultimately an opportunity to demonstrate your ability to conduct a comprehensive study by synthesizing the methodologies you’ve developed throughout the program. For many students, consolidating previously written term papers into a unified argument can serve as an excellent starting point.</p>
+        <p>That said, I ultimately chose to pursue an entirely new topic for my thesis. I saw it as a rare opportunity to explore a subject entirely on my own terms: one of the few chances in academia where the direction is truly yours to define. At the same time, it pushed me to confront something important: post-graduate research is less about following personal curiosity and more about rigorously applying established methodologies to generate new knowledge. The distinction matters. It shifts the question from “what do I find interesting?” to “what gap in the literature can I meaningfully address, and how?”</p>
+        <p>I began by discussing potential directions with my supervisor and preparing a short preliminary presentation to outline my research objectives. After reviewing my proposed direction, my supervisor approved the topic, and I officially began drafting the research proposal.</p>
+
+        <h3>Essential Elements of a Research Proposal</h3>
+        <p>Now that I’ve outlined my own research journey, let me turn to the practical question: what actually goes into a research proposal?</p>
+
+        <figure class="fig"><svg class="art" viewBox="0 0 680 360" role="img" aria-labelledby="art1-t"><title id="art1-t">Four parts of a study, the gap, the question, the method and the finding, all flow into one title card: a short inviting main title and a precise subtitle.</title>
+  <g>
+    <rect x="40" y="48" width="200" height="52" rx="26" fill="var(--field-mint)"/><text class="s" x="64" y="79">The gap</text>
+    <rect x="40" y="118" width="200" height="52" rx="26" fill="var(--field-sky)"/><text class="s" x="64" y="149">The question</text>
+    <rect x="40" y="188" width="200" height="52" rx="26" fill="var(--field-peach)"/><text class="s" x="64" y="219">The method</text>
+    <rect x="40" y="258" width="200" height="52" rx="26" fill="var(--field-lilac)"/><text class="s" x="64" y="289">The finding</text>
+  </g>
+  <path class="ln" d="M240 74 C 320 74, 320 180, 384 180"/>
+  <path class="ln" d="M240 144 C 310 144, 320 180, 384 180"/>
+  <path class="ln" d="M240 214 C 310 214, 320 180, 384 180"/>
+  <path class="ln" d="M240 284 C 320 284, 320 180, 384 180"/>
+  <circle class="star" cx="384" cy="180" r="4"/>
+  <rect class="card" x="400" y="70" width="248" height="220"/>
+  <text class="t" x="424" y="104">MAIN TITLE</text>
+  <rect x="424" y="118" width="196" height="16" fill="var(--field-yellow)"/>
+  <rect x="424" y="142" width="132" height="16" fill="var(--field-yellow)"/>
+  <text class="t" x="424" y="196">SUBTITLE</text>
+  <rect x="424" y="208" width="200" height="7" fill="var(--line)"/>
+  <rect x="424" y="223" width="200" height="7" fill="var(--line)"/>
+  <rect x="424" y="238" width="150" height="7" fill="var(--line)"/>
+  <text class="t" x="424" y="272">inviting, then precise</text>
+</svg><figcaption class="gloss">The title must encompass the content.</figcaption></figure>
+
+        <h4>Title as a function of summarizing the entire content of the paper</h4>
+        <p>The title is often the first thing a reader or reviewer encounters, so it carries more weight than it might seem. Rather than opting for something broad and all-encompassing, a good title should clearly and specifically signal what the study actually investigates.</p>
+        <p>Interestingly, my background in advertising taught me that a great title is one that hooks the reader as quickly as possible. Academic research titles work quite differently. Here, the priority is how precisely and comprehensively the title captures the content of the study. Catchiness is a bonus, not the goal.</p>
+        <p>That said, I do think titles are one of the places where a researcher’s individual style can come through. Personally, I like to split the title into two parts: a main title that’s accessible and inviting, and a subtitle that’s more technical but thoroughly covers the scope of the research. For example, my first paper was titled <i>“‘Modalpartikeln’: Can Sentiments Survive Translation with Emojis?”</i> with the subtitle <i>“Decoding Sentiments from German ‘Modal Particles’ to Korean Using Emojis.”</i> The main title draws you in; the subtitle tells you exactly what the study does.</p>
+
+        <h4>Identifying the Research Gap: Literature Review</h4>
+        <p>The literature review is the most critical starting point when planning research. For graduate students or anyone serious about academia, reading published papers becomes a daily routine. The “Research Gap” is often found in that moment of curiosity when one asks, “Wait, why hasn’t this particular angle been explored yet?”</p>
+        <p>To stay updated, I personally rely on a systematic approach. I regularly browse papers on <b>arXiv</b> and subscribe to relevant newsletters via <b>Substack</b>. Rather than reading every issue in depth, I skim through topics of interest and dive into the full papers only when something resonates. Additionally, I set up <b>Google Scholar alerts</b> for scholars whose work aligns with my interests. This method allows me to stay attuned to current academic discourses and provides a rich foundation of background knowledge when a new research topic emerges.</p>
+        <p>Navigating dense academic papers can be daunting. In such cases, I find it helpful to look at the <b>reference list</b> and identify the foundational studies: the “roots” of the current research. This helps in grasping the core concepts more quickly. Utilizing AI tools to clarify complex definitions or terminologies followed by individual deep-dives has also proven to be an effective strategy.</p>
+        <p>The most crucial aspect of the Literature Review section is not the mere listing of existing studies. Instead, it must be a synthesis: “Study A explored X, and Study B focused on Y; however, there is a distinct lack of investigation regarding Z.” The goal is to establish the <b>justification</b> for your own research by identifying the limitations of current theories or technologies. While securing <b>novelty</b> is vital, it is more effective to highlight how your research “differs” rather than aggressively trying to prove previous studies wrong. Accepting the valid contributions of predecessors while focusing on what remains to be explored is, in itself, a significant form of novelty.</p>
+
+        <figure class="fig"><svg class="art" viewBox="0 0 680 360" role="img" aria-labelledby="art2-t"><title id="art2-t">Published studies drawn as stars in two lit fields, Study A on X and Study B on Y, and between them a dashed circle around an empty patch marked Z, the research gap.</title>
+  <ellipse cx="170" cy="170" rx="140" ry="100" fill="var(--field-mint)" opacity=".75"/>
+  <ellipse cx="520" cy="200" rx="130" ry="105" fill="var(--field-blue)" opacity=".55"/>
+  <path class="ln" d="M90 140 L150 110 L210 150 L180 210 L110 220 Z M210 150 L260 190"/>
+  <path class="ln" d="M440 170 L500 130 L570 160 L600 230 L520 260 L460 240 Z M500 130 L520 200"/>
+  <g class="star">
+    <circle cx="90" cy="140" r="4.5"/><circle cx="150" cy="110" r="4.5"/><circle cx="210" cy="150" r="4.5"/><circle cx="180" cy="210" r="4.5"/><circle cx="110" cy="220" r="4.5"/><circle cx="260" cy="190" r="4.5"/>
+    <circle cx="440" cy="170" r="4.5"/><circle cx="500" cy="130" r="4.5"/><circle cx="570" cy="160" r="4.5"/><circle cx="600" cy="230" r="4.5"/><circle cx="520" cy="260" r="4.5"/><circle cx="460" cy="240" r="4.5"/><circle cx="520" cy="200" r="4.5"/>
+  </g>
+  <text class="t" x="96" y="300">STUDY A · X</text>
+  <text class="t" x="468" y="330">STUDY B · Y</text>
+  <circle cx="350" cy="122" r="62" fill="var(--surface)" stroke="var(--signal)" stroke-width="1.5" stroke-dasharray="5 6"/>
+  <text class="h" x="350" y="120" text-anchor="middle" style="fill:var(--signal)">Z</text>
+  <text class="t" x="350" y="142" text-anchor="middle">unexplored</text>
+  <path class="ln-d" d="M260 190 L298 156"/><path class="ln-d" d="M440 170 L404 152"/>
+  <text class="t" x="350" y="40" text-anchor="middle">THE RESEARCH GAP</text>
+</svg><figcaption class="gloss">This area is uncharted territory! A research gap.</figcaption></figure>
+
+        <h4>The Research Questions and Hypothesis</h4>
+        <p>The following is a PubMed article titled “How to write an introduction section of a scientific article?” kindly authored by Dr. Abdullah Armağan. This article was immensely helpful to me when I was drafting my initial manuscripts. I highly recommend it to anyone who finds the concept of a “Research Gap” unfamiliar or challenging.</p>
+        <p class="links-row"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4548565/">How to write an introduction section of a scientific article? (PMC) →</a></p>
+        <p>In defining the research problem and purpose, two pivotal concepts emerge: the <b>Research Question</b> and the <b>Hypothesis</b>. Once you have identified a gap in existing literature, you must articulately and specifically describe what you intend to study, what hypothesis you are proposing, and how you plan to verify it.</p>
+        <p>A hypothesis is not a mere guess; it is a <b>theoretical prediction</b>. A well-defined hypothesis clarifies what to measure and what to exclude, allowing the researcher to identify the specific variables involved in the process. For instance, it should follow a logical structure such as: “If A (Independent Variable), then B (Dependent Variable).” Since academic research must be capable of being proven or disproven, the hypothesis serves as the essential benchmark for that verification.</p>
+
+        <h4>How does a Research Question differ from a Hypothesis?</h4>
+        <p>While a Research Question is the <b>fundamental inquiry</b> the study seeks to address, a Hypothesis is the <b>tentative answer</b> proposed by the researcher based on literature review and theoretical frameworks. Not all research requires a hypothesis; for instance, exploratory or descriptive qualitative studies may function solely with research questions. However, in quantitative research involving experiments or statistical validation, translating the research question into a testable hypothesis is indispensable. If the research question is the compass of the study, the hypothesis is the act of pre-mapping the specific coordinates of our destination.</p>
+        <p>To illustrate, consider the Research Question and Hypothesis from my first study:</p>
+        <ul>
+          <li><b>Research Question (RQ):</b> Can the integration of emojis effectively mitigate the loss of pragmatic meaning that occurs during the machine translation of German modal particles?</li>
+          <li><b>Hypothesis:</b> Translations incorporating emojis will achieve a higher degree of pragmatic equivalence to the source text than those produced without emojis.</li>
+        </ul>
+        <p>As shown in this example, the hypothesis gives a provisional answer to the research question. In doing so, it defines the boundaries of what you’re setting out to prove. With the research question and hypothesis in place, the next step is laying out exactly how you plan to test them: the methodology.</p>
+
+        <h4>Methodology: Bridging Strategy and Execution</h4>
+        <p>Now comes the part where you explain exactly how you’ll prove your ideas. In Computational Linguistics, this typically means specifying your dataset construction, model architecture, and evaluation metrics. In my first study, for instance, I built a “Golden Dataset” from empirical responses to test whether emoji integration could be incorporated into a translation model. The specifics will vary by field, but the core question is always the same: how do you break down the <i>“How”</i> into granular, actionable steps that directly address your research question and hypothesis?</p>
+        <p>I find that research methodology shares the same essence as strategic planning. Think of it like launching a new product: the research gap is your market void, and the methodology is your go-to-market strategy. When seeking a solution, it is not enough to simply say, “I want to sell this product.” You must consider why you want to sell it, who your target audience is, what its primary utility is, and what kind of brand memory it should leave behind. This is where methodology becomes diverse and sophisticated. Should you explain the product’s features? Should you provide use-case examples? Or perhaps offer discounts and free trials? This is the point where <b>strategy connects to tactics</b>: the “How” of solving a problem.</p>
+        <p>Research design follows the same logic. If you have a specific research question, how will you solve it in concrete terms? Can you draw from existing literature to devise a suitable method and break it down into executable units? If you draft your methodology section with this level of detail and feasibility in mind, you will rarely encounter roadblocks during the actual research process.</p>
+
+        <h4>Reproducibility: The Gold Standard of Research</h4>
+        <p>While strategic planning and research methodology share a common goal of problem-solving, a critical distinction lies in <b>Reproducibility</b>. In business strategy, the outcome often depends on timing, execution, and external market variables; furthermore, such strategies are frequently treated as “trade secrets.” In contrast, academic research demands transparency. A researcher must consider whether another scholar, following the same methodology, can achieve the same or substantially similar results.</p>
+        <p>This necessitates a high level of detail in the methodology section. One must document every step, for example, from data collection and preprocessing to the specific hyperparameters of a model in computational linguistics research, with enough clarity that the experiment can be replicated by others. A methodology that lacks reproducibility cannot gain academic trust, as it undermines the validity of the entire study. In this sense, while strategy focuses on a singular success in a specific context, research methodology aims to establish a universal and verifiable truth.</p>
+
+        <h4>Contributions and Expected Effects: Building an Academic Ecosystem</h4>
+        <p>A study that rigorously ensures reproducibility not only elevates its own intrinsic value but also maximizes its potential to contribute to the broader academic ecosystem. By designing a methodology and dataset that are transparent and replicable, a researcher essentially offers a “public intellectual asset.” This allows fellow scholars to use the findings as a stepping stone to reach even greater heights in their respective fields.</p>
+        <p>In this light, the <b>Contributions</b> and <b>Expected Effects</b> sections of a proposal should go beyond merely asserting success; they must specify the tangible impact the research will have on both academia and industry. For instance, my research in computational linguistics aims to make a technical contribution by improving the translation quality of German modal particles. Simultaneously, it seeks to provide a scholarly contribution by introducing a novel methodology for quantifying linguistic nuances, thereby offering fresh insights for future researchers.</p>
+        <p>Ultimately, a compelling research proposal is a persuasive narrative that explains how the entire ecosystem benefits from your work. A well-refined methodology and high reproducibility are the most powerful tools in validating that persuasion. By building a reliable path for others to follow, the research transcends individual achievement and becomes a catalyst for collective progress.</p>
+
+        <figure class="fig"><svg class="art" viewBox="0 0 680 300" role="img" aria-labelledby="art3-t"><title id="art3-t">Two paths from the same thought, I think X is true. The opinion path stops there. The research path goes on through the literature, a hypothesis and peer review, and ends in a claim that has survived scrutiny.</title>
+  <text class="t" x="40" y="44">OPINION</text>
+  <rect x="40" y="60" width="150" height="48" rx="24" fill="var(--field-pink)"/><text class="s" x="115" y="89" text-anchor="middle">“I think X is true.”</text>
+  <path class="ln" d="M190 84 L236 84"/><circle class="star" cx="240" cy="84" r="4"/>
+  <text class="t" x="256" y="89">ends here</text>
+  <path d="M40 140 L640 140" stroke="var(--line)"/>
+  <text class="t" x="40" y="180">RESEARCH</text>
+  <rect x="40" y="196" width="150" height="48" rx="24" fill="var(--field-pink)"/><text class="s" x="115" y="225" text-anchor="middle">“I think X is true.”</text>
+  <path class="ln" d="M190 220 L214 220"/>
+  <rect x="214" y="200" width="104" height="40" fill="var(--field-mint)"/><text class="s" x="266" y="225" text-anchor="middle">Literature</text>
+  <path class="ln" d="M318 220 L334 220"/>
+  <rect x="334" y="200" width="104" height="40" fill="var(--field-sky)"/><text class="s" x="386" y="225" text-anchor="middle">Hypothesis</text>
+  <path class="ln" d="M438 220 L454 220"/>
+  <rect x="454" y="200" width="104" height="40" fill="var(--field-lilac)"/><text class="s" x="506" y="225" text-anchor="middle">Peer review</text>
+  <path class="ln" d="M558 220 L574 220"/>
+  <circle cx="606" cy="220" r="30" fill="var(--field-yellow)"/><text class="s" x="606" y="225" text-anchor="middle">Claim</text>
+  <text class="t" x="640" y="276" text-anchor="end">a claim that survived scrutiny</text>
+</svg><figcaption class="gloss">Academic Research vs. Personal Opinion: What’s the difference?</figcaption></figure>
+
+        <h3>Academic Research vs. Personal Opinion</h3>
+        <p>One misconception I often encounter is the idea that a research proposal is simply a more formal version of a personal opinion piece. They’re not, while they operate on fundamentally different logics and serve different purposes.</p>
+        <p>An opinion piece draws its strength from the author’s voice, lived experience, and the reader’s emotional resonance. That’s a legitimate and valuable form of writing. A research proposal, on the other hand, isn’t grounded in what you personally believe: it’s grounded in what the existing literature supports, and what your methodology can verify. The researcher’s voice matters, but it has to earn its place through evidence and logic, not conviction alone.</p>
+        <p>The clearest way to see this distinction is through the validation process. An opinion ends with an observation: “I think X is true.” A research proposal takes that same observation and situates it within a body of literature, tests it against a hypothesis, and submits it to peer review. What comes out the other side isn’t just your idea anymore. It’s a claim that has survived scrutiny, which is what gives it academic legitimacy and lasting value.</p>
+
+        <h4>Key Differences: Personal Opinion vs. Academic Research</h4>
+        <p><b>Foundation</b></p>
+        <ul>
+          <li><b>Personal Opinion:</b> Based on subjective experience, individual sentiments, or intuition.</li>
+          <li><b>Academic Research:</b> Built upon validated literature and objective, empirical data.</li>
+        </ul>
+        <p><b>Methodology</b></p>
+        <ul>
+          <li><b>Personal Opinion:</b> Expressed through a free-form, essayistic narrative without formal constraints.</li>
+          <li><b>Academic Research:</b> Adheres to rigorous protocols such as hypothesis formulation, variable control, and reproducible research design.</li>
+        </ul>
+        <p><b>Validation</b></p>
+        <ul>
+          <li><b>Personal Opinion:</b> Validated by the reader’s empathy, emotional resonance, or engagement.</li>
+          <li><b>Academic Research:</b> Subjected to systematic peer review and cross-validation by expert groups to ensure logical soundness.</li>
+        </ul>
+        <p><b>Value</b></p>
+        <ul>
+          <li><b>Personal Opinion:</b> Contributes to temporary communication, personal reputation, or brand awareness.</li>
+          <li><b>Academic Research:</b> Functions as an executable strategic architecture, creating high-value Intellectual Property (IP) and strategic assets.</li>
+        </ul>
+        <p><b>Purpose</b></p>
+        <ul>
+          <li><b>Personal Opinion:</b> Primarily intended to share personal perspectives and foster social connections.</li>
+          <li><b>Academic Research:</b> Aimed at solving complex problems and providing robust support for critical decision-making.</li>
+        </ul>
+
+        <p>Writing this post reminded me of how much my own understanding of research has evolved, from loosely structured undergraduate papers to the methodological rigor of graduate school, and eventually to a thesis I’m genuinely proud of. A research proposal isn’t just a formality; it’s the architecture of an argument, and getting it right makes everything that follows easier and more meaningful.</p>
+        <p>I hope this breakdown from identifying a research gap to building a reproducible methodology gives aspiring researchers a clearer starting point. These reflections are rooted in my own experience, so there’s certainly room for refinement. If anything resonated, or if you have thoughts or corrections to add, I’d love to hear from you!</p>
+        <p class="links-row"><a href="research.html">More research and writing →</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <span class="gloss">Kai Park</span>
+    <span class="links">
+      <a class="cv-foot" href="cv/Kai_Park_CV_public.pdf" download="Kai_Park_CV.pdf">Download CV ↓</a>
+      <a href="mailto:kai.hyeyeon.park@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/bakeyeon/">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=CzCE0C0AAAAJ">Google Scholar</a>
+      <a href="https://orcid.org/0000-0002-2854-0127">ORCID</a>
+      <a href="https://github.com/bakeyeon">GitHub</a>
+    </span>
+  </footer>
+  <script src="assets/main.js?v=26"></script>
+</body>
+</html>
