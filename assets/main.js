@@ -590,17 +590,18 @@
       wrap.appendChild(snowBtn); wrap.appendChild(themeBtn);
     }
     let musicBtn = null;
-    if (snowBtn) {
+    if (snowBtn && document.querySelector('.hero')) {
       musicBtn = document.createElement('button');
       musicBtn.type = 'button'; musicBtn.className = 'theme-btn snow-btn music-btn';
-      musicBtn.setAttribute('aria-label', 'Play Jingle Bells on a xylophone');
-      musicBtn.title = 'Play Jingle Bells (xylophone)';
+      musicBtn.setAttribute('aria-label', 'Play Jingle Bells on chimes');
+      musicBtn.title = 'Play Jingle Bells (chimes)';
       musicBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 17.5V5.5l10-2v12"/><circle cx="7" cy="17.5" r="2.5"/><circle cx="17" cy="15.5" r="2.5"/></svg>';
       snowBtn.parentNode.insertBefore(musicBtn, snowBtn);
     }
 
-    // Jingle Bells (J. L. Pierpont, 1857, public domain) on a synthesized xylophone: Web Audio only,
-    // nothing to download, and it plays only after a click.
+    // Jingle Bells (J. L. Pierpont, 1857, public domain) on synthesized chimes and sleigh bells: Web Audio
+    // only, nothing to download, plays only after a click. Home page only, since moving to another page
+    // reloads it and would cut the tune off mid-phrase.
     const carol = (function () {
       const HI = { C: 523.25, D: 587.33, E: 659.25, F: 698.46, G: 783.99 };
       const LO = { C: 130.81, D: 146.83, F: 174.61, G: 196.0, A: 220.0, C4: 261.63, D4: 293.66 };
@@ -611,27 +612,45 @@
       // one chord per bar: root on beat 1, fifth on beat 3
       const bass = 'C C C C F C D G C C C C F C G C'.split(' ');
       const FIFTH = { C: 'G', F: 'C4', D: 'A', G: 'D4' };
-      const BEAT = 60 / 138, LOOP = 64;
-      let ctx = null, master = null, timer = 0, playing = false;
+      const BEAT = 60 / 152, LOOP = 64;
+      let ctx = null, master = null, timer = 0, playing = false, noise = null;
 
+      // a small metal chime (glockenspiel bar): fundamental, a slightly detuned twin for shimmer and
+      // the inharmonic partials of a free bar, each fading faster than the last
+      const CHIME = [[1, 1, 1], [1.003, .3, 1], [2.76, .3, .35], [5.4, .1, .18], [8.93, .04, .1]];
       function strike(out, f, t, vel, len) {
-        // a wooden bar: the fundamental plus the bright, quickly fading partials of a xylophone
-        [[1, 1, 1], [3, .32, .35], [6.3, .1, .18], [9.8, .04, .1]].forEach(([m, amp, d]) => {
+        CHIME.forEach(([m, amp, d]) => {
           const o = ctx.createOscillator(), g = ctx.createGain();
           o.type = 'sine'; o.frequency.value = f * m;
           g.gain.setValueAtTime(.0001, t);
-          g.gain.exponentialRampToValueAtTime(vel * amp, t + .003);
+          g.gain.exponentialRampToValueAtTime(vel * amp, t + .002);
           g.gain.exponentialRampToValueAtTime(.0001, t + len * d);
           o.connect(g); g.connect(out); o.start(t); o.stop(t + len * d + .05);
         });
       }
+      // sleigh bells: a short burst of high, bright noise
+      function jingle(out, t, vel) {
+        if (!noise) {
+          noise = ctx.createBuffer(1, Math.round(ctx.sampleRate * .25), ctx.sampleRate);
+          const d = noise.getChannelData(0);
+          for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+        }
+        const s = ctx.createBufferSource(), hp = ctx.createBiquadFilter(), g = ctx.createGain();
+        s.buffer = noise; hp.type = 'highpass'; hp.frequency.value = 6500;
+        g.gain.setValueAtTime(.0001, t);
+        g.gain.exponentialRampToValueAtTime(vel, t + .004);
+        g.gain.exponentialRampToValueAtTime(.0001, t + .14);
+        s.connect(hp); hp.connect(g); g.connect(out); s.start(t); s.stop(t + .2);
+      }
       function schedule(t0) {
         let t = t0;
-        tune.forEach(([n, b], i) => { strike(master, HI[n], t, i % 2 ? .5 : .6, .9); t += b * BEAT; });
+        tune.forEach(([n, b]) => { strike(master, HI[n] * 2, t, .3, 1.5); t += b * BEAT; });
         bass.forEach((c, k) => {
           const bt = t0 + k * 4 * BEAT;
-          strike(master, LO[c], bt, .38, 1.4);
-          if (k < bass.length - 1) strike(master, LO[FIFTH[c]], bt + 2 * BEAT, .26, 1.1);
+          strike(master, LO[c] * 2, bt, .11, 1.0);
+          if (k < bass.length - 1) strike(master, LO[FIFTH[c]] * 2, bt + 2 * BEAT, .08, .8);
+          [1, 3].forEach(b => jingle(master, bt + b * BEAT, .07));
+          jingle(master, bt + 3.5 * BEAT, .035);
         });
         return t0 + (LOOP + 2) * BEAT;
       }
@@ -640,9 +659,9 @@
         if (!AC) return false;
         ctx = ctx || new AC();
         ctx.resume();
-        master = ctx.createGain(); master.gain.value = .2;
+        master = ctx.createGain(); master.gain.value = .5;
         const echo = ctx.createDelay(), fb = ctx.createGain(), tone = ctx.createBiquadFilter();
-        echo.delayTime.value = .23; fb.gain.value = .22; tone.type = 'lowpass'; tone.frequency.value = 2600;
+        echo.delayTime.value = .18; fb.gain.value = .15; tone.type = 'lowpass'; tone.frequency.value = 5000;
         master.connect(ctx.destination); master.connect(echo); echo.connect(tone); tone.connect(fb); fb.connect(echo); tone.connect(ctx.destination);
         let t = ctx.currentTime + .08;
         const loop = () => { t = schedule(t); timer = setTimeout(loop, Math.max(0, (t - ctx.currentTime - 1) * 1000)); };
