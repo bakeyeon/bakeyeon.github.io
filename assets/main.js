@@ -759,7 +759,7 @@
       if (hero && !XMAS) {
         town = document.createElement('div');
         town.className = 'xmas-town globe'; town.setAttribute('aria-hidden', 'true');
-        town.innerHTML = '<img class="town-base" alt="" width="560" height="645" decoding="async" src="assets/img/newyear-globe.webp">';
+        town.innerHTML = '<img class="town-base" alt="" width="560" height="645" decoding="async" src="assets/img/newyear-globe.webp?v=2">';
         town.firstChild.addEventListener('load', () => { if (town) town.classList.add('in'); });
         hero.insertBefore(town, hero.querySelector('.wash'));
       } else if (hero) {
