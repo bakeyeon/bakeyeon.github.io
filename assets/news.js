@@ -8,7 +8,7 @@ window.NEWS = [
   { date: '2026-10', label: 'Oct 2026', text: 'Wrote <a href="https://medium.com/@kaiwritesornot/how-to-write-a-good-paper-43c475f277d1">How to Write a Good Paper</a>, reflections on a year of submitting my first workshop paper.' },
   { date: '2026-09', label: 'Sep 2026', text: 'Submitted MA thesis (11 Sep) on morphological derivation and the Korean blue-green spectrum, Göttingen.' },
   { date: '2026-09', label: 'Sep 2026', text: 'Working paper <a href="https://github.com/bakeyeon/light-verbs-heavy-meaning">Light Verbs, Heavy Meaning?</a> on Korean simplex verbs and root+hata constructions.' },
-  { date: '2026-05', label: 'May 2026', text: 'Wrote <a href="https://medium.com/@kaiwritesornot/from-curiosity-to-proposal-how-academic-research-actually-works-c314f835b751">From Curiosity to Proposal</a>, a guide to writing a research proposal.' },
+  { date: '2026-05', label: 'May 2026', text: 'Wrote <a href="from-curiosity-to-proposal.html">From Curiosity to Proposal</a>, a guide to writing a research proposal.' },
   { date: '2026-04', label: 'Apr 2026', text: 'Selected for the Google Cloud TPU Research Cloud program.' },
   { date: '2026-03', label: 'Mar 2026', text: 'Transferred to Georg-August-Universität Göttingen to complete the MA in linguistics.' },
   { date: '2025-10', label: 'Oct 2025', text: 'The Grue Divide survey platform closed after a month online (16 Sep – 19 Oct) and was featured on the <a href="https://www.deepl.com/en/blog/connecting-insights-deepl-bridges">DeepL Blog</a>.' },
