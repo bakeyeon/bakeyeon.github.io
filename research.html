@@ -64,7 +64,7 @@
         </figure>
         <span class="label">Profile</span><h2 id="h-summary">What I work on</h2></header>
       <div class="body">
-        <p>Computational linguist working on semantic cognition, morphological derivation, and LLM hallucination and interpretability, with applied experience in LLM alignment and evaluation at DeepL.</p>
+        <p>Computational linguist working on semantic cognition, morphological derivation, and LLM hallucination and interpretability, with applied experience in human-feedback (RLHF) data for Korean LLM alignment.</p>
         <p>The common thread: speakers encode more than they say, through derivation, register, particles and tone. Nuance that can be measured can be modeled, and what can be modeled can be aligned.</p>
         <ul class="facts">
           <li>Semantic cognition</li><li>Morphological derivation</li><li>Cross-lingual sentiment</li><li>Pragmatics &amp; politeness</li><li>RLHF &amp; human evaluation</li><li>Hallucination &amp; interpretability</li>
@@ -142,13 +142,13 @@
       <div class="body">
         <article class="item" id="p-modal-particles">
           <div class="row"><h3>How Much Sentiment Can Be Carried by Modal Particles?</h3><span class="gloss">Term paper · 2025</span></div>
-          <p class="gloss meta">A Comparative Analysis Using BERT, Hugging Face, and FastText Models · Deep Learning in NLP, HHU Düsseldorf · featured on the DeepL Blog · DOI 10.5281/zenodo.24326464</p>
+          <p class="gloss meta">A Comparative Analysis Using BERT, Hugging Face, and FastText Models · Deep Learning in NLP, HHU Düsseldorf · DOI 10.5281/zenodo.24326464</p>
           <p>Benchmarks sentiment models on German modal particles (<i>ja, doch, halt, mal</i>), which shift tone without changing propositional content.</p>
           <p><a href="https://doi.org/10.5281/zenodo.24326464">Paper &amp; code (Zenodo) →</a> &nbsp; <a href="https://github.com/bakeyeon/modalparticles_sentiment_analysis/">GitHub →</a></p>
         </article>
         <article class="item" id="p-emoji">
           <div class="row"><h3>Modalpartikeln: Can Sentiments Survive Translation with Emojis?</h3><span class="gloss">Term paper · 2024</span></div>
-          <p class="gloss meta">Decoding Sentiments from German Modal Particles to Korean Using Emojis · The Meaning of Gestures (and more), Prof. Dr. Jacopo Romoli · featured on the DeepL Blog · DOI 10.5281/zenodo.24326143</p>
+          <p class="gloss meta">Decoding Sentiments from German Modal Particles to Korean Using Emojis · The Meaning of Gestures (and more), Prof. Dr. Jacopo Romoli · DOI 10.5281/zenodo.24326143</p>
           <p><i>Sehen wir</i> and <i>Sehen wir mal</i> both come out as "Let's see", but the particle <i>mal</i> turns a businesslike decision into a relaxed suggestion. Two surveys measured this: German speakers rated the sentiment of modal particles, and Korean speakers rated expressive emojis. The two sets of scores matched at about 80%, with positive sentiment aligning almost exactly, suggesting emojis can carry tone that translation flattens.</p>
           <figure class="fig"><img src="assets/img/modal-particles-emoji.png" width="800" height="564" loading="lazy" alt="Line chart comparing German speakers' sentiment scores for modal particles with Korean speakers' scores for the matched emojis, across 14 particle uses; positive uses track closely, negative uses diverge more."><figcaption class="gloss">Sentiment of German modal particles (German raters) against their matched emojis (Korean raters).</figcaption></figure>
           <p><a href="https://doi.org/10.5281/zenodo.24326143">Paper &amp; code (Zenodo) →</a> &nbsp; <a href="https://github.com/bakeyeon/Modalparticles_Emojis">GitHub →</a> &nbsp; <a href="https://medium.com/gopenai/can-we-translate-our-sentiments-140c55822ead">Read the write-up →</a> &nbsp; <a href="https://github.com/bakeyeon/sentiment_translator">Sentiment Translator prototype →</a></p>
@@ -169,9 +169,9 @@
           </details>
         </article>
         <article class="item">
-          <div class="row"><h3>Alignment work at DeepL</h3><span class="gloss">Language Data Team · 2024–</span></div>
+          <div class="row"><h3>Applied alignment work</h3><span class="gloss">RLHF data · Korean · 2024–</span></div>
           <ul class="bul">
-            <li>Human annotation for RLHF: preference ranking of Korean candidates, minimal edits that isolate error signals, and full rewrites as gold-standard data.</li>
+            <li>Human annotation for RLHF in DeepL's Language Data Team: preference ranking of Korean candidates, minimal edits that isolate error signals, and full rewrites as gold-standard data.</li>
             <li>KO–EN cross-lingual work: syntactic classification, source-text correction and translation-quality judgments, plus linguistic rationales and decision criteria for ambiguity that fed into the core NLP research team's guidelines.</li>
             <li>Proposed a pragmatic framework (Sentiment, Formality, Friendliness) internally for modeling social distance in controlled generation, with honorific and politeness hierarchies framed as data guidelines for tone-control models; the unadopted proposal later became an independent, sole-authored PANDORA paper.</li>
             <li>Tested the pre-release formality feature in the v3 API beta with a few domain example sentences and reported register issues through DeepL's public developer community; also built a working prototype of the "Nudge Editor" concept.</li>
@@ -198,7 +198,7 @@
       <div class="body">
         <ul class="xlist" data-xlist>
           <li class="x">
-            <button class="x-row" type="button" aria-expanded="false" aria-controls="x-1"><span class="x-thumb" data-tone="blue" aria-hidden="true"></span><span class="x-head"><span class="x-t">Modal-particle and emoji research featured by DeepL</span><span class="label">Feature · DeepL Blog · 2025</span></span><span class="x-chev" aria-hidden="true"></span></button>
+            <button class="x-row" type="button" aria-expanded="false" aria-controls="x-1"><span class="x-thumb" data-tone="blue" aria-hidden="true"></span><span class="x-head"><span class="x-t">Modal particles and emoji in translation</span><span class="label">Feature · DeepL Blog · 2025</span></span><span class="x-chev" aria-hidden="true"></span></button>
             <div class="x-panel" id="x-1"><div class="x-in"><p>DeepL's blog featured my studies on how sentiment carried by modal particles and emoji survives translation.</p><a class="x-go" href="https://www.deepl.com/en/blog/connecting-insights-deepl-bridges">Read on the DeepL Blog ↗</a></div></div>
           </li>
           <li class="x">
