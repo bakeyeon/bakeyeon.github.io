@@ -1,6 +1,8 @@
 # Kai Park
 
-> Kai (Hyeyeon) Park is a computational linguist working on language, cognition and LLM alignment. She quantifies pragmatic, emotional and cultural nuance to evaluate where model language departs from how people actually use it. Based in Germany, open to relocation.
+> Kai (Hyeyeon) Park is a computational linguist working on language, cognition and LLM alignment. She quantifies pragmatic, emotional and cultural nuance to evaluate where model language departs from how people actually use it. Based in Germany (authorized to work, no visa sponsorship needed), open to relocation. Available from January 2027 for full-time research roles in industry or academia, and for PhD positions.
+
+Full CV as plain text: https://bakeyeon.github.io/llms-full.txt
 
 ## Profile
 - [Home and About](https://bakeyeon.github.io/): research summary, interests, recent work, news
@@ -9,6 +11,8 @@
 - [Education](https://bakeyeon.github.io/education.html): MA Linguistics (Computational Linguistics), Göttingen / HHU Düsseldorf; computer science coursework, TU Darmstadt; BA, Pusan National University
 - [Awards and certificates](https://bakeyeon.github.io/certificates.html): Google Cloud TPU Research Cloud grant, national scholarship, competition awards, C1 in English and German
 - [News](https://bakeyeon.github.io/news.html)
+- [CV, full text](https://bakeyeon.github.io/llms-full.txt): every section of the public CV (experience, education, awards, certifications, projects)
+- [CV, PDF](https://bakeyeon.github.io/cv/Kai_Park_CV_public.pdf)
 
 ## Publications
 - Park, K. (2026). The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment. PANDORA Workshop @ EMNLP 2026. https://aclanthology.org/2026.pandora-1.2/

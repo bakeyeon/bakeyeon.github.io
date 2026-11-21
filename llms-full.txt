@@ -1,0 +1,91 @@
+# Kai Park: full CV
+
+> Full text of the public CV of Kai (Hyeyeon) Park, computational linguist working on language, cognition and LLM alignment. Plain-text mirror of https://bakeyeon.github.io/cv/Kai_Park_CV_public.pdf (updated November 2026). Short overview: https://bakeyeon.github.io/llms.txt
+
+- Name: Kai Park (legal name: Hyeyeon Park)
+- Based: Germany, open to relocation
+- Work authorization: Germany (post-study residence permit), no visa sponsorship needed
+- Availability: from January 2027, for full-time research roles in industry or academia, and for PhD positions
+- Email: kai.hyeyeon.park@gmail.com
+- Website: https://bakeyeon.github.io/
+- LinkedIn: https://www.linkedin.com/in/bakeyeon/
+- Google Scholar: https://scholar.google.com/citations?user=CzCE0C0AAAAJ
+- ORCID: https://orcid.org/0000-0002-2854-0127
+- GitHub: https://github.com/bakeyeon
+
+## Professional summary
+
+Computational linguist working at the intersection of empirical linguistics and language model evaluation.
+
+## Core competencies
+
+- AI and product strategy: language model alignment, RLHF annotation, human-in-the-loop evaluation, benchmark design, cross-functional stakeholder management
+- Tools and frameworks: statistical modeling (R/Python), cloud resource orchestration (GCP), empirical experimental design
+- Languages: Korean (native), English (C1 / professional), German (C1 / professional)
+
+## Publications and key research
+
+- Park, K. (2026). The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment. Poster, PANDORA @ EMNLP 2026. Sole author; developed from the author's MA thesis. Paper: https://aclanthology.org/2026.pandora-1.2 · Experiment platform: https://bakeyeon.github.io/colorfish/
+- MA thesis: "Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum." University of Göttingen, 2026. https://publications.goettingen-research-online.de/handle/2/182236
+- Public-facing research writing: "Can We Translate Our Sentiments?" (GoPenAI on Medium, 2026). An accessible piece revisiting 2024 term-paper research on cross-lingual emotional nuance and perceptual color cognition, featured in DeepL Bridges launch materials (https://www.deepl.com/en/blog/connecting-insights-deepl-bridges). https://blog.gopenai.com/can-we-translate-our-sentiments-140c55822ead
+
+## Research and product framework projects
+
+### Large-scale cognitive data architecture (MA thesis project and PANDORA paper)
+- Designed, built and deployed a web-based empirical experiment platform, collecting 9,534 analyzed trials from 1,159 participants (about 2,200 recruited); formulated statistical models and data pipelines to quantify morphological cognition effects.
+
+### Light Verbs, Heavy Meaning? (MA seminar term paper, Göttingen)
+- Tested Polinsky and Magyar's (2020) informativity account of head-final lexicons on Korean simplex verbs vs. root+hata constructions via dictionary sense counts, embedding self-similarity (KLUE-BERT, KcBERT, Vertex AI) and corpus frequency. The predicted asymmetry held in 58% of 38 conditions and was item-driven rather than structurally deterministic. https://github.com/bakeyeon/light-verbs-heavy-meaning
+
+### Modal particles, emojis and sentiment translation (MA term paper series, HHU Düsseldorf)
+- Survey study finding a significant correlation between the emotional scores of German modal particles and expressive emojis, extended with a benchmark of FastText, Hugging Face and BERT sentiment models. https://github.com/bakeyeon/Modalparticles_Emojis · https://github.com/bakeyeon/modalparticles_sentiment_analysis
+- Built "Sentiment Translator", a Gemini/AI Studio prototype visualizing cross-lingual sentiment shifts via an interactive emoji-based emotion map. https://github.com/bakeyeon/sentiment_translator
+
+## Work experience
+
+### Freelance Linguistic Editor, AI Alignment (Korean/English): DeepL SE, Language Data Team, Research (Nov 2024 – present, remote)
+- Human-in-the-loop RLHF alignment: preference ranking, minimal-error editing and full rewriting to build gold-standard datasets for Korean LLM alignment. Formulated structural linguistic rationales and proposed new decision criteria for cross-lingual semantic ambiguity (KO–EN).
+- Part of DeepL Bridges Early Access; research on linguistic nuance featured in official platform launch materials, including work on modal-particle sentiment and emoji-mediated translation, and the survey platform built for the "Grue Divide" paper (poster, PANDORA workshop, EMNLP 2026).
+
+### Freelance Localization QA Specialist and Translator: CCJK Technologies (Marstranslation) / SUCCESSGLO PTE LTD (May 2022 – Nov 2026, remote)
+- Delivered linguistic QA, translation, voice-over (tech/legal/compliance) and full/technical MTPE across Korean–English and German–Korean pairs; served as final QA on 100+ tasks, including Korean voiceover localization for English IVR systems.
+- Handled UI-based length-overflow issues in German–English–Korean localization for automotive infotainment clients, and provided structured peer review for junior linguists, working with Trados and proprietary QA tools.
+
+### Head of Strategic Planning and Brand Strategist: Minor to Winner, social venture (May 2016 – Jul 2016, on-site)
+- Led strategic planning as one of two core team members alongside the founder during early-stage company building, with cross-functional ownership of operations, branding and HR.
+- Scaled the team by onboarding 8 new members within the 3-month mandate.
+- Co-led rebranding initiatives for regional industry promotion.
+- Secured government grant funding and led contract negotiations with public and private stakeholders.
+
+### Performance Marketing Planner (AE), internship: 9 Fruits Media (Dec 2015 – May 2016, on-site)
+- Owned budget planning and allocation for multi-channel growth campaigns on a major TV home-shopping platform, directing creative-team briefs and deliverables end to end.
+- Drove measurable conversion growth via data-driven content optimization and cross-platform tracking: Facebook purchase-link clicks +173% in 2 months (829 → 2,265); Kakao conversion clicks +516% in 6 months (25 → 154); Naver link clicks +408% in 6 months (123 → 625).
+- Managed publication workflows and authored monthly performance and competitor-analysis reports for client stakeholders.
+- Led client-facing communication and marketing analytics.
+
+## Education
+
+- M.A. in Linguistics, Georg-August-Universität Göttingen, 2023–2026. Primary coursework completed at Heinrich Heine University Düsseldorf; degree conferred by Göttingen. GPA 1.4 (German scale, 1.0 best; "sehr gut"); MA thesis grade 1.0.
+- Pre-MBA (Social Entrepreneurship Management Program), KAIST College of Business, 2016. Selected as key talent alongside the CEO of Minor to Winner; program fully sponsored by SK Group.
+- B.A. in English Literature and Languages (minor: Mass Communication), Pusan National University, 2011–2015.
+- Teaching Korean as a Foreign Language Program, NILE Korea, 2023–2024.
+- Coursework in Computer Science (Informatik), TU Darmstadt, 2020–2023.
+
+## Honors and awards
+
+- Google Cloud TPU Research Cloud grantee (2026). Architected and open-sourced a Python-based Spot TPU orchestration tool that streamlines environment setup for fellow TRC researchers. https://github.com/bakeyeon/gcloud-tpu-spot-automator
+- The Next Century Humanities Scholarship: full-ride national scholarship, Ministry of Education, Korea (2011).
+- Invited to the Frontier Research Club 2026 series.
+- Cannes Lions Korea and Innocean Worldwide, Busan Region Award (2014): team lead and main presenter for a 3-person team; conceived and presented an integrated PR campaign on teen smartphone overuse.
+- Creative Arena, 3rd place, national final (2014): team lead and main presenter for a 3-person team; presented an AMD brand-reputation campaign live to 5,000+ attendees (COEX, broadcast on AfreecaTV). A proposal concept from the competition was later implemented on the organizer Stu:m Creation's official platform.
+- KT&G Marketing Competition, National Excellence Award (2013): team leader and lead planner; won multiple first-place regional rounds on the way to the national award.
+- Anti-Corruption and Civil Rights Commission of Korea, Top Prize for Online PR (2012): owned monthly budget allocation for a multi-institution PR campaign; grew a Naver blog to 1M+ page views and led a 1,000-attendee offline campaign.
+
+## Certifications
+
+- Teaching Korean as a Foreign Language (Level 2), National Institute of Korean Language (2024)
+- Language certifications: EF SET English (C1 Advanced, 2024) · TestDaF (CEFR C1, 2019) · IELTS Academic (CEFR C1, 2023)
+
+## Talks
+
+- Invited speaker, APAC AI for Science DevFest 2026 (Google Researcher Groups, GDG AI for Science), Nov 27–28, 2026. https://bakeyeon.github.io/talk.html
