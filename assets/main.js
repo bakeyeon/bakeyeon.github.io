@@ -772,7 +772,7 @@
         banner.className = 'ny-banner';
         banner.innerHTML = '<svg class="ny-strings" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">' +
           '<path d="M10 20 L50 2 L90 20"/><circle cx="50" cy="2" r="1.6"/></svg>' +
-          '<span class="en">Happy New Year 2027</span><span class="sep" aria-hidden="true"> · </span><span class="ko" lang="ko">새해 복 많이 받으세요</span>';
+          '<span class="en">Happy New Year 2027</span>';
         town.appendChild(banner);
       } else if (hero) {
         town = document.createElement('div');
