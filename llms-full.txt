@@ -15,7 +15,7 @@
 
 ## Professional summary
 
-Computational linguist working at the intersection of empirical linguistics and language model evaluation.
+Computational linguist working at the intersection of empirical linguistics and language model evaluation. Studies how linguistic structure shapes cognition and affect, using corpus-based quantitative analysis and large controlled experiments, and turns pragmatic, emotional and cultural nuance into measurable signals that show where model language aligns with human language and where it diverges. Owns research end to end, from experimental design and platform engineering to statistics and sole-authored publication (PANDORA @ EMNLP 2026), and brings hands-on RLHF data experience for Korean LLM alignment. Works across Korean, English and German, with the longer aim of alignment methods that hold across languages, not just within one.
 
 ## Core competencies
 
