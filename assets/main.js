@@ -744,7 +744,11 @@
     // The town is a base render with the tree lights dimmed, plus three small layers over the tree,
     // each with one group of bulbs lit; CSS fades them in turn so the lights twinkle.
     const setTownSrc = () => {
-      if (!town || !XMAS) return;
+      if (!town) return;
+      if (!XMAS) {   // the globe's light is off by day and on at night
+        town.firstChild.src = 'assets/img/newyear-globe-' + (isDark() ? 'night' : 'day') + '.webp';
+        return;
+      }
       const m = isDark() ? 'night' : 'day';
       town.querySelectorAll('img').forEach(img => {
         img.src = img.dataset.g === undefined ? 'assets/img/xmas-town-' + m + '.webp' : 'assets/img/xmas-lights-' + m + '-' + img.dataset.g + '.webp';
@@ -759,8 +763,9 @@
       if (hero && !XMAS) {
         town = document.createElement('div');
         town.className = 'xmas-town globe'; town.setAttribute('aria-hidden', 'true');
-        town.innerHTML = '<img class="town-base" alt="" width="560" height="645" decoding="async" src="assets/img/newyear-globe.webp?v=2">';
+        town.innerHTML = '<img class="town-base" alt="" width="560" height="645" decoding="async">';
         town.firstChild.addEventListener('load', () => { if (town) town.classList.add('in'); });
+        setTownSrc();
         hero.insertBefore(town, hero.querySelector('.wash'));
       } else if (hero) {
         town = document.createElement('div');
