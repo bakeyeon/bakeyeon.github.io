@@ -740,7 +740,7 @@
       return () => { halt(); if (io) io.disconnect(); removeEventListener('resize', onResize); document.removeEventListener('visibilitychange', onVis); cv.remove(); };
     }
 
-    let stops = [], town = null;
+    let stops = [], town = null, banner = null;
     // The town is a base render with the tree lights dimmed, plus three small layers over the tree,
     // each with one group of bulbs lit; CSS fades them in turn so the lights twinkle.
     const setTownSrc = () => {
@@ -767,6 +767,13 @@
         town.firstChild.addEventListener('load', () => { if (town) town.classList.add('in'); });
         setTownSrc();
         hero.insertBefore(town, hero.querySelector('.wash'));
+        // a small cloth banner hanging above the job title
+        banner = document.createElement('p');
+        banner.className = 'ny-banner';
+        banner.innerHTML = '<svg class="ny-strings" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">' +
+          '<path d="M10 20 L50 2 L90 20"/><circle cx="50" cy="2" r="1.6"/></svg>' +
+          '<span class="en">Happy New Year 2027</span><span class="sep" aria-hidden="true"> · </span><span class="ko" lang="ko">새해 복 많이 받으세요</span>';
+        hero.insertBefore(banner, hero.querySelector('.nameplate'));
       } else if (hero) {
         town = document.createElement('div');
         town.className = 'xmas-town'; town.setAttribute('aria-hidden', 'true');
@@ -781,6 +788,7 @@
       root.classList.remove('xmas', 'newyear');
       stops.forEach(s => s()); stops = [];
       if (town) { town.remove(); town = null; }
+      if (banner) { banner.remove(); banner = null; }
       if (carol.playing) carol.stop();
       syncMusic();
       if (musicBtn) musicBtn.hidden = true;
