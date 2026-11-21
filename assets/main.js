@@ -762,18 +762,18 @@
       const hero = document.querySelector('.hero');
       if (hero && !XMAS) {
         town = document.createElement('div');
-        town.className = 'xmas-town globe'; town.setAttribute('aria-hidden', 'true');
+        town.className = 'xmas-town globe';
         town.innerHTML = '<img class="town-base" alt="" width="560" height="645" decoding="async">';
         town.firstChild.addEventListener('load', () => { if (town) town.classList.add('in'); });
         setTownSrc();
         hero.insertBefore(town, hero.querySelector('.wash'));
-        // a small cloth banner hanging above the job title
+        // a small cloth banner hung across the front of the globe's base
         banner = document.createElement('p');
         banner.className = 'ny-banner';
         banner.innerHTML = '<svg class="ny-strings" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">' +
           '<path d="M10 20 L50 2 L90 20"/><circle cx="50" cy="2" r="1.6"/></svg>' +
           '<span class="en">Happy New Year 2027</span><span class="sep" aria-hidden="true"> · </span><span class="ko" lang="ko">새해 복 많이 받으세요</span>';
-        hero.insertBefore(banner, hero.querySelector('.nameplate'));
+        town.appendChild(banner);
       } else if (hero) {
         town = document.createElement('div');
         town.className = 'xmas-town'; town.setAttribute('aria-hidden', 'true');
