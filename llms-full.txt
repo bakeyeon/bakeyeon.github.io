@@ -27,6 +27,8 @@ Computational linguist working at the intersection of empirical linguistics and 
 
 - Park, K. (2026). The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment. Poster, PANDORA @ EMNLP 2026. Sole author; developed from the author's MA thesis. Paper: https://aclanthology.org/2026.pandora-1.2 · Experiment platform: https://bakeyeon.github.io/colorfish/
 - MA thesis: "Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum." University of Göttingen, 2026. https://publications.goettingen-research-online.de/handle/2/182236
+- Park, K. (2024). Modalpartikeln: Can Sentiments Survive Translation with Emojis? Term paper, HHU Düsseldorf. https://doi.org/10.5281/zenodo.24326143
+- Park, K. (2025). How Much Sentiment Can Be Carried by Modal Particles? Term paper, HHU Düsseldorf. https://doi.org/10.5281/zenodo.24326464
 - Public-facing research writing: "Can We Translate Our Sentiments?" (GoPenAI on Medium, 2026). An accessible piece revisiting 2024 term-paper research on cross-lingual emotional nuance and perceptual color cognition, featured in DeepL Bridges launch materials (https://www.deepl.com/en/blog/connecting-insights-deepl-bridges). https://blog.gopenai.com/can-we-translate-our-sentiments-140c55822ead
 
 ## Research and product framework projects
