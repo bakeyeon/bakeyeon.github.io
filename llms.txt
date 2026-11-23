@@ -8,7 +8,7 @@ Full CV as plain text: https://bakeyeon.github.io/llms-full.txt
 - [Home and About](https://bakeyeon.github.io/): research summary, interests, recent work, news
 - [Research](https://bakeyeon.github.io/research.html): MA thesis, The Grue Divide, Light Verbs, modal particle studies, applied alignment work (RLHF data for Korean)
 - [Experience](https://bakeyeon.github.io/experience.html): RLHF data for Korean LLM alignment (DeepL), localization QA, earlier strategy and marketing
-- [Education](https://bakeyeon.github.io/education.html): MA Linguistics (Computational Linguistics), Göttingen / HHU Düsseldorf; computer science coursework, TU Darmstadt; BA, Pusan National University
+- [Education](https://bakeyeon.github.io/education.html): MA Linguistics (Computational Linguistics), Göttingen; computer science coursework, TU Darmstadt; BA, Pusan National University
 - [Awards and certificates](https://bakeyeon.github.io/certificates.html): Google Cloud TPU Research Cloud grant, national scholarship, competition awards, C1 in English and German
 - [News](https://bakeyeon.github.io/news.html)
 - [CV, full text](https://bakeyeon.github.io/llms-full.txt): every section of the public CV (experience, education, awards, certifications, projects)
@@ -18,8 +18,8 @@ Full CV as plain text: https://bakeyeon.github.io/llms-full.txt
 - Park, K. (2026). The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment. PANDORA Workshop @ EMNLP 2026. https://aclanthology.org/2026.pandora-1.2/
 - Park, H. (2026). Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum. MA thesis, University of Göttingen.
 - Park, K. (2026). Light Verbs, Heavy Meaning? Working paper. https://github.com/bakeyeon/light-verbs-heavy-meaning
-- Park, K. (2024). Modalpartikeln: Can Sentiments Survive Translation with Emojis? Term paper, HHU Düsseldorf. https://doi.org/10.5281/zenodo.24326143
-- Park, K. (2025). How Much Sentiment Can Be Carried by Modal Particles? Term paper, HHU Düsseldorf. https://doi.org/10.5281/zenodo.24326464
+- Park, K. (2024). Modalpartikeln: Can Sentiments Survive Translation with Emojis? Term paper. https://doi.org/10.5281/zenodo.24326143
+- Park, K. (2025). How Much Sentiment Can Be Carried by Modal Particles? Term paper. https://doi.org/10.5281/zenodo.24326464
 
 ## Talks
 - Invited speaker, APAC AI for Science DevFest 2026 (Google Researcher Groups, GDG AI for Science), Nov 27–28, 2026 (session: Fri, Nov 27, 9:20–9:50 AM GMT+1)

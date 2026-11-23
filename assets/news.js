@@ -16,5 +16,5 @@ window.NEWS = [
   { date: '2024-11', label: 'Nov 2024', text: 'Joined DeepL\'s Language Data Team as a freelance linguistic editor for AI alignment.' },
   { date: '2024-10', label: 'Oct 2024', text: 'Certified to teach Korean as a foreign language (Level 2), and EF SET English C1.' },
   { date: '2024-02', label: 'Feb 2024', text: 'Term paper <a href="https://github.com/bakeyeon/Modalparticles_Emojis/blob/main/Modalpartikeln_Can_Sentiments_Survive_Translation_with_Emojis.pdf">Modalpartikeln: Can Sentiments Survive Translation with Emojis?</a>, my first study on sentiment across languages.' },
-  { date: '2023-10', label: 'Oct 2023', text: 'Began MA studies in linguistics at Heinrich Heine University Düsseldorf.' }
+  { date: '2023-10', label: 'Oct 2023', text: 'Began MA studies in linguistics.' }
 ];

@@ -27,8 +27,8 @@ Computational linguist working at the intersection of empirical linguistics and 
 
 - Park, K. (2026). The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment. Poster, PANDORA @ EMNLP 2026. Sole author; developed from the author's MA thesis. Paper: https://aclanthology.org/2026.pandora-1.2 · Experiment platform: https://bakeyeon.github.io/colorfish/
 - MA thesis: "Can the Use of Derivatives Affect Cognition? A Large-Scale Empirical Study on Morphological Derivation and the Korean Blue-Green Spectrum." University of Göttingen, 2026. https://publications.goettingen-research-online.de/handle/2/182236
-- Park, K. (2024). Modalpartikeln: Can Sentiments Survive Translation with Emojis? Term paper, HHU Düsseldorf. https://doi.org/10.5281/zenodo.24326143
-- Park, K. (2025). How Much Sentiment Can Be Carried by Modal Particles? Term paper, HHU Düsseldorf. https://doi.org/10.5281/zenodo.24326464
+- Park, K. (2024). Modalpartikeln: Can Sentiments Survive Translation with Emojis? Term paper. https://doi.org/10.5281/zenodo.24326143
+- Park, K. (2025). How Much Sentiment Can Be Carried by Modal Particles? Term paper. https://doi.org/10.5281/zenodo.24326464
 - Public-facing research writing: "Can We Translate Our Sentiments?" (GoPenAI on Medium, 2026). An accessible piece revisiting 2024 term-paper research on cross-lingual emotional nuance and perceptual color cognition, featured in DeepL Bridges launch materials (https://www.deepl.com/en/blog/connecting-insights-deepl-bridges). https://blog.gopenai.com/can-we-translate-our-sentiments-140c55822ead
 
 ## Research and product framework projects
@@ -39,7 +39,7 @@ Computational linguist working at the intersection of empirical linguistics and 
 ### Light Verbs, Heavy Meaning? (MA seminar term paper, Göttingen)
 - Tested Polinsky and Magyar's (2020) informativity account of head-final lexicons on Korean simplex verbs vs. root+hata constructions via dictionary sense counts, embedding self-similarity (KLUE-BERT, KcBERT, Vertex AI) and corpus frequency. The predicted asymmetry held in 58% of 38 conditions and was item-driven rather than structurally deterministic. https://github.com/bakeyeon/light-verbs-heavy-meaning
 
-### Modal particles, emojis and sentiment translation (MA term paper series, HHU Düsseldorf)
+### Modal particles, emojis and sentiment translation (MA term paper series)
 - Survey study finding a significant correlation between the emotional scores of German modal particles and expressive emojis, extended with a benchmark of FastText, Hugging Face and BERT sentiment models. https://github.com/bakeyeon/Modalparticles_Emojis · https://github.com/bakeyeon/modalparticles_sentiment_analysis
 - Built "Sentiment Translator", a Gemini/AI Studio prototype visualizing cross-lingual sentiment shifts via an interactive emoji-based emotion map. https://github.com/bakeyeon/sentiment_translator
 
@@ -67,7 +67,7 @@ Computational linguist working at the intersection of empirical linguistics and 
 
 ## Education
 
-- M.A. in Linguistics, Georg-August-Universität Göttingen, 2023–2026. Most coursework completed at Heinrich Heine University Düsseldorf; degree conferred by Göttingen. GPA 1.4 (German scale, 1.0 best; "sehr gut"); MA thesis grade 1.0.
+- M.A. in Linguistics, Georg-August-Universität Göttingen, 2023–2026. GPA 1.4 (German scale, 1.0 best; "sehr gut"); MA thesis grade 1.0.
 - Pre-MBA (Social Entrepreneurship Management Program), KAIST College of Business, 2016. Selected as key talent alongside the CEO of Minor to Winner; program fully sponsored by SK Group.
 - B.A. in English Literature and Languages (minor: Mass Communication), Pusan National University, 2011–2015, including a winter exchange term at Seoul National University (2013).
 - Teaching Korean as a Foreign Language Program, NILE Korea, 2023–2024.
