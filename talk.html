@@ -24,6 +24,8 @@
     .copy-btn { position: absolute; top: var(--space-8); right: var(--space-8); padding: 4px 12px; font: 500 13px/20px var(--font-sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-full); cursor: pointer; }
     .copy-btn:hover { border-color: var(--ink); }
     .copy-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .ask-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8) var(--space-16); }
+    .ask-row .copy-btn { position: static; padding: 8px 16px; }
   </style>
 </head>
 <body>
@@ -157,20 +159,27 @@
         </details>
       </div>
     </section>
+    <section class="section" id="ask" aria-labelledby="h-ask">
+      <header><span class="sw" style="background:var(--field-yellow)"></span><span class="label">Q&amp;A</span><h2 id="h-ask">Ask me a question</h2></header>
+      <div class="body">
+        <p>It's a short session, so please send me your questions by email.</p>
+        <p class="ask-row"><button class="copy-btn" type="button" data-mail="a2FpLmh5ZXllb24ucGFya0BnbWFpbC5jb20=" aria-live="polite">Copy email address</button></p>
+      </div>
+    </section>
   </main>
 
   <footer class="site">
     <span class="gloss">Kai Park</span>
     <span class="links">
       <a class="cv-foot" href="cv/Kai_Park_CV_public.pdf" download="Kai_Park_CV.pdf">Download CV ↓</a>
-      <a href="mailto:kai.hyeyeon.park@gmail.com">Email</a>
+      <a href="#email" data-mail="a2FpLmh5ZXllb24ucGFya0BnbWFpbC5jb20=">Email</a>
       <a href="https://www.linkedin.com/in/bakeyeon/">LinkedIn</a>
       <a href="https://scholar.google.com/citations?user=CzCE0C0AAAAJ">Google Scholar</a>
       <a href="https://orcid.org/0000-0002-2854-0127">ORCID</a>
       <a href="https://github.com/bakeyeon">GitHub</a>
     </span>
   </footer>
-  <script src="assets/main.js?v=35"></script>
+  <script src="assets/main.js?v=36"></script>
   <script>
     (() => {
       const el = document.getElementById('local-time');
@@ -185,15 +194,16 @@
   </script>
   <script>
     document.querySelectorAll('.copy-btn').forEach((btn) => {
+      const label = btn.textContent;
       btn.addEventListener('click', async () => {
-        const text = document.getElementById(btn.dataset.copy).textContent;
+        const text = btn.dataset.mail ? atob(btn.dataset.mail) : document.getElementById(btn.dataset.copy).textContent;
         try { await navigator.clipboard.writeText(text); }
         catch {
           const ta = document.createElement('textarea'); ta.value = text; document.body.append(ta);
           ta.select(); try { document.execCommand('copy'); } catch {} ta.remove();
         }
         btn.textContent = 'Copied ✓';
-        setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+        setTimeout(() => { btn.textContent = label; }, 1800);
       });
     });
   </script>
