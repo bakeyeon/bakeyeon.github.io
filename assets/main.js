@@ -153,7 +153,7 @@
   top.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
   // Menu: a floating button beside back-to-top that opens a short list of every page
   const here = (location.pathname.split('/').pop() || 'index.html');
-  const LINKS = [['index.html', 'Home'], ...PAGES.map(p => [p.href, p.label]), ['news.html', 'News']];
+  const LINKS = [['index.html', 'Home'], ...PAGES.slice(0, 1).map(p => [p.href, p.label]), ['talk.html', 'Talk'], ...PAGES.slice(1).map(p => [p.href, p.label]), ['news.html', 'News']];
   const menuBtn = document.createElement('button');
   menuBtn.type = 'button'; menuBtn.className = 'to-top to-menu';
   menuBtn.setAttribute('aria-label', 'Menu'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-controls', 'fab-menu');

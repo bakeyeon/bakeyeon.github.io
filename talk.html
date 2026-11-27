@@ -33,6 +33,7 @@
     .media-tabs button[aria-selected="true"] { color: var(--surface); background: var(--ink); border-color: var(--ink); }
     .media-tabs button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
     .media-panel[hidden] { display: none; }
+    .talk-summary { margin: var(--space-16) 0 0; max-width: 68ch; }
     .media-panel .talk-video, .media-panel .deck { margin-top: var(--space-8); }
     .deck { margin: var(--space-16) 0 var(--space-8); }
     .deck-frame { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; background: var(--surface-raised); touch-action: pan-y; }
@@ -61,6 +62,15 @@
   </section>
 
   <main class="content">
+    <section class="section" aria-labelledby="h-about">
+      <header><span class="sw" style="background:var(--field-lilac)"></span><span class="label">Fri, Nov 27, 2026</span><h2 id="h-about">Beyond Benchmarks</h2></header>
+      <div class="body">
+        <p><b>Beyond Benchmarks: Why Empirical Linguistics Is Essential for AI Alignment and Evaluation</b></p>
+        <p class="gloss meta">My session: <time datetime="2026-11-27T09:20+01:00">Fri, Nov 27 · 9:20–9:50 AM (GMT+1)</time><span id="local-time"></span></p>
+        <p class="links-row"><a href="https://gdgaiforscience.github.io/devfest-program/#kai-park">My session in the program →</a> &nbsp; <a href="https://gdg.community.dev/events/details/google-gdg-ai-for-science-australia-presents-apac-ai-for-science-devfest/cohost-gdg-ai-for-science-india/">APAC AI for Science DevFest 2026 →</a></p>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="h-abs">
       <header><span class="sw" style="background:var(--field-mint)"></span><span class="label">The talk</span><h2 id="h-abs">Materials</h2></header>
       <div class="body">
@@ -86,6 +96,8 @@
           </div>
         </div>
         </div>
+        <p class="talk-summary">A 30-minute session in three parts: what I learned from my own research on modal particles and Korean color terms, practical notes on using AI in a research workflow, and the questions I want to explore next in AI alignment.</p>
+        <p class="talk-summary">Rather than an exhaustive survey of every field mentioned, it connects papers I have been reading across these areas and shares my own perspective on where they intersect.</p>
         <p class="links-row"><a href="talk-slides/beyond-benchmarks-slides.pdf" download>Download the slides (PDF, 6.3 MB) ↓</a></p>
         <p class="links-row"><a href="from-curiosity-to-proposal.html">Essay: From Curiosity to Proposal, how academic research actually works →</a></p>
         <details class="more">
@@ -94,15 +106,6 @@
         </details>
       </div>
     </section>
-    <section class="section" aria-labelledby="h-about">
-      <header><span class="sw" style="background:var(--field-lilac)"></span><span class="label">Fri, Nov 27, 2026</span><h2 id="h-about">Beyond Benchmarks</h2></header>
-      <div class="body">
-        <p><b>Beyond Benchmarks: Why Empirical Linguistics Is Essential for AI Alignment and Evaluation</b></p>
-        <p class="gloss meta">My session: <time datetime="2026-11-27T09:20+01:00">Fri, Nov 27 · 9:20–9:50 AM (GMT+1)</time><span id="local-time"></span></p>
-        <p class="links-row"><a href="https://gdgaiforscience.github.io/devfest-program/#kai-park">My session in the program →</a> &nbsp; <a href="https://gdg.community.dev/events/details/google-gdg-ai-for-science-australia-presents-apac-ai-for-science-devfest/cohost-gdg-ai-for-science-india/">APAC AI for Science DevFest 2026 →</a></p>
-      </div>
-    </section>
-
     <section class="section" aria-labelledby="h-res">
       <header><span class="sw" style="background:var(--field-peach)"></span><span class="label">Science for AI</span><h2 id="h-res">The research</h2></header>
       <div class="body">
@@ -285,7 +288,7 @@
       show(0);
     })();
   </script>
-  <script src="assets/main.js?v=36"></script>
+  <script src="assets/main.js?v=37"></script>
   <script>
     (() => {
       const el = document.getElementById('local-time');
