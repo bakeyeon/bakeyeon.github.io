@@ -44,6 +44,38 @@
     .deck-nav button:disabled { opacity: .4; cursor: default; }
     .deck-nav button:focus-visible, .deck-frame:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
     .deck-count { font: 13px/20px var(--font-mono); color: var(--ink-muted); }
+    .wf-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-16); margin: var(--space-16) 0; }
+    .wf-card { padding: var(--space-16); border: 1px solid var(--line); border-radius: 12px; background: var(--surface-raised); }
+    .wf-card h3 { margin: var(--space-8) 0 var(--space-4); font: 700 22px/28px var(--font-sans); }
+    .wf-card p { margin: 0 0 var(--space-8); }
+    .wf-card .links-row { margin: 0; font-size: 14px; }
+    .wf-ic { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .wf { --wf-b: #2b6cc4; --wf-r: #1f8a57; --wf-w: #d0443a; }
+    :root[data-theme="dark"] .wf { --wf-b: #7fb0f5; --wf-r: #6fd3a0; --wf-w: #ff8a7a; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .wf { --wf-b: #7fb0f5; --wf-r: #6fd3a0; --wf-w: #ff8a7a; } }
+    .wf-card.build { color: var(--ink); } .wf-card.build .wf-ic, .wf-card.build h3 { color: var(--wf-b); }
+    .wf-card.run .wf-ic, .wf-card.run h3 { color: var(--wf-r); }
+    .wf-card.write .wf-ic, .wf-card.write h3 { color: var(--wf-w); }
+    .wf-note { padding: var(--space-8) var(--space-16); border-left: 3px solid var(--wf-b); background: var(--surface-raised); }
+    .wf-h { margin: var(--space-40) 0 var(--space-8); font: 600 20px/28px var(--font-sans); scroll-margin-top: 80px; }
+    .wf-h4 { margin: var(--space-24) 0 var(--space-8); font: 600 16px/24px var(--font-sans); }
+    .wf-legend { font-size: 14px; color: var(--ink-muted); }
+    .wf-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; vertical-align: 1px; }
+    .wf-dot.me { background: var(--wf-w); } .wf-dot.ag { background: var(--wf-r); }
+    .wf-phases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-24); margin: var(--space-16) 0; }
+    .wf-phase { position: relative; padding: var(--space-16); border: 1px solid var(--line); border-radius: 12px; background: var(--surface-raised); }
+    .wf-phase .wf-ic { position: absolute; right: var(--space-16); top: var(--space-16); color: var(--ink-muted); }
+    .wf-phase:not(:last-child)::after { content: "→"; position: absolute; right: -19px; top: 50%; color: var(--ink-muted); }
+    .wf-k { margin: 0; font: 600 12px/16px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-muted); }
+    .wf-phase h4 { margin: var(--space-4) 0 0; font: 700 20px/26px var(--font-sans); }
+    .wf-sub { margin: 0; font-size: 14px; color: var(--ink-muted); }
+    .wf-scope { margin: var(--space-8) 0; }
+    .wf-phase ul { margin: 0; padding: 0; list-style: none; }
+    .wf-phase li { margin: var(--space-4) 0; }
+    .wf-dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-4) var(--space-16); margin: 0 0 var(--space-8); }
+    .wf-dl dt { font: 600 13px/22px var(--font-mono); color: var(--ink-muted); }
+    .wf-dl dd { margin: 0; }
+    @media (max-width: 760px) { .wf-cards, .wf-phases { grid-template-columns: 1fr; } .wf-phase:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -22px; } }
   </style>
 </head>
 <body>
@@ -170,7 +202,48 @@
 
     <section class="section" aria-labelledby="h-kit">
       <header><span class="sw" style="background:var(--field-lilac)"></span><span class="label">AI for Science</span><h2 id="h-kit">My research workflow</h2></header>
-      <div class="body">
+      <div class="body wf">
+        <p>My studies are early, proof-of-concept work with linguistics at the core. At this stage, close review and a linguist's judgment matter more than scale; large compute makes more sense after the proof of concept. So AI helped me in three places, and I stayed the one who answers for the work.</p>
+        <div class="wf-cards">
+          <div class="wf-card build"><svg class="wf-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5l4 4-9 9H5.5v-4z"/><path d="M12.5 7.5l4 4"/></svg><h3>Build</h3><p>Demo video (Claude Code), experiment front end (Lovable)</p><p class="links-row"><a href="#h-demo">Demo videos and the recipe →</a> &nbsp; <a href="https://github.com/bakeyeon/colorfish_public">Experiment platform source →</a></p></div>
+          <div class="wf-card run"><svg class="wf-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3.5v3.5M14 3.5v3.5M10 17v3.5M14 17v3.5M3.5 10H7M3.5 14H7M17 10h3.5M17 14h3.5"/></svg><h3>Run</h3><p>A few Colab chunks → spot TPUs, found by an agent's script</p><p class="links-row"><a href="#wf-run">How I ran it ↓</a></p></div>
+          <div class="wf-card write"><svg class="wf-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h7l4 4V20.5H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15.5h6"/></svg><h3>Write</h3><p>Review cycle: people early on, AI review later</p><p class="links-row"><a href="#wf-write">The review cycle ↓</a></p></div>
+        </div>
+        <p class="wf-note"><b>AI assists.</b> I check, disclose and stay responsible.</p>
+
+        <h3 class="wf-h" id="wf-run">Run: cloud resources and agents</h3>
+        <p>These are not experiments with huge numbers of agents. I used cloud resources and agents to work faster: from a few chunks in Colab to spot TPUs on Google Cloud. The paper that used TPUs is still being drafted, so I can't share details yet.</p>
+        <p>With TPUs I ran into two bottlenecks: optimizing the code, and actually getting spot capacity. For the code, I used Antigravity, and alternating between Gemini and Claude models made bottlenecks much easier to track down. For capacity, I wanted an auto-hunting setup I could leave running, so an agent wrote a script that polls for free spot TPUs through the SDK and grabs one. I'm not an infrastructure engineer, so I delegated the setup; to check what was really running, I had the agent print step-by-step logs.</p>
+        <ol class="tl">
+          <li class="major"><div class="row"><h3>Spot TPU auto-provisioner for TRC researchers</h3><span class="gloss">GitHub</span></div>
+            <p class="links-row"><a href="https://github.com/bakeyeon/gcloud-tpu-spot-automator">View on GitHub →</a></p></li>
+          <li><div class="row"><h3>Running models locally</h3><span class="gloss">Tools</span></div>
+            <p>For quick local experiments, LM Studio is often simpler than a command-line setup: download a model, chat with it, or serve it as a local API. Your data stays on your machine.</p>
+            <p class="links-row"><a href="https://lmstudio.ai/">LM Studio →</a></p></li>
+          <li><div class="row"><h3>AlphaEvolve-style plugin for Claude Code and Antigravity</h3><span class="gloss">Beta</span></div>
+            <p>An evolution loop for problems a machine can grade by counting, measuring and comparing, with a guide to when it helps and when something simpler is better. For reference only: it is an early beta I am still tuning and have not fully run myself yet, so expect rough edges. Not an official Google product.</p>
+            <p class="links-row"><a href="https://github.com/bakeyeon/alphaevolve-plugin">View on GitHub →</a></p></li>
+        </ol>
+
+        <h3 class="wf-h" id="wf-write">Write: the review cycle</h3>
+        <p class="wf-legend"><span class="wf-dot me" aria-label="I do it"></span> I do it &nbsp; <span class="wf-dot ag" aria-label="The agent does it"></span> The agent does it</p>
+        <div class="wf-phases">
+          <div class="wf-phase"><svg class="wf-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5h6M10 20.5h4"/><path d="M12 3.5a5.5 5.5 0 0 0-3.5 9.7c.6.5 1 1.3 1 2.1v.2h5v-.2c0-.8.4-1.6 1-2.1A5.5 5.5 0 0 0 12 3.5z"/></svg><p class="wf-k">Phase 1</p><h4>Design</h4><p class="wf-sub">Proposal · pre-registration</p><p class="wf-scope">Research question, task design, metric formulas</p><ul><li><span class="wf-dot me" aria-label="I do it"></span> Form the hypothesis</li><li><span class="wf-dot me" aria-label="I do it"></span><span class="wf-dot ag" aria-label="The agent does it"></span> Rough check with quick, messy code</li><li><span class="wf-dot ag" aria-label="The agent does it"></span> Boilerplate code</li><li><span class="wf-dot me" aria-label="I do it"></span> Check the core logic</li></ul></div>
+          <div class="wf-phase"><svg class="wf-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M7 20v-6M11.5 20V8M16 20v-9"/></svg><p class="wf-k">Phase 2</p><h4>Data &amp; first draft</h4><p class="wf-sub">Initial draft</p><p class="wf-scope">Pilot and main analysis, statistical modelling, the narrative</p><ul><li><span class="wf-dot ag" aria-label="The agent does it"></span> Pull the core logic out of a messy notebook</li><li><span class="wf-dot ag" aria-label="The agent does it"></span><span class="wf-dot me" aria-label="I do it"></span> Search for and summarize literature</li><li><span class="wf-dot me" aria-label="I do it"></span> Write the first draft</li></ul></div>
+          <div class="wf-phase"><svg class="wf-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10v17H7z"/><path d="M9.5 9h5M9.5 12.5h5"/><path d="M9.5 16.5l1.5 1.5 3-3"/></svg><p class="wf-k">Phase 3</p><h4>Final manuscript</h4><p class="wf-sub">Pre-submission</p><p class="wf-scope">Page limits, venue format, final edit</p><ul><li><span class="wf-dot ag" aria-label="The agent does it"></span> Translation and polishing</li><li><span class="wf-dot ag" aria-label="The agent does it"></span> Point out mathematical flaws</li><li><span class="wf-dot ag" aria-label="The agent does it"></span> Suggest missing references</li><li><span class="wf-dot me" aria-label="I do it"></span> Re-check the literature</li></ul></div>
+        </div>
+        <p class="wf-note">The earlier and less reversible the decision, the more you need people; the later, the better AI review does. Order of review: people first (advisor, peers), AI review later.</p>
+        <h4 class="wf-h4">Phase 1 · Design review</h4>
+        <dl class="wf-dl"><dt>Check</dt><dd>Metric scales that distort, boundary conditions.</dd><dt>Why</dt><dd>Catch flaws you cannot undo before collecting data at scale.</dd><dt>AI</dt><dd>Formula errors, edge cases, scale checks.</dd><dt>People</dt><dd>Is the question worth asking? Does the design answer it?</dd></dl>
+        <ol class="tl">
+          <li class="major"><div class="row"><h3>From Curiosity to Proposal</h3><span class="gloss">Essay</span></div>
+            <p>How a research question becomes a proposal, step by step, for anyone writing their first one.</p>
+            <p class="links-row"><a href="from-curiosity-to-proposal.html">Read the essay →</a></p></li>
+          <li><div class="row"><h3>CL Research Tips for Beginners</h3><span class="gloss">Notion</span></div>
+            <p class="links-row"><a href="https://bakeyeoni.notion.site/CL-Research-Tips-for-Beginners-2b2818a1b111804aa73df65336f843a0">Open in Notion →</a></p></li>
+        </ol>
+        <h4 class="wf-h4">Phase 2 · Analysis review</h4>
+        <dl class="wf-dl"><dt>Check</dt><dd>Statistical assumptions such as covariate control, and the line of argument.</dd><dt>Why</dt><dd>Answer reviewers’ questions before they ask for new experiments.</dd><dt>AI</dt><dd>Assumptions; code matches the numbers.</dd><dt>People</dt><dd>Is the interpretation overclaimed? Is the story convincing?</dd></dl>
         <ol class="tl">
           <li class="major"><div class="row"><h3>Paper → Obsidian note: template and prompts</h3><span class="gloss">Notion</span></div>
             <p>The research-wiki kit from the talk: the agent fills in the facts; the questions and opinions stay yours.</p>
@@ -180,9 +253,13 @@
           <li><div class="row"><h3>Reading and note-taking tools</h3><span class="gloss">Tools</span></div>
             <p class="links-row"><a href="https://obsidian.md/">Obsidian →</a> &nbsp; <a href="https://www.researchrabbit.ai/">ResearchRabbit →</a> &nbsp; <a href="https://www.alphaxiv.org/">alphaXiv →</a> &nbsp; <a href="https://notebooklm.google/">Gemini Notebook (NotebookLM) →</a> &nbsp; <a href="https://support.google.com/notebooklm/answer/16164461">Its data and privacy help →</a></p>
             <p class="gloss meta">Data policies change; check them before you upload unpublished work.</p></li>
-          <li><div class="row"><h3>Running models locally</h3><span class="gloss">Tools</span></div>
-            <p>For quick local experiments, LM Studio is often simpler than a command-line setup: download a model, chat with it, or serve it as a local API. Your data stays on your machine.</p>
-            <p class="links-row"><a href="https://lmstudio.ai/">LM Studio →</a></p></li>
+          <li><div class="row"><h3>GLM Distribution Explorer</h3><span class="gloss">Beta</span></div>
+            <p>For the statistical modelling step: compare GLM distributions for your data at a glance.</p>
+            <p class="links-row"><a href="https://bakeyeon.github.io/glm-explorer/">Open the app →</a></p></li>
+        </ol>
+        <h4 class="wf-h4">Phase 3 · Pre-submission check</h4>
+        <dl class="wf-dl"><dt>Check</dt><dd>Key citations a reviewer will expect, encoding and formatting.</dd><dt>Tip</dt><dd>Keep minor fixes (parsing, stray underscores) on a separate list.</dd><dt>AI</dt><dd>Format, encoding, typos, page limits.</dd><dt>People</dt><dd>Missing key papers; AI can invent references.</dd></dl>
+        <ol class="tl">
           <li class="major"><div class="row"><h3>Using AI in ACL-venue research</h3><span class="gloss">Policy</span></div>
             <p>Use it, disclose it, and remember the authors stay responsible.</p>
             <p class="links-row"><a href="https://www.aclweb.org/adminwiki/index.php/ACL_Policy_on_Publication_Ethics">ACL Policy on Publication Ethics →</a> &nbsp; <a href="https://aclrollingreview.org/cfp">ACL Rolling Review: call for papers →</a> &nbsp; <a href="https://aclrollingreview.org/responsibleNLPresearch/">ARR Responsible NLP Checklist →</a> &nbsp; <a href="https://2023.aclweb.org/blog/ACL-2023-policy/">ACL 2023 policy on AI writing assistance →</a></p></li>
@@ -196,13 +273,6 @@
 3. Mark unverified claims as unverified; never present them as established facts.
 4. Keep a formal, objective tone. No emojis, and no follow-up questions at the end.</pre>
             </div></li>
-          <li><div class="row"><h3>CL Research Tips for Beginners</h3><span class="gloss">Notion</span></div>
-            <p class="links-row"><a href="https://bakeyeoni.notion.site/CL-Research-Tips-for-Beginners-2b2818a1b111804aa73df65336f843a0">Open in Notion →</a></p></li>
-          <li><div class="row"><h3>Spot TPU auto-provisioner for TRC researchers</h3><span class="gloss">GitHub</span></div>
-            <p class="links-row"><a href="https://github.com/bakeyeon/gcloud-tpu-spot-automator">View on GitHub →</a></p></li>
-          <li><div class="row"><h3>AlphaEvolve-style plugin for Claude Code and Antigravity</h3><span class="gloss">Beta</span></div>
-            <p>An evolution loop for problems a machine can grade by counting, measuring and comparing, with a guide to when it helps and when something simpler is better. For reference only: it is an early beta I am still tuning and have not fully run myself yet, so expect rough edges. Not an official Google product.</p>
-            <p class="links-row"><a href="https://github.com/bakeyeon/alphaevolve-plugin">View on GitHub →</a></p></li>
         </ol>
       </div>
     </section>
