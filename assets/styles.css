@@ -345,7 +345,7 @@ footer.site:has(.peek) { position: relative; padding-bottom: 104px; }
   .csw dt { line-height: 18px; margin-top: var(--space-8); }
   .constellation { width: 100%; }
   .page-head { height: 260px; }
-  .mini-nav { top: 74px; width: 72vw; }
+  .mini-nav { top: 74px; width: min(72vw, 330px); }
   .map-legend .label { font-size: 9px; }
 }
 @media (prefers-reduced-motion: reduce) {
