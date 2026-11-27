@@ -28,7 +28,12 @@
     .ask-row .copy-btn { position: static; padding: 8px 16px; }
     .talk-video { position: relative; aspect-ratio: 16 / 9; margin: var(--space-16) 0 var(--space-8); border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; background: #000; }
     .talk-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .sub-h { margin: var(--space-24) 0 0; font: 600 15px/22px var(--font-sans); color: var(--ink); }
+    .media-tabs { display: flex; gap: var(--space-8); margin: var(--space-16) 0 0; }
+    .media-tabs button { padding: 6px 16px; font: 500 14px/20px var(--font-sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-full); cursor: pointer; }
+    .media-tabs button[aria-selected="true"] { color: var(--surface); background: var(--ink); border-color: var(--ink); }
+    .media-tabs button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .media-panel[hidden] { display: none; }
+    .media-panel .talk-video, .media-panel .deck { margin-top: var(--space-8); }
     .deck { margin: var(--space-16) 0 var(--space-8); }
     .deck-frame { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; background: var(--surface-raised); touch-action: pan-y; }
     .deck-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
@@ -59,12 +64,17 @@
     <section class="section" aria-labelledby="h-abs">
       <header><span class="sw" style="background:var(--field-mint)"></span><span class="label">The talk</span><h2 id="h-abs">Materials</h2></header>
       <div class="body">
-        <h3 class="sub-h">Watch the talk</h3>
+        <div class="media-tabs" role="tablist" aria-label="Talk materials">
+          <button type="button" role="tab" id="tab-video" aria-controls="panel-video" aria-selected="true">▶ Video</button>
+          <button type="button" role="tab" id="tab-slides" aria-controls="panel-slides" aria-selected="false" tabindex="-1">Slides</button>
+        </div>
+        <div class="media-panel" id="panel-video" role="tabpanel" aria-labelledby="tab-video">
         <div class="talk-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/531rUA8GNTY" title="Beyond Benchmarks (re-recorded), APAC AI for Science DevFest 2026" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe data-src="https://www.youtube-nocookie.com/embed/531rUA8GNTY" title="Beyond Benchmarks (re-recorded), APAC AI for Science DevFest 2026" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <p class="gloss meta">A re-recorded version of my session. <a href="https://youtu.be/531rUA8GNTY">Open on YouTube →</a></p>
-        <h3 class="sub-h">Slides</h3>
+        </div>
+        <div class="media-panel" id="panel-slides" role="tabpanel" aria-labelledby="tab-slides" hidden>
         <div class="deck" id="deck" data-titles='["Beyond Benchmarks: title slide","Hello: I’m Kai, a computational linguist working on alignment","The research in this talk","Where AI helped me","The review cycle","Five stops on today’s map","What is alignment?","HHH: helpful, honest, harmless","What do experts do in alignment?","What is positive alignment?","Positive Alignment: a closer look","Alignment is like a huge umbrella","Describe by features","Can your feeling survive translation?","Korean listens for the relationship","An early SFF map","Seeing alike, feeling apart","Vibe-coded with Lovable","Framing 1: language and perception","Fewest forms, most used","Framing 2: alignment beyond accuracy","One word instead of a phrase","A word may sharpen what we see","Cluster by features, and neighbors group together","Why countries are the wrong unit","Whorf was half right","Not one score, but parts of meaning","Social topics or social cues?","A match is not yet a cue","Adult-like isn’t the same as skilled","Where SFF goes next","Toward shared features","Questions? Let’s talk."]'>
           <div class="deck-frame" tabindex="0" aria-label="Slides; use the left and right arrow keys to move">
             <img src="talk-slides/slide-01.webp" width="1600" height="900" alt="Slide 1: Beyond Benchmarks: title slide">
@@ -74,6 +84,7 @@
             <span class="deck-count" aria-live="polite">1 / 33</span>
             <button type="button" data-step="1" aria-label="Next slide">Next →</button>
           </div>
+        </div>
         </div>
         <p class="links-row"><a href="talk-slides/beyond-benchmarks-slides.pdf" download>Download the slides (PDF, 6.3 MB) ↓</a></p>
         <p class="links-row"><a href="from-curiosity-to-proposal.html">Essay: From Curiosity to Proposal, how academic research actually works →</a></p>
@@ -221,7 +232,30 @@
   </footer>
   <script>
     (() => {
+      const tabs = [...document.querySelectorAll('.media-tabs [role="tab"]')];
+      const iframe = document.querySelector('#panel-video iframe');
+      const loadVideo = () => { if (iframe && !iframe.src) iframe.src = iframe.dataset.src; };
+      const pick = (tab) => {
+        tabs.forEach((b) => {
+          const on = b === tab;
+          b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
+          document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+        });
+        if (tab.id === 'tab-video') loadVideo();
+        else if (iframe && iframe.src) iframe.src = iframe.dataset.src; // stops playback
+      };
+      tabs.forEach((b, k) => {
+        b.addEventListener('click', () => pick(b));
+        b.addEventListener('keydown', (e) => {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          const n = tabs[(k + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); pick(n);
+        });
+      });
+      loadVideo();
+    })();
+    (() => {
       const deck = document.getElementById('deck');
+
       if (!deck) return;
       const titles = JSON.parse(deck.dataset.titles);
       const n = titles.length, img = deck.querySelector('img'), frame = deck.querySelector('.deck-frame');
