@@ -133,6 +133,11 @@ img, svg { display: block; max-width: 100%; }
 .star .saturn { transition: transform .4s ease; }
 .star.planet:hover .saturn, .star.planet:focus-visible .saturn { transform: rotate(-14deg) scale(1.12); }
 .star:hover text, .star:focus-visible text { fill-opacity: 1; }
+.star .tail { fill: none; stroke-linecap: round; }
+.star .cbody { transition: transform .4s ease; }
+.star.comet:hover .cbody, .star.comet:focus-visible .cbody { transform: translate(3px, 2px) scale(1.08); }
+.mini-nav .star.comet.current .core { fill: var(--signal); }
+.mini-nav .star.comet.current text { fill-opacity: 1; }
 .star:focus-visible .core { stroke: var(--focus); stroke-width: 2; }
 
 /* intro under the hero */

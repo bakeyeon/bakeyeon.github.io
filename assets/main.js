@@ -53,13 +53,27 @@
       '<text x="' + cx + '" y="' + (cy + 36 * k) + '" text-anchor="middle">CV ↓</text></a>';
   }
 
+  // A comet beside the constellation: the latest talk (video, slides, links)
+  function cometSVG(cx, cy, k, id, current) {
+    const tx = cx - 36 * k, ty = cy - 20 * k;
+    return '<defs><linearGradient id="' + id + '" gradientUnits="userSpaceOnUse" x1="' + tx + '" y1="' + ty + '" x2="' + cx + '" y2="' + cy + '">' +
+      '<stop offset="0" style="stop-color:var(--star);stop-opacity:0"/><stop offset="1" style="stop-color:var(--star);stop-opacity:.95"/></linearGradient></defs>' +
+      '<a class="star comet' + (current ? ' current' : '') + '" href="talk.html" aria-label="Talk: video, slides and links"' + (current ? ' aria-current="page"' : '') + '>' +
+      '<circle class="bloom" cx="' + cx + '" cy="' + cy + '" r="' + 26 * k + '"/>' +
+      '<g class="cbody" style="transform-origin:' + cx + 'px ' + cy + 'px">' +
+      '<line class="tail" x1="' + tx + '" y1="' + ty + '" x2="' + cx + '" y2="' + cy + '" stroke="url(#' + id + ')" stroke-width="' + 2.4 * k + '"/>' +
+      '<line class="tail" x1="' + (tx + 6 * k) + '" y1="' + (ty + 9 * k) + '" x2="' + cx + '" y2="' + cy + '" stroke="url(#' + id + ')" stroke-width="' + 1.2 * k + '" opacity=".7"/>' +
+      '<circle class="core" cx="' + cx + '" cy="' + cy + '" r="' + 3.4 * k + '"/></g>' +
+      '<text x="' + cx + '" y="' + (cy + 30 * k) + '" text-anchor="middle">Talk</text></a>';
+  }
+
   // Home constellation
   const home = document.querySelector('.constellation svg');
   if (home) {
     const dust = [[420,110,1.2,.7],[610,80,1,.6],[760,140,1.4,.8],[905,215,1,.6],[715,365,1.2,.7],[945,430,1.4,.7],[495,300,1,.6],[350,220,1.2,.5],[580,420,1,.5],[840,470,1,.6],[980,120,1.2,.6],[300,420,1,.5]]
       .map(d => '<circle class="dust" cx="' + d[0] + '" cy="' + d[1] + '" r="' + d[2] + '" opacity="' + d[3] + '"/>').join('');
     const tw = [[452,239,7],[920,80,8],[640,446,6]].map(t => '<g class="twinkle"><line x1="' + t[0] + '" y1="' + (t[1]-t[2]) + '" x2="' + t[0] + '" y2="' + (t[1]+t[2]) + '"/><line x1="' + (t[0]-t[2]) + '" y1="' + t[1] + '" x2="' + (t[0]+t[2]) + '" y2="' + t[1] + '"/></g>').join('');
-    home.innerHTML = BLOOM + dust + tw + starsSVG([[520,160],[668,196],[792,250],[872,340]]) + planetSVG(900, 100, 11, 'saturn-cut');
+    home.innerHTML = BLOOM + dust + tw + starsSVG([[520,160],[668,196],[792,250],[872,340]]) + planetSVG(900, 100, 11, 'saturn-cut') + cometSVG(700, 92, 1, 'comet-tail');
     // On narrow screens crop the view to the constellation so the stars and labels stay legible
     const fit = () => home.setAttribute('viewBox', innerWidth < 760 ? '440 40 520 420' : '0 0 1000 560');
     fit(); addEventListener('resize', fit);
@@ -67,7 +81,7 @@
 
   // Mini nav on section pages
   const mini = document.querySelector('.mini-nav svg');
-  if (mini) mini.innerHTML = BLOOM + starsSVG([[30,40],[150,62],[260,96],[340,150]], { current: mini.dataset.current, size: .62 }) + planetSVG(368, 52, 7, 'saturn-cut-mini');
+  if (mini) mini.innerHTML = BLOOM + starsSVG([[30,40],[150,62],[260,96],[340,150]], { current: mini.dataset.current, size: .62 }) + planetSVG(368, 52, 7, 'saturn-cut-mini') + cometSVG(108, 142, .62, 'comet-tail-mini', mini.dataset.current === 'talk');
 
   // Theme toggle
   const btn = document.querySelector('.theme-btn');
