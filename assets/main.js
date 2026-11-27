@@ -58,13 +58,13 @@
     const tx = cx - 36 * k, ty = cy - 20 * k;
     return '<defs><linearGradient id="' + id + '" gradientUnits="userSpaceOnUse" x1="' + tx + '" y1="' + ty + '" x2="' + cx + '" y2="' + cy + '">' +
       '<stop offset="0" style="stop-color:var(--star);stop-opacity:0"/><stop offset="1" style="stop-color:var(--star);stop-opacity:.95"/></linearGradient></defs>' +
-      '<a class="star comet' + (current ? ' current' : '') + '" href="talk.html" aria-label="Talk: video, slides and links"' + (current ? ' aria-current="page"' : '') + '>' +
+      '<a class="star comet' + (current ? ' current' : '') + '" href="talks.html" aria-label="Talks: videos, slides and links"' + (current ? ' aria-current="page"' : '') + '>' +
       '<circle class="bloom" cx="' + cx + '" cy="' + cy + '" r="' + 26 * k + '"/>' +
       '<g class="cbody" style="transform-origin:' + cx + 'px ' + cy + 'px">' +
       '<line class="tail" x1="' + tx + '" y1="' + ty + '" x2="' + cx + '" y2="' + cy + '" stroke="url(#' + id + ')" stroke-width="' + 2.4 * k + '"/>' +
       '<line class="tail" x1="' + (tx + 6 * k) + '" y1="' + (ty + 9 * k) + '" x2="' + cx + '" y2="' + cy + '" stroke="url(#' + id + ')" stroke-width="' + 1.2 * k + '" opacity=".7"/>' +
       '<circle class="core" cx="' + cx + '" cy="' + cy + '" r="' + 3.4 * k + '"/></g>' +
-      '<text x="' + cx + '" y="' + (cy + 30 * k) + '" text-anchor="middle">Talk</text></a>';
+      '<text x="' + cx + '" y="' + (cy + 30 * k) + '" text-anchor="middle">Talks</text></a>';
   }
 
   // Home constellation
@@ -166,8 +166,8 @@
   document.body.appendChild(top);
   top.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
   // Menu: a floating button beside back-to-top that opens a short list of every page
-  const here = (location.pathname.split('/').pop() || 'index.html');
-  const LINKS = [['index.html', 'Home'], ...PAGES.slice(0, 1).map(p => [p.href, p.label]), ['talk.html', 'Talk'], ...PAGES.slice(1).map(p => [p.href, p.label]), ['news.html', 'News']];
+  const here = ({ 'talk.html': 'talks.html' })[location.pathname.split('/').pop()] || (location.pathname.split('/').pop() || 'index.html');
+  const LINKS = [['index.html', 'Home'], ...PAGES.slice(0, 1).map(p => [p.href, p.label]), ['talks.html', 'Talks'], ...PAGES.slice(1).map(p => [p.href, p.label]), ['news.html', 'News']];
   const menuBtn = document.createElement('button');
   menuBtn.type = 'button'; menuBtn.className = 'to-top to-menu';
   menuBtn.setAttribute('aria-label', 'Menu'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.setAttribute('aria-controls', 'fab-menu');
