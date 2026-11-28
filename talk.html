@@ -75,7 +75,8 @@
     .wf-dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-4) var(--space-16); margin: 0 0 var(--space-8); }
     .wf-dl dt { font: 600 13px/22px var(--font-mono); color: var(--ink-muted); }
     .wf-dl dd { margin: 0; }
-    @media (max-width: 760px) { .wf-cards, .wf-phases { grid-template-columns: 1fr; } .wf-phase:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -22px; } }
+    @media (max-width: 760px) { .wf-phases { grid-template-columns: 1fr; } .wf-cards { gap: var(--space-8); } .wf-card { padding: 12px; } .wf-card h3 { font-size: 18px; line-height: 24px; } .wf-card p { font-size: 14px; line-height: 20px; } .wf-card .links-row { font-size: 13px; } .wf-phase:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -22px; } }
+    @media (max-width: 480px) { .wf-cards { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -212,7 +213,7 @@
         <p class="wf-note"><b>AI assists.</b> I check, disclose and stay responsible.</p>
 
         <h3 class="wf-h" id="wf-run">Run: cloud resources and agents</h3>
-        <p>These are not experiments with huge numbers of agents. I used cloud resources and agents to work faster: from a few chunks in Colab to spot TPUs on Google Cloud. The paper that used TPUs is still being drafted, so I can't share details yet.</p>
+        <p>My studies are not experiments with huge numbers of agents. I used cloud resources and agents to work faster: from a few chunks in Colab to spot TPUs on Google Cloud. The paper that used TPUs is still being drafted, so I can't share details yet.</p>
         <p>With TPUs I ran into two bottlenecks: optimizing the code, and actually getting spot capacity. For the code, I used Antigravity, and alternating between Gemini and Claude models made bottlenecks much easier to track down. For capacity, I wanted an auto-hunting setup I could leave running, so an agent wrote a script that polls for free spot TPUs through the SDK and grabs one. I'm not an infrastructure engineer, so I delegated the setup; to check what was really running, I had the agent print step-by-step logs.</p>
         <ol class="tl">
           <li class="major"><div class="row"><h3>Spot TPU auto-provisioner for TRC researchers</h3><span class="gloss">GitHub</span></div>
