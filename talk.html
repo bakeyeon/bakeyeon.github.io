@@ -114,7 +114,7 @@
         </div>
         <div class="media-panel" id="panel-video" role="tabpanel" aria-labelledby="tab-video">
         <div class="talk-video">
-          <iframe data-src="https://www.youtube-nocookie.com/embed/531rUA8GNTY" title="Beyond Benchmarks (re-recorded), APAC AI for Science DevFest 2026" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe data-src="https://www.youtube-nocookie.com/embed/531rUA8GNTY?enablejsapi=1" title="Beyond Benchmarks (re-recorded), APAC AI for Science DevFest 2026" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <p class="gloss meta">A re-recorded version of my session. <a href="https://youtu.be/531rUA8GNTY">Open on YouTube →</a></p>
         </div>
@@ -303,6 +303,21 @@
       const tabs = [...document.querySelectorAll('.media-tabs [role="tab"]')];
       const iframe = document.querySelector('#panel-video iframe');
       const loadVideo = () => { if (iframe && !iframe.src) iframe.src = iframe.dataset.src; };
+      // Start the talk video at 1.5x; viewers can still change the speed in the player's settings.
+      if (iframe) {
+        const send = (msg) => iframe.contentWindow && iframe.contentWindow.postMessage(JSON.stringify(msg), '*');
+        let sped = false;
+        iframe.addEventListener('load', () => { sped = false; send({ event: 'listening', id: 'talk-video' }); });
+        addEventListener('message', (e) => {
+          if (e.source !== iframe.contentWindow || typeof e.data !== 'string') return;
+          let d; try { d = JSON.parse(e.data); } catch { return; }
+          const state = d.info && d.info.playerState;
+          if ((d.event === 'onReady' || d.event === 'initialDelivery' || state === 1) && !sped) {
+            send({ event: 'command', func: 'setPlaybackRate', args: [1.5] });
+            if (state === 1) sped = true;
+          }
+        });
+      }
       const pick = (tab) => {
         tabs.forEach((b) => {
           const on = b === tab;
