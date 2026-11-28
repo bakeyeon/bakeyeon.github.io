@@ -77,6 +77,9 @@
     .wf-dl dd { margin: 0; }
     @media (max-width: 760px) { .wf-phases { grid-template-columns: 1fr; } .wf-cards { gap: var(--space-8); } .wf-card { padding: 12px; } .wf-card h3 { font-size: 18px; line-height: 24px; } .wf-card p { font-size: 14px; line-height: 20px; } .wf-card .links-row { font-size: 13px; } .wf-phase:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -22px; } }
     @media (max-width: 480px) { .wf-cards { grid-template-columns: 1fr; } }
+    .note-box { margin: var(--space-16) 0; padding: var(--space-16); border: 1px solid #5fb8ac; border-left: 4px solid #2a9d8f; border-radius: 10px; background: #e6f5f2; color: var(--ink); }
+    :root[data-theme="dark"] .note-box { background: #173a36; border-color: #3f8f84; border-left-color: #5ccfbf; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .note-box { background: #173a36; border-color: #3f8f84; border-left-color: #5ccfbf; } }
   </style>
 </head>
 <body>
@@ -132,7 +135,7 @@
         </div>
         <p class="talk-summary">A 30-minute session in three parts: what I learned from my own research on modal particles and Korean color terms, practical notes on using AI in a research workflow, and the questions I want to explore next in AI alignment.</p>
         <p class="talk-summary">Rather than an exhaustive survey of every field mentioned, it connects papers I have been reading across these areas and shares my own perspective on where they intersect.</p>
-        <p class="gloss meta">For time, the talk simplifies some results and their limitations. For example, I say Korean speakers were more accurate in the blue-green range. In the thesis, the accuracy advantage is general across all four color gradients, while the <b>speed</b> advantage is confined to the blue-green transition, where the Korean and English category boundaries diverge. That localized speed effect parallels the Russian-blues study (<a href="https://doi.org/10.1073/pnas.0701644104">Winawer et al., 2007</a>), whose effect also appeared in response times. Both studies are correlational. Before citing a finding, please check the full results in the <a href="https://publications.goettingen-research-online.de/handle/2/182236">MA thesis</a> and the <a href="https://aclanthology.org/2026.pandora-1.2/">paper</a>.</p>
+        <p class="note-box">For time, the talk simplifies some results and their limitations. For example, I say Korean speakers were more accurate in the blue-green range. In the thesis, the accuracy advantage is general across all four color gradients, while the <b>speed</b> advantage is confined to the blue-green transition, where the Korean and English category boundaries diverge. That localized speed effect parallels the Russian-blues study (<a href="https://doi.org/10.1073/pnas.0701644104">Winawer et al., 2007</a>), whose effect also appeared in response times. Both studies are correlational. Before citing a finding, please check the full results in the <a href="https://publications.goettingen-research-online.de/handle/2/182236">MA thesis</a> and the <a href="https://aclanthology.org/2026.pandora-1.2/">paper</a>.</p>
         <details class="more">
           <summary><span class="label">Limitations</span></summary>
           <p class="gloss meta">From the final MA thesis (Section 6.2) and the Grue Divide paper.</p>
