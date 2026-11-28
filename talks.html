@@ -18,6 +18,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500&display=swap">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css?v=59">
+  <style>
+    .yt { position: relative; aspect-ratio: 16 / 9; margin: var(--space-16) 0 var(--space-8); border: 1px solid var(--line); border-radius: var(--radius-2); overflow: hidden; background: #000; }
+    .yt button { all: unset; display: block; width: 100%; height: 100%; cursor: pointer; }
+    .yt img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .yt-play { position: absolute; left: 50%; top: 50%; width: 68px; height: 48px; transform: translate(-50%, -50%); }
+    .yt-play svg { width: 100%; height: 100%; } .yt-play path { fill: #212121; fill-opacity: .8; transition: fill .2s, fill-opacity .2s; } .yt-play .tri { fill: #fff; fill-opacity: 1; }
+    .yt button:hover .yt-play path:not(.tri), .yt button:focus-visible .yt-play path:not(.tri) { fill: #f00; fill-opacity: 1; }
+    .yt button:focus-visible { outline: 2px solid var(--focus); outline-offset: -4px; }
+    .yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  </style>
 </head>
 <body>
   <header class="bar">
@@ -42,10 +52,12 @@
           <li class="major"><div class="row"><h3>Beyond Benchmarks: Why Empirical Linguistics Is Essential for AI Alignment and Evaluation</h3><span class="gloss">Nov 2026</span></div>
             <p class="gloss meta">Invited talk · APAC AI for Science DevFest 2026, Google Researcher Groups (GDG AI for Science)</p>
             <p>What I learned from my research on modal particles and Korean color terms, practical notes on using AI in a research workflow, and the questions I want to explore next in AI alignment.</p>
+            <div class="yt" data-id="531rUA8GNTY" data-title="Beyond Benchmarks (re-recorded), APAC AI for Science DevFest 2026"><button type="button" aria-label="Play: Beyond Benchmarks, about 31 minutes"><img src="https://i.ytimg.com/vi/531rUA8GNTY/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z"/><path class="tri" d="M27 34l18-10-18-10z"/></svg></span></button></div>
             <p class="links-row"><a href="talk.html">Video, slides and all links →</a> &nbsp; <a href="https://youtu.be/531rUA8GNTY">Watch on YouTube →</a></p></li>
           <li class="major"><div class="row"><h3>The Grue Divide: When Cognitive Accuracy Doesn't Predict Affective Alignment</h3><span class="gloss">2026</span></div>
             <p class="gloss meta">Poster · PANDORA @ EMNLP 2026, Budapest</p>
             <p>People can see colors alike and still feel them differently, so a model tuned only for accuracy can miss what a color feels like. The paper in eight minutes, with the poster and an FAQ.</p>
+            <div class="yt" data-id="bOZgka83TMA" data-title="The Grue Divide, the paper in eight minutes"><button type="button" aria-label="Play: The Grue Divide, 8 minutes"><img src="https://i.ytimg.com/vi/bOZgka83TMA/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 68 48"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.2.3 34 .3 34 .3s-21.2 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.8 47.7 34 47.7 34 47.7s21.2 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3z"/><path class="tri" d="M27 34l18-10-18-10z"/></svg></span></button></div>
             <p class="links-row"><a href="https://bakeyeon.github.io/colorfish/">Project page: talk, poster, FAQ →</a> &nbsp; <a href="https://www.youtube.com/watch?v=bOZgka83TMA">Watch the talk (8 min) →</a> &nbsp; <a href="https://aclanthology.org/2026.pandora-1.2/">Paper (ACL Anthology) →</a></p></li>
           <li><div class="row"><h3>Can the Use of Derivatives Affect Cognition? Korean Derivatives and Cognitive Advantage in the Grue Spectrum</h3><span class="gloss">Nov 2025</span></div>
             <p class="gloss meta">Psycholinguistic &amp; Semantic Research Colloquium (Thesis Defense &amp; Presentation) · convened by Prof. Jacopo Romoli and Prof. Katharina Spalek</p>
@@ -122,6 +134,20 @@
       show(0);
     })();
   </script>
-    <script src="assets/main.js?v=39"></script>
+    <script>
+    // Click-to-play: the YouTube player loads only when a visitor presses play.
+    document.querySelectorAll('.yt').forEach((box) => {
+      box.querySelector('button').addEventListener('click', () => {
+        const f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + box.dataset.id + '?autoplay=1';
+        f.title = box.dataset.title;
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        f.referrerPolicy = 'strict-origin-when-cross-origin';
+        box.replaceChildren(f);
+      }, { once: true });
+    });
+  </script>
+  <script src="assets/main.js?v=39"></script>
 </body>
 </html>
